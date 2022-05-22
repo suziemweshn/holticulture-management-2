@@ -1,0 +1,102 @@
+.{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.top-hero-section{
+    background:linear-gradient( 115deg, rgba(58,58,158,0.8), rgba(136,136,206,0.7) ),url(/onions.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-attachment: fixed;
+}
+.carousel-inner{
+    height: 300px;
+    color:lime
+   
+}
+.carousel-item img{
+    height:300px !important;
+    width: 100% !important;
+    border: 3px solid lime;
+
+
+
+
+}
+.carousel-caption h5 {
+    color:black;
+    font-size: 30px;
+}
+.carousel-caption p{
+    color:lime;
+
+}
+#hero-section{
+    color: lime;
+    background-color: lightgray;
+}
+.img-2 {
+    width:950px
+    
+}
+.paragraph .dec{
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    
+   
+}
+.jan{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    
+
+}
+.form{
+    width:40%;
+}
+.question{
+    
+}
+.question p a{
+    width:40px;
+}
+.question p{
+    font-size:20px;
+    font-weight: bold;
+    padding: 6px;
+    width:70%;
+   
+    
+    background-color:lightgray;
+}
+.question a{
+    width:40px;
+}
+.paragraph{
+    width:50%;
+}
+.form p{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    
+    
+}
+.hire{
+    background-color: lightgray;
+}
+input[type="text"],input [type="email"], input[type="tel"]{
+    width:70%;
+    border-radius: 5px;
+    padding: 6px;
+}
+label{
+    font-size:20px;
+}
+@media (max-width:427px){
+    .top-hero-section
+}
