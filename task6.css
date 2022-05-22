@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 .top-hero-section{
-    background:url(/onions.jpg);
+    background:url(onions.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -133,8 +133,23 @@ label{
     #hero-section{
         width:350%;
     }
+    #hero-section ul li{
+        font-size: 20px;
+    }
     .top-hero-section{
         width: 350%;
+    }
+    .services p{
+        font-size: 40px;
+    }
+    .testimony{
+        font-size:40px;
+    }
+    .p-2 p{
+        font-size:40px;
+    }
+    label{
+        font-size:40px;
     }
     .services{
         width:350%;
