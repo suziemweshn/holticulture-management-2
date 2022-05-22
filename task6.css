@@ -4,12 +4,16 @@
     box-sizing: border-box;
 }
 .top-hero-section{
-    background:linear-gradient( 20deg, rgba(42, 120, 20, 0.8), rgba(10, 205, 10, 0.69) ),url(/onions.jpg);
+    background:url(/onions.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
     background-attachment: fixed;
+   
+}
+.top-hero-section p{
+    color: lime;
 }
 .carousel-inner{
     height: 300px;
@@ -38,7 +42,7 @@
     background-color: lightgray;
 }
 .img-2 {
-    width:950px
+    width:950px;
     
 }
 .paragraph .dec{
@@ -115,41 +119,48 @@ label{
     text-align: center;
 }
 
-@media (max-width:427px){
-    .top-hero-section{
-        width:250%;
+
+@media (max-width:769px){
+    .img-2{
+        width:205%;
     }
+    .services p{
+        font-size: 25px;
+    }
+    
+}
+@media (max-width:427px){
     #hero-section{
-        width:250%;
+        width:350%;
+    }
+    .top-hero-section{
+        width: 350%;
     }
     .services{
-        width:250%;
+        width:350%;
     }
     .img-2{
         width:100%;
     }
     .About-us-section{
-        width:250%;
+        width:350%;
     }
     .Delivery-section{
-        width:250%;
+        width:350%;
     }
     .products{
         width:250%;
     }
     .hire{
-        width:250%;
+        width:350%;
     }
     .testimonials{
-        width:250%;
+        width:350%;
     }
     .question{
-        width:200%;
+        width:350%;
     }
     .portfolio{
-        width:250%;
+        width:350%;
     }
-}
-@media (max-width:769px){
-    
 }
