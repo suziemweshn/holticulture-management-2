@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 .top-hero-section{
-    background:linear-gradient( 115deg, rgba(58,58,158,0.8), rgba(136,136,206,0.7) ),url(/onions.jpg);
+    background:linear-gradient( 20deg, rgba(42, 120, 20, 0.8), rgba(10, 205, 10, 0.69) ),url(/onions.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -86,6 +86,13 @@
     
     
 }
+.paragraph .next{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    
+
+}
 .hire{
     background-color: lightgray;
 }
@@ -97,6 +104,52 @@ input[type="text"],input [type="email"], input[type="tel"]{
 label{
     font-size:20px;
 }
+.submit {
+    margin-top: 7px;
+    border-radius: 5px;
+    
+}
+.submit a{
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
 @media (max-width:427px){
-    .top-hero-section
+    .top-hero-section{
+        width:250%;
+    }
+    #hero-section{
+        width:250%;
+    }
+    .services{
+        width:250%;
+    }
+    .img-2{
+        width:100%;
+    }
+    .About-us-section{
+        width:250%;
+    }
+    .Delivery-section{
+        width:250%;
+    }
+    .products{
+        width:250%;
+    }
+    .hire{
+        width:250%;
+    }
+    .testimonials{
+        width:250%;
+    }
+    .question{
+        width:200%;
+    }
+    .portfolio{
+        width:250%;
+    }
+}
+@media (max-width:769px){
+    
 }
