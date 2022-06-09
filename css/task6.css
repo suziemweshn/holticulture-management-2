@@ -31,7 +31,11 @@
 }
 .testimony-person img{
     max-width: 80%;
-    min-height: 60vh;
+    min-height: 30vh;
+}
+.testimony-person1 img{
+    max-width: 40%;
+    min-height: 30vh;
 }
 .logo-section img{
     margin: auto;
