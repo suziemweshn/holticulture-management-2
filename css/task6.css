@@ -1,29 +1,73 @@
-.{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+.About-us-section{
+    background-image:url("../img/beef\ and\ dairy.jpg"); 
+    
+     background-position:center;
+     background-repeat:no-repeat;
+     background-size:cover;
+     background-attachment: fixed;
+     width: 100%;
+    
+     border-radius: 5px ;
+     
+
+     
+     
+     
 }
-.top-hero-section{
-    background:url(../img/onions.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    background-attachment: fixed;
+.portfolio{
+    margin-top: 20px;
+}
+#About{
+    
+    
+    max-width: 40%;
+    border-radius: 3px solid;
+    margin-right: 80px;
+    margin-bottom: 20px;
+     margin-top: 100px;
+}
+#About h1{
+    color: rgb(10, 244, 10);
    
+    
+    font-size:60px;
 }
+.bt{
+    background-color: rgb(41, 172, 41);
+    width:60%;
+    
+}
+.search{
+    margin-bottom: 10px;
+}
+#About h2{
+    color: rgb(10, 244, 10);
+   
+    
+    font-size:40px;
+}
+#About p{
+    
+    font-weight: bolder;
+}
+
+
 .top-hero-section p{
-    color: lime;
+    color:white;
+}
+nav li a{
+    text-decoration: none;
 }
 .carousel-inner{
     height: 300px;
-    color:lime
+    color:white
    
 }
 .carousel-item img{
     height:300px !important;
     width: 100% !important;
-    border: 3px solid lime;
+    border: 3px solid white;
 
 
 
@@ -49,16 +93,45 @@
     font-size: 30px;
 }
 .carousel-caption p{
-    color:lime;
+    color:white;
 
 }
 #hero-section{
-    color: lime;
+    color:white;
     background-color: lightgray;
 }
 .img-2 {
     width:950px;
     
+}
+.hero__caption h1{
+font-size: 40px;
+}
+.hero__caption{
+    width:60%;
+}
+.slider{
+    max-width: 100%;
+}
+.edge-animation img{
+    width: 300%;
+    margin-left: 150px;
+    margin-top: 20px;
+    min-height: 95%;
+   
+}
+
+
+
+
+.edge-animation{
+   margin-left: 30px;
+   max-width: 60%;
+}
+.logo {
+    color: lime;
+    font-size: 30px;
+    font-weight: bolder;
 }
  .dec{
     font-size: 40px;
@@ -75,7 +148,7 @@
 
 }
 .form{
-    width:40%;
+    width:60%;
 }
 
 
@@ -96,6 +169,19 @@
    text-align: center;
   
 }
+.about{
+border-radius: 3px;
+text-decoration: none;
+padding: 15px;
+font-size: 20px;
+width: 80%;
+height: 80%;
+text-align: center;
+}
+
+.about button a{
+    text-decoration: none;
+}
 
 
     
@@ -109,19 +195,43 @@
 }
 .hire{
     background-color: lightgray;
+    min-height: 50vh;
+}
+.hire .container{
+    height: ;
+}
+.hire img{
+    min-height: 50vh;
 }
 input[type="text"],input [type="email"], input[type="tel"]{
-    width:70%;
+    width:80%;
+    border-radius: 5px;
+    padding: 6px;
+}
+input[type="email"]{
+    width: 80%;
     border-radius: 5px;
     padding: 6px;
 }
 label{
     font-size:20px;
 }
-.submit {
-    margin-top: 7px;
-    border-radius: 5px;
+.submit button {
+   margin-top: 10px;
+   border-radius: 5px;
+   width: 60%;
+   background-color: lime;
+   color: white;
+   padding: 6px;
+   font-size: 20px;
     
+}
+
+.submit a{
+    width: 60%;
+}
+.trend{
+    background-color: gray;
 }
 .submit a{
     border-radius: 5px;
@@ -130,6 +240,10 @@ label{
 }
 .portfolio h5{
     color: lime;
+}
+.portfolio{
+    background-color: black;
+    color: white;
 }
 
 
