@@ -37,7 +37,7 @@ body {
 }
 .carousel-item {
 	min-height: 100vh;
-    padding: 60px;
+    
 	background-color: #1cae40;
 }
 .carousel-inner{
@@ -79,7 +79,7 @@ body {
 	padding-top: 25%;
 }
 .imgBox img {
-	width: 650px;
+	width: 100%;
     margin-top: 30px;
    
     
@@ -87,25 +87,25 @@ body {
 .carousel-control-prev-icon, .carousel-control-next-icon {
 	height: 80px;
 	width: 80px;
-	outline: rgb(27, 196, 154);
+	outline: lime;
 	background-size: 100%, 100%;
 	border-radius: 50%;
 	background-image: none;
-	color: #fff;
-	background: rgb(33, 160, 33);
+	color:lime;
+	background: lime;
 }
 .carousel-control-next-icon:after {
 	content: '->';
 	font-size: 55px;
-	color: #fff;
+	color: lime;
 }
 .carousel-control-prev-icon:after {
 	content: '';
 	font-size: 55px;
-	color: #fff;
+	color:lime;
 }
 .carousel-indicators [data-bs-target] {
-	background-color: green;
+	background-color: white;
 }
 .navbar-light .navbar-toggler {
 	color: #FFF;

@@ -22,6 +22,7 @@
 	<link rel="stylesheet" href="assets/css/slick.css">
 	<link rel="stylesheet" href="assets/css/nice-select.css">
 	<link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="agriculture/style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,9 +81,7 @@
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo">
                                 <a href="index.html"><img src="img/org.png" alt="" height="50px"></a> AHF
-                                <div>
-                               
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10">
@@ -104,7 +103,7 @@
                                             </li>
                                             <li><a href="category.html">Portals</a>
                                               <ul class="submenu">
-                        <li><a href="datascience.html">Admin Portal</a></li>
+                        <li><a href="Adminn_portal.html">Admin Portal</a></li>
                         <li><a href="ai.html">Employee portal</a></li>
                         
                         
@@ -117,12 +116,25 @@
                         
                      </ul>
                                              </li>
+                                             <li><a href="Blog.html">Blog</a></li>
+                                            
                                             <li><a href="contact.html">Contacts</a></li>
                                             
                                         </ul>
                                         <div class="search">
                                             <form class="d-flex">
-                                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                                <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+
+    <ul id="myMenu">
+     <!-- <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Portals</a></li>
+      <li><a href="#">Account</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contacts</a></li>-->
+      
+    </ul>
                                                 
                                               </form>
                                         </div>
@@ -216,7 +228,7 @@
                         <div class="col-lg-5 col-md-12 col-12">
                             <div class="banner-info">
                                 <h5>Fresh Vegetables <br> From Garden</h5>
-                    <p>Buy fresj vegetables and other products from us at affordable prices</p>
+                    <p>Buy fresh vegetables and other products from us at affordable prices</p>
                     <div class="d-flex align items center">
                         <div class="button1">
                             <p><a href="#" class="btn mt-3">Shop now</a></p>
@@ -239,11 +251,11 @@
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
+              
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
+              
             </button>
           </div>
     
@@ -322,7 +334,8 @@
                                     
                               
                     </section>
-                    <div class="about-low-area section-padding2" id="about" style="background-color:green; color: white;">
+                   
+                    <section class="about-low-area " id="about" style="background-color:green; color: white;">
                         <div class="container" >
                             <div class="row">
                                 <div class="col-lg-6 col-md-10">
@@ -351,10 +364,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                     <section class="trend " style="background-color: gray;">
                        
-                        <div class="team-area pt-160 pb-160">
+                        <div class="team-area  pb-160">
                             <div class="container-fluid" style="background-color:lightgray;">
                                 <div class="row justify-content-center">
                                     <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
@@ -615,9 +628,9 @@
                                                 <!-- Blog Social -->
                                                 <ul class="team-social">
                                                     
-                                                    <li style="font-size:50px; color: lime;"><strike> was  $300</strike></li><br>
-                                                    <li style="font-size:50px; color: lime;">now  $280</li><br>
-                                                    <li style="font-size:30px; color: lime;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    <li style="font-size:50px; color: black;"><strike> was  $300</strike></li><br>
+                                                    <li style="font-size:50px; color:black;">now  $280</li><br>
+                                                    <li style="font-size:30px; color:black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
                                                     
                                                 </ul>
                                             </div>
@@ -633,11 +646,8 @@
                         <!-- Team Ara End -->
                         <!-- Want To work -->
                         
-                    </section>
-                   
-                    
-                    
-                                 <section class="hire ">
+                                </section>
+                           <section class="hire">
                                      <div class="container-fluid">
                                          <div class="row">
                                          <div class="col-lg-6 w-40 me-30">
@@ -682,7 +692,7 @@
 
                                          </div>
                                         
-                                 </section>
+                                        </section>
                                  <section class="test" style="font-family: 'Times New Roman', Times, serif;">
                                     <div id="testimonials" class="py-5">
                                         <div class="container">
@@ -967,6 +977,8 @@
                                  <script src="js/bootstrap.min.js"></script>
                                  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
                                  <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
+                                 <script src="agriculture/js/script.js"></script>
+                                 <script src="js/js/app.js"></script>
                                  <!-- Jquery, Popper, Bootstrap -->
                                  <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
                                  <script src="./assets/js/popper.min.js"></script>
