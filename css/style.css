@@ -190,3 +190,20 @@ body {
 	}
 	
 }
+.card-title {
+    color: #db0075;
+}
+.card-text {
+    color: #17E6E6;
+}
+.list-inline-item {
+    color: #ffd700
+}
+.price {
+    color: #9B1B30;
+}
+.trend .multi-carousel{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
