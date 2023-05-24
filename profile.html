@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+    <!-- Include your CSS and other necessary dependencies -->
+    <style>
+        /* Add your custom styles here */
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-info {
+            margin-bottom: 20px;
+        }
+
+        .profile-label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1>User Profile</h1>
+        <div class="profile-info">
+            <img class="profile-picture" src="path_to_profile_picture.jpg" alt="Profile Picture">
+            <p><span class="profile-label">Username:</span> <?php echo $username; ?></p>
+            <p><span class="profile-label">Email:</span> <?php echo $email; ?></p>
+            <p><span class="profile-label">Bio:</span> <?php echo $bio; ?></p>
+            <!-- Add more user information as needed -->
+        </div>
+        <a href="logout.php">Logout</a>
+    </div>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Pages / Register - NiceAdmin Bootstrap Template</title>
+  <title></title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -31,7 +31,6 @@
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/task6.css" rel="stylesheet">
   
-
  
 </head>
 
@@ -45,12 +44,21 @@
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-              <div class="d-flex justify-content-center py-4">
+            <!--  <div class="d-flex justify-content-center py-4">
                 <a href="index.html" class="logo d-flex align-items-center w-auto">
                   <img src="assets/img/org2.png" alt="">
                   <span class="d-none d-lg-block">AHF</span>
                 </a>
               </div><!-- End Logo -->
+              <div class="col-xl-2 col-lg-2">
+                <div class="logo">
+                    <a href="Admin.html"><img src="assets/img/org2.png" alt="" ></a> AHF
+                    
+                </div>
+            </div>
+            <div class="col-xl-10 col-lg-10">
+                <div class="menu-wrapper  d-flex align-items-center justify-content-end">
+          
 
               <div class="card mb-3">
 
@@ -61,16 +69,27 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 needs-validation" action="connect.php" method="post">
+                  <form class="row g-3 " action="create-account.php" method="post">
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
-                      <input type="text" name="name" class="form-control" id="yourName" required>
+                      <input type="text" name="ADMIN_NAME" class="form-control" id="yourName" required>
                       <div class="invalid-feedback">Please, enter your name!</div>
                     </div>
+                    <div class="col-12">
+                      <label for="ADMIN_ID" class="form-label">ADMIN ID</label>
+                      <input type="text" name="ADMIN_ID" class="form-control" id="ID" required>
+                      <div class="invalid-feedback">Please, enter your ID!</div>
+                    </div>
+                    <div class="col-12">
+                      <label for="ADMIN_ID" class="form-label">ROLE ID</label>
+                      <input type="text" name="ROLE_ID" class="form-control" id="ID" required>
+                      <div class="invalid-feedback">Please, enter your ID!</div>
+                    </div>
+                    
 
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
+                      <input type="email" name="EMAIL" class="form-control" id="yourEmail" required>
                       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                     </div>
 
@@ -78,14 +97,14 @@
                       <label for="yourUsername" class="form-label">Username</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
+                        <input type="text" name="USER_NAME" class="form-control" id="yourUsername" required>
                         <div class="invalid-feedback">Please choose a username.</div>
                       </div>
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
+                      <input type="password" name="PASS_WORD" class="form-control" id="yourPassword" required>
                       <div class="invalid-feedback">Please enter your password!</div>
                     </div>
 
