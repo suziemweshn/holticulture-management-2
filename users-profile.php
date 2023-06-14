@@ -1,5 +1,29 @@
+//<?php
+  //session_start();
+  
+  // Check if the user is authenticated
+ // if (!isset($_SESSION["username"])) {
+   //   // Redirect to the login page
+     // header("Location: login.html");
+      //exit();
+  }
+  
+  // Simulated user data (replace with your own database logic)
+  //$userData = array(
+    // "name" => "John Doe",
+      //"email" => "johndoe@example.com",
+      //"phone" => "+1234567890",
+      //"profile_pic" => "profile_picture.jpg"
+  //);
+  //?>
+  
+  
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<head>
+  <title>Profile</title>
+  <html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -10,9 +34,7 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+ 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -30,12 +52,22 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/task6.css" rel="stylesheet">
+  <link href="assets/css/style2.css" rel="stylesheet">
   
-
   
-</head>
-
-<body>
+  </head>
+  <body>
+   <!-- <h2>User Profile</h2>
+    <p>Welcome, <?php echo $_SESSION["username"]; ?>!</p>
+    
+    <h3>Profile Information</h3>
+    <p>Name: <?php echo $userData["name"]; ?></p>
+    <p>Email: <?php echo $userData["email"]; ?></p>
+    <p>Phone: <?php echo $userData["phone"]; ?></p>
+    
+    <h3>Profile Picture</h3>
+    <img src="<?php echo $userData["profile_pic"]; ?>" alt="Profile Picture">
+    
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -64,159 +96,7 @@
           </a>
         </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="notification.html"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
-              <div>
-                <h4>Weekly summary</h4>
-                <p>You have acquired one new lead weekly</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-    
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>credits</h4>
-                <p> Your credit card has expired pelae update your biling details</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-    
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Update</h4>
-                <p>Your services has been updated</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Hangout</h4>
-                <p>user@suzie has declined your invitation to the Admin's group</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </li>
-
-            
-            <li class="dropdown-footer">
-              <a href="notification.html">Show all notifications</a>
-            </li>
-
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="messages.html">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Hello am trying to order some Flowers but my order button not reponsing please...help me in this</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
       
-
-            <li class="message-item">
-              <a href="messages.html">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Hello...This is to inform you that we have a  stafff meeting on wednesday afternoon at teh board room.</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="messages.html">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle" height="100px" width="100px">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Hey there...there are no seedlings available for brocolli...please look at that</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="message-item">
-              <a href="messages.html">
-                <img src="assets/img/news-1.jpg" alt="" class="rounded-circle" height="100px" width="100px">
-                <div>
-                  <h4>Eliking johnes</h4>
-                  <p>Greetings...just wanted to inform you about teh order I made yesterday ahs not yet arrived.</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
-
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -226,8 +106,8 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Suzy tech</h6>
-              <span>Web Designer</span>
+              <h6> </h6>
+              <span> </span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -279,7 +159,7 @@
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
+  <!--<aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
@@ -528,7 +408,7 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section profile">
+   <!--\ <section class="section profile">
       <div class="row">
         <div class="col-xl-4">
 
@@ -554,7 +434,7 @@
           <div class="card">
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
-              <ul class="nav nav-tabs nav-tabs-bordered">
+              <!--<ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
                   <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
@@ -621,7 +501,7 @@
                 <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                   <!-- Profile Edit Form -->
-                  <form>
+                  <!--<form>
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
@@ -724,12 +604,12 @@
 
                 </div>
 
-                <div class="tab-pane fade pt-3" id="profile-settings">
+               <!-- <div class="tab-pane fade pt-3" id="profile-settings">
 
                   <!-- Settings Form -->
                   <form>
 
-                    <div class="row mb-3">
+                    <!--<div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
                       <div class="col-md-8 col-lg-9">
                         <div class="form-check">
@@ -766,11 +646,11 @@
 
                 </div>
 
-                <div class="tab-pane fade pt-3" id="profile-change-password">
+                <!--<div class="tab-pane fade pt-3" id="profile-change-password">
                   <!-- Change Password Form -->
                   <form>
 
-                    <div class="row mb-3">
+                    <!--<div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="password" type="password" class="form-control" id="currentPassword">
@@ -798,7 +678,7 @@
 
                 </div>
 
-              </div><!-- End Bordered Tabs -->
+              </div><!-- End Bordered Tabs 
 
             </div>
           </div>
@@ -808,20 +688,134 @@
     </section>
 
   </main><!-- End #main -->
+  <section class="section-profile">
+    
+    <div class="row">
+      <div class="col-xl-4">
 
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+        <div class="card">
+          <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <h2><?php echo $fullName; ?></h2>
+            <h3><?php echo $jobTitle; ?></h3>
+            <div class="social-links mt-2">
+              <a href="<?php echo $twitterProfile; ?>" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="<?php echo $facebookProfile; ?>" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="<?php echo $instagramProfile; ?>" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="<?php echo $linkedinProfile; ?>" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+   
+      
+      <div class="col-xl-8">
+      <div class="card">
+          <div class="card-body">
+            <!-- Bordered Tabs -->
+            <ul class="nav nav-tabs nav-tabs-bordered">
+
+              <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
+              </li>
+
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+              </li>
+
+            </ul>
+            <div class="tab-content pt-2">
+
+              <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                <h5 class="card-title">About</h5>
+                <p class="small fst-italic"><?php echo $about; ?></p>
+
+                <h5 class="card-title">Profile Details</h5>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Full Name</div>
+                  <div class="col-lg-9 col-md-8"><?php echo $fullName; ?></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Company</div>
+                  <div class="col-lg-9 col-md-8"><?php echo $company; ?></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Job</div>
+                  <div class="col-lg-9 col-md-8"><?php echo $jobTitle; ?></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Country</div>
+                  <div class="col-lg-9 col-md-8"><?php echo $country; ?></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Address</div>
+                  <div class="col-lg-9 col-md-8"><?php echo $address; ?></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Phone</div>
+                  <div class="col-lg-9 col-md-8"><?php echo $phone; ?></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Email</div>
+                  <div class="col-lg-9 col-md-8"><?php echo $email; ?></div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="profile-edit">
+                <h5 class="card-title">Edit Profile</h5>
+                <form>
+                  <!-- Form fields for editing profile information -->
+                </form>
+              </div>
+
+              <div class="tab-pane fade" id="profile-settings">
+                <h5 class="card-title">Settings</h5>
+                <form>
+                  <!-- Form fields for adjusting settings -->
+                </form>
+              </div>
+
+              <div class="tab-pane fade" id="profile-change-password">
+                <h5 class="card-title">Change Password</h5>
+                <form>
+                  <!-- Form fields for changing password -->
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+
     </div>
-    <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-    </div>
-  </footer><!-- End Footer -->
+
+
+      
+  </section>
+
+
+ 
+    
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
