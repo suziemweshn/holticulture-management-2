@@ -50,6 +50,7 @@ if ($result->num_rows > 0) {
     $about = $row['about'] ?? '';
     $USER_NAME = $row['USER_NAME'] ?? '';
     $PASS_WORD = $row['PASS_WORD'] ?? '';
+    $profilePictureData= $row['profilePictureData'] ?? '';
 } else {
     // User not found in the admin_table
     // Handle the scenario accordingly, e.g., display an error message
@@ -91,9 +92,9 @@ $conn->close();
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
   <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/task6.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+<link href="css/task6.css" rel="stylesheet">
 
   
 
@@ -141,11 +142,7 @@ $conn->close();
  <!-- <i class="bi bi-list toggle-sidebar-btn"></i>
 </div><!-- End Logo -->
 
-<div class="search-bar">
-  <form class="search-form d-flex align-items-center" method="POST" action="#">
-    <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-    <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-  </form>
+
 </div><!-- End Search Bar -->
 <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center flex-row-reverse">
@@ -155,18 +152,10 @@ $conn->close();
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
-        <?php if (isset($profilePictureData)): ?>
-        <img src="data:image/jpeg;base64,<?php echo base64_encode($profilePictureData); ?>" alt="Profile Picture">
-    <?php else: ?>
-        <p>No profile picture found.</p>
-    <?php endif; ?>
-
+       
 <li class="nav-item dropdown pe-3">
   <a class="nav-link nav-profile d-flex align-items-center pe-0 justify-content-end" href="#" data-bs-toggle="dropdown">
-  <form action="profile-picture.php" method="POST" enctype="multipart/form-data">
-        <input type="file" name="profilePicture">
-        <button type="submit">Upload Profile Picture</button>
-    </form>
+  <img src=<?php echo $profilePictureData; ?> alt="Profile" class="rounded-circle">
     <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $ADMIN_NAME; ?></span>
   </a>
   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -409,13 +398,14 @@ $conn->close();
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-          <h1>Profile Picture Upload</h1>
-    <form action="create-account.php" method="POST" enctype="multipart/form-data">
-        <label for="profilePicture">Select Profile Picture:</label>
-        <input type="file" name="profilePicture" id="profilePicture" accept="image/*" required>
-        <br>
-        <input type="submit" value="Upload">
-    </form>
+          <div class="row mb-3">
+        <label for="profileImage" ></label>
+        <div class="col-md-8 col-lg-9">
+        <img src=<?php echo $profilePictureData; ?> alt="Profile" class="rounded-circle">
+          
+        </div>
+    </div>
+
             <h2><?php echo $ADMIN_NAME; ?></h2>
             <h3><?php echo $jobTitle; ?></h3>
             <div class="social-links mt-2">
@@ -500,23 +490,205 @@ $conn->close();
 
               <div class="tab-pane fade" id="profile-edit">
                 <h5 class="card-title">Edit Profile</h5>
-                <form>
-                  <!-- Form fields for editing profile information -->
-                </form>
+               
+   
+    
+                <form action="profile-picture.php" method="POST" enctype="multipart/form-data">
+    <div class="row mb-3">
+        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label"></label>
+        <div class="col-md-8 col-lg-9">
+            <?php
+            // Check if the profile image path is set in session
+            if (isset($_SESSION['profileImagePath'])) {
+                $profileImagePath = $_SESSION['profileImagePath'];
+                echo '<img id="profileImg" src="' . $profileImagePath . '" alt="Profile">';
+            } else {
+                // Fetch the profilePictureData field from the admin table
+                $ADMIN_ID = $_SESSION['ADMIN_ID']; // Assuming you have stored the admin ID in session
+                $sql = "SELECT profilePictureData FROM admin_table WHERE ADMIN_ID = $ADMIN_ID";
+                $result = $conn->query($sql);
+
+                if ($result && $result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $profilePictureData = $row['profilePictureData'];
+                    echo '<img id="profileImg" src="' . $profilePictureData . '" alt="Profile">';
+                } else {
+                    echo '<img id="profileImg" src="assets/img/profile-img.jpg" alt="Profile">';
+                }
+            }
+            ?>
+            <div class="p-2 d-flex">
+                <label for="profileUpload" class="btn btn-primary btn-sm me-4" title="Upload new profile image"><i class="bi bi-upload"></i></label>
+                <button type="submit" class="btn btn-primary btn-sm me-4" title="Save profile image" id="saveButton"><i class="bi bi-save"></i> Save</button>
+                <button id="removeProfile" class="btn btn-danger btn-sm me-4" title="Remove my profile image"><i class="bi bi-trash"></i></button>
+            </div>
+            
+        </div>
+    </div>
+    <input type="file" id="profileUpload" style="display: none" name="profileImage">
+</form>
+
+    
+<form>
+    <div class="row mb-3">
+        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($ADMIN_NAME); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+        <div class="col-md-8 col-lg-9">
+            <textarea name="about" class="form-control" id="about" style="height: 100px"><?php echo htmlspecialchars($about); ?></textarea>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="company" class="col-md-4 col-lg-3 col-form-label">Company</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="company" type="text" class="form-control" id="company" value="<?php echo htmlspecialchars($company); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="job" type="text" class="form-control" id="Job" value="<?php echo htmlspecialchars($jobTitle); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="country" type="text" class="form-control" id="Country" value="<?php echo htmlspecialchars($country); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="address" type="text" class="form-control" id="Address" value="<?php echo htmlspecialchars($Address); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo htmlspecialchars($Phone); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="email" type="email" class="form-control" id="Email" value="<?php echo htmlspecialchars($email); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="twitter" type="text" class="form-control" id="Twitter" value="<?php echo htmlspecialchars($twitterProfile); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="facebook" type="text" class="form-control" id="Facebook" value="<?php echo htmlspecialchars($facebookProfile); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="instagram" type="text" class="form-control" id="Instagram" value="<?php echo htmlspecialchars($instagramProfile); ?>">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="linkedin" type="text" class="form-control" id="Linkedin" value="<?php echo htmlspecialchars($linkedinProfile); ?>">
+        </div>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>
+
               </div>
 
               <div class="tab-pane fade" id="profile-settings">
                 <h5 class="card-title">Settings</h5>
                 <form>
-                  <!-- Form fields for adjusting settings -->
-                </form>
+
+<div class="row mb-3">
+  <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
+  <div class="col-md-8 col-lg-9">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="changesMade" checked>
+      <label class="form-check-label" for="changesMade">
+        Changes made to your account
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="newProducts" checked>
+      <label class="form-check-label" for="newProducts">
+        Information on new products and services
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="proOffers">
+      <label class="form-check-label" for="proOffers">
+        Marketing and promo offers
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
+      <label class="form-check-label" for="securityNotify">
+        Security alerts
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <button type="submit" class="btn btn-primary">Save Changes</button>
+</div>
               </div>
 
               <div class="tab-pane fade" id="profile-change-password">
                 <h5 class="card-title">Change Password</h5>
                 <form>
-                  <!-- Form fields for changing password -->
-                </form>
+
+                    <div class="row mb-3">
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="password" type="password" class="form-control" id="currentPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                  </form><!-- End Change Password Form -->
               </div>
 
             </div>

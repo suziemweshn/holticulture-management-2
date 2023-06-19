@@ -4,7 +4,7 @@ session_start(); // Start the session
 $servername = 'localhost:3307';
 $username = "root";
 $password = '1234';
-$database = 'Project';
+$database = 'project';
 $port = '3307';
 
 // Create connection
@@ -29,11 +29,13 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $stored_PASS_WORD = $row['PASS_WORD'];
+    $ADMIN_ID = $row['ADMIN_ID']; // Assuming the column name is ADMIN_ID
 
     // Verify the password using password_verify
     if (password_verify($PASS_WORD, $stored_PASS_WORD)) {
         // Password is correct, set session variables
         $_SESSION['USER_NAME'] = $USER_NAME;
+        $_SESSION['ADMIN_ID'] = $ADMIN_ID; // Set the ADMIN_ID session variable
 
         // Redirect to the profile page
         header("Location: profile.php");

@@ -331,5 +331,42 @@
           }
         
         })();
-  
+        /* profile js*/
+       
+       
+        // Event listener for the profile image upload button
+        document.getElementById('profileUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+    
+            reader.onload = function(e) {
+                document.getElementById('profileImg').src = e.target.result;
+                document.getElementById('profileImg').classList.add('circle-image');
+            }
+    
+            reader.readAsDataURL(file);
+        });
+    
+        // Event listener for the save button
+        document.getElementById('saveButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Submit the form to save the profile image
+            document.querySelector('form').submit();
+        });
+    
+        // Event listener for the remove profile button
+        document.getElementById('removeProfile').addEventListener('click', function() {
+            // Remove the profile image and reset the form
+            document.getElementById('profileImg').src = 'assets/img/profile-img.jpg';
+            document.getElementById('profileImg').classList.remove('circle-image');
+            document.getElementById('profileUpload').value = '';
+        });
+        // Event listener for the remove profile button
+    document.getElementById('removeProfile').addEventListener('click', function() {
+      // Remove the profile image
+      document.getElementById('profileImg').src = 'assets/img/profile-img.jpg';
+      document.getElementById('profileImg').classList.remove('circle-image');
 
+      // Reset the session variable
+      <?php unset($_SESSION['profileImagePath']); ?>;
+  });

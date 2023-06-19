@@ -1,59 +1,123 @@
 <?php
 session_start();
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $targetDirectory = "uploads/";
-    $targetFile = $targetDirectory . basename($_FILES["profilePicture"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+// Establish database connection
+$servername = 'localhost:3307';
+$username = "root";
+$password = '1234';
+$database = "project";
 
-    // Check if image file is a actual image or fake image
-    if (isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["profilePicture"]["tmp_name"]);
-        if ($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
-        } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
-        }
+$conn = new mysqli($servername, $username, $password, $database);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if a file was uploaded
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
+    $tempFile = $_FILES['profileImage']['tmp_name'];
+    $targetDirectory = $_SERVER['DOCUMENT_ROOT'] . '/main project/profile-pictures/';
+    $fileName = basename($_FILES['profileImage']['name']);
+    $targetFile = $targetDirectory . $fileName;
+
+    // Get the image size and type
+    $imageSize = getimagesize($tempFile);
+    $originalWidth = $imageSize[0];
+    $originalHeight = $imageSize[1];
+    $imageType = $imageSize[2];
+
+    // Check if the image type is supported
+    $allowedExtensions = array(IMAGETYPE_JPEG, IMAGETYPE_PNG, IMAGETYPE_GIF);
+    if (!in_array($imageType, $allowedExtensions)) {
+        echo "Invalid file format. Only JPEG, PNG, and GIF images are allowed.";
+        exit();
     }
 
-    // Check if file already exists
-    if (file_exists($targetFile)) {
-        echo "Sorry, file already exists.";
-        $uploadOk = 0;
+    // Create the resized image with the desired width
+    $desiredWidth = $originalWidth * 0.5;
+    $desiredHeight = $originalHeight * ($desiredWidth / $originalWidth);
+    $resizedImage = imagecreatetruecolor($desiredWidth, $desiredHeight);
+
+    // Load the original image based on its type
+    switch ($imageType) {
+        case IMAGETYPE_JPEG:
+            $originalImage = imagecreatefromjpeg($tempFile);
+            break;
+        case IMAGETYPE_PNG:
+            $originalImage = imagecreatefrompng($tempFile);
+            break;
+        case IMAGETYPE_GIF:
+            $originalImage = imagecreatefromgif($tempFile);
+            break;
     }
 
-    // Check file size
-    if ($_FILES["profilePicture"]["size"] > 500000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
+    // Resize the original image to the desired dimensions
+    imagecopyresampled($resizedImage, $originalImage, 0, 0, 0, 0, $desiredWidth, $desiredHeight, $originalWidth, $originalHeight);
+
+    // Create a circular mask
+    $mask = imagecreatetruecolor($desiredWidth, $desiredHeight);
+    $maskTransparent = imagecolorallocate($mask, 255, 0, 0);
+    imagecolortransparent($mask, $maskTransparent);
+    imagefilledellipse($mask, $desiredWidth / 2, $desiredHeight / 2, $desiredWidth, $desiredHeight, $maskTransparent);
+    imagecopymerge($resizedImage, $mask, 0, 0, 0, 0, $desiredWidth, $desiredHeight, 100);
+    imagecolortransparent($resizedImage, $maskTransparent);
+    imagefill($resizedImage, 0, 0, $maskTransparent);
+
+    // Save the resized and masked image to the target directory
+    switch ($imageType) {
+        case IMAGETYPE_JPEG:
+            imagejpeg($resizedImage, $targetFile);
+            break;
+        case IMAGETYPE_PNG:
+            imagepng($resizedImage, $targetFile);
+            break;
+        case IMAGETYPE_GIF:
+            imagegif($resizedImage, $targetFile);
+            break;
     }
 
-    // Allow only certain file formats
-    if (
-        $imageFileType !== "jpg" &&
-        $imageFileType !== "jpeg" &&
-        $imageFileType !== "png" &&
-        $imageFileType !== "gif"
-    ) {
-        echo "Sorry, only JPG, JPEG, PNG, and GIF files are allowed.";
-        $uploadOk = 0;
-    }
+    // Destroy the images to free up memory
+    imagedestroy($originalImage);
+    imagedestroy($resizedImage);
+    imagedestroy($mask);
 
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
+    // Store the file path in session
+    $_SESSION['profileImagePath'] = 'profile-pictures/' . $fileName;
+    echo "Image uploaded and resized successfully!";
+    
+    // Update the profilePictureData field in the admin_table
+    $profileImagePath = 'profile-pictures/' . $fileName;
+    $ADMIN_ID = $_SESSION['ADMIN_ID']; // Assuming you have stored the admin ID in session
+
+    $sql = "UPDATE admin_table SET profilePictureData = '$profileImagePath' WHERE ADMIN_ID = $ADMIN_ID";
+    if ($conn->query($sql) === TRUE) {
+        echo "Profile picture path stored in the database.";
     } else {
-        // if everything is ok, try to upload file
-        if (move_uploaded_file($_FILES["profilePicture"]["tmp_name"], $targetFile)) {
-            echo "The file " . basename($_FILES["profilePicture"]["name"]) . " has been uploaded.";
+        echo "Error updating profile picture path: " . $conn->error;
+    }
+} else {
+    echo "Error uploading the image.";
+}
+
+   
+// Generate the profile page
+function generateProfilePage() {
+    // Check if the profile image path is set in session
+    if (isset($_SESSION['profileImagePath'])) {
+        $profileImagePath = $_SESSION['profileImagePath'];
+        echo '<img id="profileImg" src="' . $profileImagePath . '" alt="Profile">';
+    } else {
+        // Fetch the profilePictureData field from the admin_table
+        $ADMIN_ID = $_SESSION['ADMIN_ID']; // Assuming you have stored the admin ID in session
+        $sql = "SELECT profilePictureData FROM admin_table WHERE ADMIN_ID = $ADMIN_ID";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $profilePictureData = $row['profilePictureData'];
+            echo '<img id="profileImg" src="' . $profilePictureData . '" alt="Profile">';
         } else {
-            echo "Sorry, there was an error uploading your file.";
+            echo '<img id="profileImg" src="assets/img/profile-img.jpg" alt="Profile">';
         }
     }
 }
 ?>
-
-

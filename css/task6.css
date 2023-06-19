@@ -260,7 +260,7 @@ label{
     background-color: black;
     color: white;
 }
-/*.section-profile{
+.section-profile{
 
   display: flex;
  flex-direction: row;
@@ -282,24 +282,24 @@ label{
   padding: 10px;
   width: 60%;
 }
-/* Style for the parent container 
+ /*Style for the parent container */
 .section-profile .profile-information {
   display: flex;
   flex-direction: column;
 }
 
-/* Style for the tab content container 
+/* Style for the tab content container*/ 
 .section-profile .profile-information .tab-content {
   flex-grow: 1;
   display: flex;
 }
 
-/* Style for the overview and form sections 
+ /*Style for the overview and form sections */
 .section-profile .profile-information .profile-overview,
 .section-profile .profile-information .tab-pane {
   flex-basis: 50%;
 }
-*/
+
 @media (max-width:769px){
     .img-2{
         width:205%;
@@ -982,7 +982,7 @@ label{
   # Sidebar
   --------------------------------------------------------------*/
   .sidebar {
-   /*position: fixed;
+  /* position: fixed;
     top: 60px;
     left: 0;
     bottom: 0;*/
@@ -1002,11 +1002,12 @@ label{
     margin-left: 400px;
     position: relative;
     top:-750px;
+  
 
   }
   body{
     width: 100%;
-  }
+  }*/
   
   
   @media (max-width: 1199px) {
