@@ -1,4 +1,5 @@
 
+
 <?php
 session_start();
 
@@ -9,14 +10,10 @@ if (!isset($_SESSION['USER_NAME'])) {
     exit;
 }
 
-// Retrieve user details from the session
-$USER_NAME = $_SESSION['USER_NAME'];
-
 $servername = 'localhost:3307';
 $username = "root";
 $password = '1234';
 $database = 'Project';
-$port = '3307';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
@@ -26,6 +23,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Retrieve user details from the session
+$USER_NAME = isset($_SESSION['USER_NAME']) ? $_SESSION['USER_NAME'] : '';
+
 // Retrieve user profile details from the admin_table
 $stmt = $conn->prepare("SELECT * FROM admin_table WHERE USER_NAME = ?");
 $stmt->bind_param("s", $USER_NAME);
@@ -34,18 +34,22 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $jobTitle = $row['jobTitle'];
-    $company = $row['company'];
-    $country = $row['country'];
-    $Address = $row['Address'];
-    $Phone = $row['Phone'];
-    $email = $row['email'];
-    $twitterProfile = $row['twitterProfile'];
-    $instagramProfile = $row['instagramProfile'];
-    $facebookProfile = $row['facebookProfile'];
-    $linkedinProfile = $row['linkedinProfile'];
-    $ADMIN_NAME = $row['ADMIN_NAME'];
-
+    $jobTitle = $row['jobTitle'] ?? '';
+    $company = $row['company'] ?? '';
+    $country = $row['country'] ?? '';
+    $Address = $row['Address'] ?? '';
+    $Phone = $row['Phone'] ?? '';
+    $email = $row['email'] ?? '';
+    $twitterProfile = $row['twitterProfile'] ?? '';
+    $instagramProfile = $row['instagramProfile'] ?? '';
+    $facebookProfile = $row['facebookProfile'] ?? '';
+    $linkedinProfile = $row['linkedinProfile'] ?? '';
+    $ADMIN_NAME = $row['ADMIN_NAME'] ?? '';
+    $ADMIN_ID = $row['ADMIN_ID'] ?? '';
+    $ROLE_ID = $row['ROLE_ID'] ?? '';
+    $about = $row['about'] ?? '';
+    $USER_NAME = $row['USER_NAME'] ?? '';
+    $PASS_WORD = $row['PASS_WORD'] ?? '';
 } else {
     // User not found in the admin_table
     // Handle the scenario accordingly, e.g., display an error message
@@ -55,6 +59,10 @@ if ($result->num_rows > 0) {
 $stmt->close();
 $conn->close();
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -147,10 +155,18 @@ $conn->close();
             <i class="bi bi-search"></i>
           </a>
         </li><!-- End Search Icon-->
+        <?php if (isset($profilePictureData)): ?>
+        <img src="data:image/jpeg;base64,<?php echo base64_encode($profilePictureData); ?>" alt="Profile Picture">
+    <?php else: ?>
+        <p>No profile picture found.</p>
+    <?php endif; ?>
 
 <li class="nav-item dropdown pe-3">
   <a class="nav-link nav-profile d-flex align-items-center pe-0 justify-content-end" href="#" data-bs-toggle="dropdown">
-    <img src="assets/img/testimonial 2.jpg" alt="Profile" class="rounded-circle">
+  <form action="profile-picture.php" method="POST" enctype="multipart/form-data">
+        <input type="file" name="profilePicture">
+        <button type="submit">Upload Profile Picture</button>
+    </form>
     <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $ADMIN_NAME; ?></span>
   </a>
   <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -393,7 +409,13 @@ $conn->close();
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+          <h1>Profile Picture Upload</h1>
+    <form action="create-account.php" method="POST" enctype="multipart/form-data">
+        <label for="profilePicture">Select Profile Picture:</label>
+        <input type="file" name="profilePicture" id="profilePicture" accept="image/*" required>
+        <br>
+        <input type="submit" value="Upload">
+    </form>
             <h2><?php echo $ADMIN_NAME; ?></h2>
             <h3><?php echo $jobTitle; ?></h3>
             <div class="social-links mt-2">
@@ -436,7 +458,7 @@ $conn->close();
 
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
                 <h5 class="card-title">About</h5>
-                <!--<p class="small fst-italic"><?php echo $about; ?></p>-->
+                <p class="small fst-italic"><?php echo $about; ?></p>
 
                 <h5 class="card-title">Profile Details</h5>
 

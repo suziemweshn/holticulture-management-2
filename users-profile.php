@@ -98,9 +98,16 @@
 
       
         <li class="nav-item dropdown pe-3">
+        
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/testimonial 2.jpg" alt="Profile" class="rounded-circle">
+          <h1>Profile Picture Upload</h1>
+    <form action="create-account.php" method="POST" enctype="multipart/form-data">
+        <label for="profilePicture">Select Profile Picture:</label>
+        <input type="file" name="profilePicture" id="profilePicture" accept="image/*" required>
+        <br>
+        <input type="submit" value="Upload">
+    </form>
             <span class="d-none d-md-block dropdown-toggle ps-2">suzy tech</span>
           </a><!-- End Profile Iamge Icon -->
 
