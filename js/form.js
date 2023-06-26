@@ -69,3 +69,23 @@ $(function()
 $('#navbarSupportedContent .nav-item .nav-link').on('click', function(){
     $('.navbar-collapse').collapse('hide');
 })
+
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get a reference to the "Save Changes" button
+        var saveChangesBtn = document.getElementById("saveChangesBtn");
+
+        // Add an event listener for the form submission
+        document.querySelector("form").addEventListener("submit", function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Add your form validation logic here
+            // ...
+
+            // If the form is valid, enable the button and submit the form
+            saveChangesBtn.disabled = false;
+            this.submit();
+        });
+    });
+

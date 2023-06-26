@@ -982,10 +982,10 @@ label{
   # Sidebar
   --------------------------------------------------------------*/
   .sidebar {
-  /* position: fixed;
+   position: fixed;
     top: 60px;
     left: 0;
-    bottom: 0;*/
+    bottom: 0;
     width: 300px;
     z-index: 996;
     transition: all 0.3s;
@@ -1002,12 +1002,17 @@ label{
     margin-left: 400px;
     position: relative;
     top:-750px;
+  }
   
 
+  
+  .section-faq{
+    position: relative;
+    top: -750px;
   }
   body{
     width: 100%;
-  }*/
+  }
   
   
   @media (max-width: 1199px) {
@@ -1202,7 +1207,7 @@ label{
   
   .dashboard .info-card h6 {
     font-size: 28px;
-    color: #012970;
+    color:  #012970;
     font-weight: 700;
     margin: 0;
     padding: 0;

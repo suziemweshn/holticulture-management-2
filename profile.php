@@ -1,5 +1,4 @@
 
-
 <?php
 session_start();
 
@@ -48,9 +47,10 @@ if ($result->num_rows > 0) {
     $ADMIN_ID = $row['ADMIN_ID'] ?? '';
     $ROLE_ID = $row['ROLE_ID'] ?? '';
     $about = $row['about'] ?? '';
-    $USER_NAME = $row['USER_NAME'] ?? '';
     $PASS_WORD = $row['PASS_WORD'] ?? '';
-    $profilePictureData= $row['profilePictureData'] ?? '';
+    $profilePictureData = $row['profilePictureData'] ?? '';
+    $changesMade = $row['changesMade'] ?? '';
+    $newProducts = $row['newProducts'] ?? '';
 } else {
     // User not found in the admin_table
     // Handle the scenario accordingly, e.g., display an error message
@@ -61,15 +61,11 @@ $stmt->close();
 $conn->close();
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
+  <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Users / Profile - AHF Admin</title>
@@ -77,24 +73,29 @@ $conn->close();
   <meta content="" name="keywords">
 
   <!-- Favicons -->
- 
+
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
+  <link href="css/task6.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
- <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="css/bootstrap.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
-<link href="css/task6.css" rel="stylesheet">
+ 
+
+
+
+
+
 
   
 
@@ -167,7 +168,7 @@ $conn->close();
       <hr class="dropdown-divider">
     </li>
     <li>
-      <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+      <a class="dropdown-item d-flex align-items-center" href="profile.php">
         <i class="bi bi-person"></i>
         <span>My Profile</span>
       </a>
@@ -177,7 +178,7 @@ $conn->close();
     </li>
     
     <li>
-      <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+      <a class="dropdown-item d-flex align-items-center" href="#">
         <i class="bi bi-gear"></i>
         <span>Account Settings</span>
       </a>
@@ -187,7 +188,7 @@ $conn->close();
     </li>
     
     <li>
-      <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+      <a class="dropdown-item d-flex align-items-center" href="pages-faq.php">
         <i class="bi bi-question-circle"></i>
         <span>Need Help?</span>
       </a>
@@ -244,7 +245,7 @@ $conn->close();
             </a>
           </li>
         </ul>
-      </li><!-- End Forms Nav -->
+      </li><!-- End products Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -262,7 +263,7 @@ $conn->close();
             </a>
           </li>
         </ul>
-      </li><!-- End Tables Nav -->
+      </li><!-- End employees Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -285,7 +286,7 @@ $conn->close();
             </a>
           </li>
         </ul>
-      </li><!-- End Charts Nav -->
+      </li><!-- End customers Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
@@ -343,7 +344,7 @@ $conn->close();
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
+        <a class="nav-link collapsed" href="pages-faq.php">
           <i class="bi bi-question-circle"></i>
           <span>F.A.Q</span>
         </a>
@@ -398,17 +399,17 @@ $conn->close();
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-          <div class="row mb-3">
+          <div class="row ">
         <label for="profileImage" ></label>
         <div class="col-md-8 col-lg-9">
-        <img src=<?php echo $profilePictureData; ?> alt="Profile" class="rounded-circle">
+        <img src=<?php echo $profilePictureData?> alt="Profile" class="rounded-circle h-50 w-100">
           
         </div>
     </div>
 
             <h2><?php echo $ADMIN_NAME; ?></h2>
             <h3><?php echo $jobTitle; ?></h3>
-            <div class="social-links mt-2">
+            <div class="social-links ">
               <a href="<?php echo $twitterProfile; ?>" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="<?php echo $facebookProfile; ?>" class="facebook"><i class="bi bi-facebook"></i></a>
               <a href="<?php echo $instagramProfile; ?>" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -495,11 +496,11 @@ $conn->close();
     
                 <form action="profile-picture.php" method="POST" enctype="multipart/form-data">
     <div class="row mb-3">
-        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label"></label>
+        <label for="profileImage" class="col-md-4 col-lg-3 col-form-label"> profile</label>
         <div class="col-md-8 col-lg-9">
-            <?php
+             <?php
             // Check if the profile image path is set in session
-            if (isset($_SESSION['profileImagePath'])) {
+           /* if (isset($_SESSION['profileImagePath'])) {
                 $profileImagePath = $_SESSION['profileImagePath'];
                 echo '<img id="profileImg" src="' . $profileImagePath . '" alt="Profile">';
             } else {
@@ -515,8 +516,10 @@ $conn->close();
                 } else {
                     echo '<img id="profileImg" src="assets/img/profile-img.jpg" alt="Profile">';
                 }
-            }
+            }*/
             ?>
+            
+
             <div class="p-2 d-flex">
                 <label for="profileUpload" class="btn btn-primary btn-sm me-4" title="Upload new profile image"><i class="bi bi-upload"></i></label>
                 <button type="submit" class="btn btn-primary btn-sm me-4" title="Save profile image" id="saveButton"><i class="bi bi-save"></i> Save</button>
@@ -529,7 +532,7 @@ $conn->close();
 </form>
 
     
-<form>
+<form action="edit-profile.php" method="POST">
     <div class="row mb-3">
         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
         <div class="col-md-8 col-lg-9">
@@ -615,81 +618,112 @@ $conn->close();
     </div>
 
     <div class="text-center">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="submit" class="btn btn-primary" id="saveChanges">Save Changes</button>
+        <script>
+    // Wait for the DOM to load
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get a reference to the "Save Changes" button
+        var saveChangesBtn = document.getElementById("saveChanges");
+
+        // Add an event listener to enable the button on form input
+        document.querySelector("form").addEventListener("input", function() {
+            saveChanges.disabled = false;
+        });
+    });
+</script>
+
     </div>
+    
+
 </form>
+
 
               </div>
 
               <div class="tab-pane fade" id="profile-settings">
-                <h5 class="card-title">Settings</h5>
-                <form>
+    <h5 class="card-title">Settings</h5>
+    <form action="update-notification.php" method="POST">
 
-<div class="row mb-3">
-  <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
-  <div class="col-md-8 col-lg-9">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="changesMade" checked>
-      <label class="form-check-label" for="changesMade">
-        Changes made to your account
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="newProducts" checked>
-      <label class="form-check-label" for="newProducts">
-        Information on new products and services
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="proOffers">
-      <label class="form-check-label" for="proOffers">
-        Marketing and promo offers
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
-      <label class="form-check-label" for="securityNotify">
-        Security alerts
-      </label>
-    </div>
-  </div>
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <p class="success-message"><?php echo $_SESSION['success_message']; ?></p>
+            <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+
+        <!-- Display error message -->
+        <?php if (isset($_SESSION['error_message'])): ?>
+            <p class="error-message"><?php echo $_SESSION['error_message']; ?></p>
+            <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
+
+        <div class="row mb-3">
+            <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email Notifications</label>
+            <div class="col-md-8 col-lg-9">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="changesMade" name="changesMade" <?php if ($changesMade) echo "checked"; ?>>
+                    <label class="form-check-label" for="changesMade">
+                        Changes made to your account
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="newProducts" name="newProducts" <?php if ($newProducts) echo "checked"; ?>>
+                    <label class="form-check-label" for="newProducts">
+                        Information on new products and services
+                    </label>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" id="saveChangesBtn" class="btn btn-primary" disabled>Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
-<div class="text-center">
-  <button type="submit" class="btn btn-primary">Save Changes</button>
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const saveChangesBtn = document.getElementById('saveChangesBtn');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            saveChangesBtn.disabled = false;
+        });
+    });
+</script>
+
+
+
+
+
+<div class="tab-pane fade" id="profile-change-password">
+    <h5 class="card-title">Change Password</h5>
+    <form action="change-password.php" method="POST">
+
+        <div class="row mb-3">
+            <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+            <div class="col-md-8 col-lg-9">
+                <input name="currentPassword" type="password" class="form-control" id="currentPassword" required>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+            <div class="col-md-8 col-lg-9">
+                <input name="newPassword" type="password" class="form-control" id="newPassword" required>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+            <div class="col-md-8 col-lg-9">
+                <input name="renewPassword" type="password" class="form-control" id="renewPassword" required>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Change Password</button>
+        </div>
+    </form><!-- End Change Password Form -->
 </div>
-              </div>
-
-              <div class="tab-pane fade" id="profile-change-password">
-                <h5 class="card-title">Change Password</h5>
-                <form>
-
-                    <div class="row mb-3">
-                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="currentPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="password" class="form-control" id="newPassword">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                      </div>
-                    </div>
-
-                    <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Change Password</button>
-                    </div>
-                  </form><!-- End Change Password Form -->
-              </div>
 
             </div>
           </div>
@@ -715,6 +749,9 @@ $conn->close();
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <!-- Add this script tag at the end of the body section -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
 
 
 </body>

@@ -67,7 +67,7 @@
                     <p class="text-center small">Enter your personal details to create account</p>
                   </div>
 
-                  <form class="row g-3 " action="create-account.php" method="post">
+                  <form class="row g-3 " action="create-account.php" method="POST">
                     <div class="col-12">
                       <label for="yourName" class="form-label">Your Name</label>
                       <input type="text" name="ADMIN_NAME" class="form-control" id="yourName" required>
@@ -84,7 +84,7 @@
                       <div class="invalid-feedback">Please, enter your ID!</div>
                     </div>
                     
-
+                   
                     <div class="col-12">
                       <label for="yourEmail" class="form-label">Your Email</label>
                       <input type="email" name="email" class="form-control" id="yourEmail" required>
@@ -166,7 +166,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">Create Account</button>
+                      <button class="btn btn-primary w-100" type="submit" name="createAccount">Create Account</button>
                     </div>
                     <div class="col-12">
                       <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
