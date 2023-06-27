@@ -65,12 +65,14 @@ $conn->close();
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Users / Profile - AHF Admin</title>
-  <meta content="" name="description">
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description">
   <meta content="" name="keywords">
+   
+  <title>Users / Profile - AHF Admin</title>
+  
 
   <!-- Favicons -->
 
@@ -79,7 +81,7 @@ $conn->close();
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="css/task6.css" rel="stylesheet">
+  
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -89,7 +91,8 @@ $conn->close();
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="css/task6.css">
  
 
 
@@ -400,15 +403,17 @@ $conn->close();
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
           <div class="row ">
-        <label for="profileImage" ></label>
-        <div class="col-md-8 col-lg-9">
-        <img src=<?php echo $profilePictureData?> alt="Profile" class="rounded-circle h-50 w-100">
+        <label for="profileImage " ></label>
+        <div class="col-md-8 col-lg-9  mx-auto">
+        <img src=<?php echo $profilePictureData?> alt="Profile" class="rounded-circle h-45 w-50 ">
           
         </div>
     </div>
 
-            <h2><?php echo $ADMIN_NAME; ?></h2>
+           <h2><?php echo $ADMIN_NAME; ?></h2>
             <h3><?php echo $jobTitle; ?></h3>
+
+            
             <div class="social-links ">
               <a href="<?php echo $twitterProfile; ?>" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="<?php echo $facebookProfile; ?>" class="facebook"><i class="bi bi-facebook"></i></a>
