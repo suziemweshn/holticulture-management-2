@@ -51,6 +51,7 @@ if ($result->num_rows > 0) {
     $profilePictureData = $row['profilePictureData'] ?? '';
     $changesMade = $row['changesMade'] ?? '';
     $newProducts = $row['newProducts'] ?? '';
+    $USER_NAME = $row['USER_NAME'] ?? '';
 } else {
     // User not found in the admin_table
     // Handle the scenario accordingly, e.g., display an error message
@@ -450,50 +451,53 @@ $conn->close();
               </li>
 
             </ul>
+            <form action="eedit-profile.php " method="POST">
             <div class="tab-content pt-2">
 
-              <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                <h5 class="card-title">About</h5>
-                <p class="small fst-italic"><?php echo $about; ?></p>
+<div class="tab-pane fade show active profile-overview" id="profile-overview">
+  <h5 class="card-title">About</h5>
+  <p class="small fst-italic"><?php echo $about; ?></p>
 
-                <h5 class="card-title">Profile Details</h5>
+  <h5 class="card-title">Profile Details</h5>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Full Name</div>
-                  <div class="col-lg-9 col-md-8"><?php echo $ADMIN_NAME; ?></div>
-                </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Full Name</div>
+    <div class="col-lg-9 col-md-8"><?php echo $ADMIN_NAME; ?></div>
+  </div>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Company</div>
-                  <div class="col-lg-9 col-md-8"><?php echo $company; ?></div>
-                </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Company</div>
+    <div class="col-lg-9 col-md-8"><?php echo $company; ?></div>
+  </div>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Job</div>
-                  <div class="col-lg-9 col-md-8"><?php echo $jobTitle; ?></div>
-                </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Job</div>
+    <div class="col-lg-9 col-md-8"><?php echo $jobTitle; ?></div>
+  </div>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Country</div>
-                  <div class="col-lg-9 col-md-8"><?php echo $country; ?></div>
-                </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Country</div>
+    <div class="col-lg-9 col-md-8"><?php echo $country; ?></div>
+  </div>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Address</div>
-                  <div class="col-lg-9 col-md-8"><?php echo $Address; ?></div>
-                </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Address</div>
+    <div class="col-lg-9 col-md-8"><?php echo $Address; ?></div>
+  </div>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Phone</div>
-                  <div class="col-lg-9 col-md-8"><?php echo $Phone; ?></div>
-                </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Phone</div>
+    <div class="col-lg-9 col-md-8"><?php echo $Phone; ?></div>
+  </div>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Email</div>
-                  <div class="col-lg-9 col-md-8"><?php echo $email; ?></div>
-                </div>
-              </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-4 label">Email</div>
+    <div class="col-lg-9 col-md-8"><?php echo $email; ?></div>
+  </div>
+</div>
 
+            </form>
+           
               <div class="tab-pane fade" id="profile-edit">
                 <h5 class="card-title">Edit Profile</h5>
                
@@ -537,11 +541,17 @@ $conn->close();
 </form>
 
     
-<form action="edit-profile.php" method="POST">
+<form action="edit-profile.php" method="POST" class="profile-form">
     <div class="row mb-3">
         <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
         <div class="col-md-8 col-lg-9">
-            <input name="fullName" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($ADMIN_NAME); ?>">
+            <input name="ADMIN_NAME" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($ADMIN_NAME); ?>">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="fullName" class="col-md-4 col-lg-3 col-form-label">User Name</label>
+        <div class="col-md-8 col-lg-9">
+            <input name="USER_NAME" type="text" class="form-control" id="fullName" value="<?php echo htmlspecialchars($USER_NAME); ?>">
         </div>
     </div>
 
@@ -562,7 +572,7 @@ $conn->close();
     <div class="row mb-3">
         <label for="Job" class="col-md-4 col-lg-3 col-form-label">Job</label>
         <div class="col-md-8 col-lg-9">
-            <input name="job" type="text" class="form-control" id="Job" value="<?php echo htmlspecialchars($jobTitle); ?>">
+            <input name="jobTitle" type="text" class="form-control" id="Job" value="<?php echo htmlspecialchars($jobTitle); ?>">
         </div>
     </div>
 
@@ -576,14 +586,14 @@ $conn->close();
     <div class="row mb-3">
         <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
         <div class="col-md-8 col-lg-9">
-            <input name="address" type="text" class="form-control" id="Address" value="<?php echo htmlspecialchars($Address); ?>">
+            <input name="Address" type="text" class="form-control" id="Address" value="<?php echo htmlspecialchars($Address); ?>">
         </div>
     </div>
 
     <div class="row mb-3">
         <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
         <div class="col-md-8 col-lg-9">
-            <input name="phone" type="text" class="form-control" id="Phone" value="<?php echo htmlspecialchars($Phone); ?>">
+            <input name="Phone" type="number" class="form-control" id="Phone" value="<?php echo htmlspecialchars($Phone); ?>">
         </div>
     </div>
 
@@ -597,28 +607,28 @@ $conn->close();
     <div class="row mb-3">
         <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
         <div class="col-md-8 col-lg-9">
-            <input name="twitter" type="text" class="form-control" id="Twitter" value="<?php echo htmlspecialchars($twitterProfile); ?>">
+            <input name="twitterProfile" type="text" class="form-control" id="Twitter" value="<?php echo htmlspecialchars($twitterProfile); ?>">
         </div>
     </div>
 
     <div class="row mb-3">
         <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
         <div class="col-md-8 col-lg-9">
-            <input name="facebook" type="text" class="form-control" id="Facebook" value="<?php echo htmlspecialchars($facebookProfile); ?>">
+            <input name="facebookProfile" type="text" class="form-control" id="Facebook" value="<?php echo htmlspecialchars($facebookProfile); ?>">
         </div>
     </div>
 
     <div class="row mb-3">
         <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
         <div class="col-md-8 col-lg-9">
-            <input name="instagram" type="text" class="form-control" id="Instagram" value="<?php echo htmlspecialchars($instagramProfile); ?>">
+            <input name="instagramProfile" type="text" class="form-control" id="Instagram" value="<?php echo htmlspecialchars($instagramProfile); ?>">
         </div>
     </div>
 
     <div class="row mb-3">
         <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
         <div class="col-md-8 col-lg-9">
-            <input name="linkedin" type="text" class="form-control" id="Linkedin" value="<?php echo htmlspecialchars($linkedinProfile); ?>">
+            <input name="linkedinProfile" type="text" class="form-control" id="Linkedin" value="<?php echo htmlspecialchars($linkedinProfile); ?>">
         </div>
     </div>
 
@@ -631,8 +641,8 @@ $conn->close();
         var saveChangesBtn = document.getElementById("saveChanges");
 
         // Add an event listener to enable the button on form input
-        document.querySelector("form").addEventListener("input", function() {
-            saveChanges.disabled = false;
+        document.querySelector(".profile-form").addEventListener("input type=[text], input type=[email]", function() {
+            saveChangesBtn.disabled = false;
         });
     });
 </script>
