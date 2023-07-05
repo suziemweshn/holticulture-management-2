@@ -1003,7 +1003,13 @@ label{
     margin-top: 20px;
     margin-left: 400px;
   }
+ .product-list{
   
+ background-color:white;
+ }
+ .product-display{
+  background-color:lightgray;
+ }
   
 
   

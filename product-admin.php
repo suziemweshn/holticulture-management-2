@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if an image was uploaded
     if (!empty($image) && !empty($tempFilePath)) {
-        $targetDirectory = $_SERVER['DOCUMENT_ROOT'] . '/products/product-images/';
+        $targetDirectory = $_SERVER['DOCUMENT_ROOT'] . '/main project/product-images/';
         $targetFile = $targetDirectory . basename($image);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
