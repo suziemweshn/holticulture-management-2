@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 $servername = 'localhost:3307';
 $username = "root";
 $password = '1234';
-$database = 'Products';
+$database = 'products';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $database);
@@ -18,13 +18,13 @@ if ($conn->connect_error) {
 }
 
 // Retrieve products from the database
-$query = "SELECT * FROM products";
+$query = "SELECT * FROM roses";
 $result = mysqli_query($conn, $query);
 
 // Fetch and store products in an array
-$products = [];
+$roses = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $products[] = $row;
+    $roses[] = $row;
 }
 
 // Close the database connection
@@ -42,22 +42,26 @@ mysqli_close($conn);
    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Roses</h1>
+    <h1 class="text-center">Roses</h1>
     
     <!-- Display Products -->
 <section class="product-display ">
-    <div class="container d-flex flex-row flex-wrap">
-    <?php foreach ($products as $product): ?>
-        <div class="product-list ms-5 mb-10 h-70 w-30 mt-20">
+    <div class="container-fluid">
+    <?php foreach ($roses as $product): ?>
+        <div class="product-list d-flex flex-column">
         <?php if (!empty($product['image'])): ?>
-                        <img src="product-images/<?php echo $product['image']; ?>" alt="Product Image" width="100" height="100">
+                        <img src="product-images/<?php echo $product['image']; ?>" alt="Product Image" class="  img-fluid rounded-circle">
                     <?php else: ?>
                         No Image Available
                     <?php endif; ?>
-                    <div class="product-details ">
+                    <div class="product-details mt-5">
                     <?php echo $product['name']?><br>
-                        <?php echo $product['description']?><br>
-                        <?php echo $product['price']?>
+                    <hr>
+                     <?php echo $product['description']?>
+                        <hr>
+                        <?php echo $product['price']?>   USD
+                        <hr>
+                        <button type="submit">Add to cart</button>
 
                     </div>
                     </div>

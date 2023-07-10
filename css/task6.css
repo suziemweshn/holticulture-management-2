@@ -1003,13 +1003,93 @@ label{
     margin-top: 20px;
     margin-left: 400px;
   }
+  .product-form{
+    
+   border:1px solid black;
+   border-radius:10px;
+   padding: 10px;
+   margin-bottom: 20px;
+
+  }
+  .product-details{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    width:400px;
+  }
+  .product-details button{
+    width:50%;
+    color:white;
+    background-color: lime;
+    padding:2px;
+    border-radius: 4px;
+    font-size: 20px;
+    margin-bottom: 10px;
+
+
+  }
  .product-list{
+  margin-left: 40px;
+  margin-top: 20px;
+  background-color: lightgray;
+  width: 400px;
+ 
+ 
+ 
   
- background-color:white;
+  
  }
- .product-display{
-  background-color:lightgray;
+ .product-list img{
+ width:350px;
+ height: 50%;
+ margin-left: auto;
+ margin-right: auto;
+ display: block;
+ 
  }
+
+ 
+ .product-display .container-fluid{
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+  
+ }
+.product-button button{
+  padding:10px;
+  width: 70%;
+  border-radius: 5px;
+  font-size: 15px;
+  color:white;
+  margin-top: 50px;
+  margin-left: 150px;
+  background-color: black;
+  
+}
+.update-button button{
+  background-color:lime;
+  color: white;
+  font-size: 30px;
+ 
+}
+.update-button{
+  border-radius: 4px;
+  padding: 4px;
+}
+.product-form fieldset{
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 30px;
+}
+.heading h3{
+  text-align:center;
+}
+.container table th{
+  border: 1px solid;
+}
   
 
   
