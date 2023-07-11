@@ -18,13 +18,13 @@ if ($conn->connect_error) {
 }
 
 // Retrieve products from the database
-$query = "SELECT * FROM roses";
+$query = "SELECT * FROM mixed_roses";
 $result = mysqli_query($conn, $query);
 
 // Fetch and store products in an array
-$roses = [];
+$mixed_roses = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $roses[] = $row;
+    $mixed_roses[] = $row;
 }
 
 // Close the database connection
@@ -147,12 +147,12 @@ mysqli_close($conn);
         </div>
     </header>
         <!-- Header End -->
-    <h1 class="text-center">Roses</h1>
+    <h1 class="text-center">Mixed Roses</h1>
     
     <!-- Display Products -->
 <section class="product-display ">
     <div class="container-fluid">
-    <?php foreach ($roses as $product): ?>
+    <?php foreach ($mixed_roses as $product): ?>
         <div class="product-list ">
         <?php if (!empty($product['image'])): ?>
                         <img src="product-images/<?php echo $product['image']; ?>" alt="Product Image" class="  img-fluid rounded-circle">

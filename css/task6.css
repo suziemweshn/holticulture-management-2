@@ -1036,6 +1036,7 @@ label{
  
  
  
+ 
   
   
  }
@@ -1090,7 +1091,62 @@ label{
 .container table th{
   border: 1px solid;
 }
+
+/*.Flowers .row{
+  min-height: 200px;
+}*/
+.flowers{
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
   
+}
+.product-tile{
+  background:  url("../img/roses.jpg") no-repeat fixed center; 
+  margin-right: 20px;
+  max-width:50%;
+  min-height: 40vh;
+
+}
+
+.product-tile2{
+  background: url(../img/andrea-mixed-roses-beautiful-flower-bouquet-2.jpeg) no-repeat fixed center;
+  margin-right: 20px;
+  max-width: 50%;
+  min-height: 40vh;
+}
+.product-tile3{
+  background:url(../img/lily.jpg) no-repeat fixed center;
+  margin-right: 20px;
+  max-width: 50%;
+  min-height: 40vh;
+
+ 
+
+}
+.product-tile4{
+  background: url(../img/carnation.jpg) no-repeat fixed center;
+  margin-right: 20px;
+  max-width: 50%;
+  min-height: 40vh;
+
+}
+.product-tile5{
+  background: url(../img/fillers\ and\ foliages.jpg) no-repeat fixed center;
+  margin-right: 20px;
+  max-width: 50%;
+  min-height: 40vh;
+
+}
+.product-tile6{
+  background: url(../img/astroemelia.jpg) no-repeat fixed center;
+  margin-right: 20px;
+  max-width: 50%;
+  min-height: 40vh;
+
+}
+
+
 
   
   .section-faq{

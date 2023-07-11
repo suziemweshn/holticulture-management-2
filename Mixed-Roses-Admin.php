@@ -58,16 +58,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $productId = $_POST['delete'];
 
         // Delete the product from the database
-        $deleteQuery = "DELETE FROM roses WHERE id = $productId";
+        $deleteQuery = "DELETE FROM  mixed_roses WHERE id = $productId";
         mysqli_query($conn, $deleteQuery);
 
         // Delete the product image file (optional)
         // Assuming the images are stored in the directory '/main project/product-images/'
-        $targetDirectory = $_SERVER['DOCUMENT_ROOT'] . '/main project/product-images/';
+       /* $targetDirectory = $_SERVER['DOCUMENT_ROOT'] . '/main project/product-images/';
         $productImage = $_POST['image']; // Retrieve the image name from the form
         $productImagePath = $targetDirectory . $productImage;
         if (file_exists($productImagePath)) {
-            unlink($productImagePath);
+            unlink($productImagePath);*/
         }
     }
 
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $price = $_POST['price'];
 
         // Update the product in the database
-        $updateQuery = "UPDATE roses SET name = '$name', description = '$description', price = $price WHERE id = $productId";
+        $updateQuery = "UPDATE mixed_roses SET name = '$name', description = '$description', price = $price WHERE id = $productId";
         mysqli_query($conn, $updateQuery);
     }
 
@@ -136,17 +136,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Insert the product into the products table
-        $query = "INSERT INTO roses (name, description, price, image) VALUES ('$name', '$description', $price, '$image')";
+        $query = "INSERT INTO mixed_roses (name, description, price, image) VALUES ('$name', '$description', $price, '$image')";
         mysqli_query($conn, $query);
     }
-}
+
 
 // Retrieve products from the database
-$query = "SELECT * FROM roses";
+$query = "SELECT * FROM mixed_roses";
 $result = mysqli_query($conn, $query);
 
 // Fetch and store products in an array
-$roses = [];
+$mixed_roses = [];
 while ($row = mysqli_fetch_assoc($result)) {
     if (!array_key_exists('image', $row) || $row['image'] === null) {
         // The "image" field is not present or null in the result set
@@ -156,7 +156,7 @@ while ($row = mysqli_fetch_assoc($result)) {
     }
 
     // Add the row to the products array
-    $roses[] = $row;
+    $mixed_roses[] = $row;
 }
 
 // Close the database connection
@@ -286,7 +286,7 @@ mysqli_close($conn);
     <!-- Add Product Form -->
     <div class="container w-100">
         <div class="product-form">
-            <form method="POST" action="Roses-admin.php" class="d-flex flex-row flex-wrap mt-20" enctype="multipart/form-data">
+            <form method="POST" action="Mixed-Roses-Admin.php" class="d-flex flex-row flex-wrap mt-20" enctype="multipart/form-data">
                 <div class="w-100 mb-10 ms-20">
                     <label for="name" class="w-10 display-8 fw-bold">Product Name:</label>
                     <input type="text" class="ms-10" name="name" id="name" required><br>
@@ -323,7 +323,7 @@ mysqli_close($conn);
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($roses as $product): ?>
+        <?php foreach ($mixed_roses as $product): ?>
             <tr>
                 <td><?php echo $product['name']; ?></td>
                 <td><?php echo $product['description']; ?></td>
@@ -336,13 +336,13 @@ mysqli_close($conn);
                     <?php endif; ?>
                 </td>
                 <td>
-                    <form method="POST" action="Roses-admin.php" class="update-button">
+                    <form method="POST" action="Mixed-Roses-Admin.php" class="update-button">
                         <input type="hidden" name="delete" value="<?php echo $product['id']; ?>">
                         <input type="hidden" name="image" value="<?php echo $product['image']; ?>">
                         <button type="submit" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
                     </form>
 
-                    <form method="POST" action="Roses-admin.php" class="update-button">
+                    <form method="POST" action="Mixed-Roses-Admin.php" class="update-button">
                         <input type="hidden" name="edit" value="<?php echo $product['id']; ?>">
                         <input type="hidden" name="image" value="<?php echo $product['image']; ?>">
                         <div class="w-100 mb-10 ms-20">
