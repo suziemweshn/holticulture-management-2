@@ -229,7 +229,7 @@ $conn->close();
         </a>
         <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="Flowers-Admin.html">
               <i class="bi bi-circle"></i><span>Flowers</span>
             </a>
           </li>
@@ -451,7 +451,7 @@ $conn->close();
               </li>
 
             </ul>
-            <form action="eedit-profile.php " method="POST">
+            <form action="edit-profile.php " method="POST">
             <div class="tab-content pt-2">
 
 <div class="tab-pane fade show active profile-overview" id="profile-overview">

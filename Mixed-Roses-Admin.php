@@ -280,7 +280,7 @@ mysqli_close($conn);
     </header>
         <!-- Header End -->
     <div class="heading mt-20 mb-20">
-        <h3>Admin Flower Page</h3>
+        <h3>Mixed Roses Admin page</h3>
     </div>
 
     <!-- Add Product Form -->
