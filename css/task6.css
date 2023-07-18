@@ -404,6 +404,10 @@ width: 80%;
 height: 50%;
 text-align: center;
 }
+.about-low-area{
+  min-height: 50vh;
+  background-color: #1ca044;
+}
 
 .about button a{
     text-decoration: none;
