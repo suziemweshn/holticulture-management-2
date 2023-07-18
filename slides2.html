@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .carousel-item {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carousel-item.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Slideshow</h1>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">            
+          <div class="carousel-caption">
+            <div class="row">
+              <div class="col-lg-5 col-md-12 col-12">
+                <div class="banner-info">
+                  <h5>Welcome To AHF <br> Start Your First Shopping</h5>
+                  <p>We put more efforts into offering the best services to see our clients smile. We are the best to work with.</p>
+                  <div class="d-flex align-items-center">
+                    <div class="button1">
+                      <p><a href="#" class="btn mt-3">Shop now</a></p>
+                    </div>
+                    <div class="button2">
+                      <p><a href="#" class="btn mt-3">Best Deals</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-12 col-12">
+                <div class="imgBox mt-20">
+                  <img src="img/basket.jfif" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">           
+          <div class="carousel-caption">
+            <div class="row">
+              <div class="col-lg-5 col-md-12 col-12">
+                <div class="banner-info">
+                  <h5>Fresh & Healthy <br> Organic Products</h5>
+                  <p>Get 10% discount for your first shopping. We offer the best fruits, vegetables, flowers, and dairy products to everyone.</p>
+                  <div class="d-flex align-items-center">
+                    <div class="button1">
+                      <p><a href="#" class="btn mt-3">Shop now</a></p>
+                    </div>
+                    <div class="button2">
+                      <p><a href="#" class="btn mt-3">Best Deals</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-12 col-12">
+                <div class="imgBox">
+                  <img src="img/onions.jpg" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="carousel-caption">
+            <div class="row">
+              <div class="col-lg-5 col-md-12 col-12">
+                <div class="banner-info">
+                  <h5>Fresh Vegetables <br> From Garden</h5>
+                  <p>Buy fresh vegetables and other products from us at affordable prices.</p>
+                  <div class="d-flex align-items-center">
+                    <div class="button1">
+                      <p><a href="#" class="btn mt-3">Shop now</a></p>
+                    </div>
+                    <div class="button2">
+                      <p><a href="#" class="btn mt-3">Best Deals</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7 col-md-12 col-12">
+                <div class="imgBox">
+                  <img src="img/beef.jpg" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

@@ -39,14 +39,16 @@ body {
 	min-height: 100vh;
     
 	background-color: #1cae40;
+	
 }
 .carousel-inner{
-    min-height: 100vh;
+    min-height: 70vh;
 }
 .carousel-caption {
 	bottom: 0;
 	z-index: 2;
 	text-align: left;
+	margin-bottom: 300px;
 }
 .carousel-caption h5 {
 	font-size: 35px;
@@ -93,6 +95,7 @@ body {
 	background-image: none;
 	color:lime;
 	background: lime;
+	margin-top: 350px;
 }
 .carousel-control-next-icon:after {
 	content: '->';
