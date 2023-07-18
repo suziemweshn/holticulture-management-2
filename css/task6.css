@@ -1238,7 +1238,7 @@ label{
  .list .text1{
   color: black;
   font-weight: bold;
-  font-size:40px;
+  font-size:20px;
  }
  .list .cart{
   margin-left: 20px;
@@ -1346,7 +1346,15 @@ label{
   min-height: 40vh;
 
 }
-
+.content-2{
+  margin-top: 100px;
+  margin-left: 400px;
+}
+.content-2 img{
+  margin-left: 400px;
+  width: 200px;
+  margin-top: 200px;
+}
 .product-tile2{
   background: url(../img/andrea-mixed-roses-beautiful-flower-bouquet-2.jpeg) no-repeat fixed center;
   margin-right: 20px;
@@ -1393,6 +1401,48 @@ label{
   }
   body{
     width: 100%;
+  }
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin-bottom: 20px;
+    margin-left: 200px;
+    
+   
+  }
+
+  .image-fade-container {
+    position: relative;
+    width:40%;
+    height: 60%;
+    
+  }
+
+  .image-fade,
+  .fade-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 400px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+   
+  }
+
+  .image-fade.active,
+  .fade-text.active {
+    opacity: 1;
+   
+  }
+  .fade-text{
+    margin-top: 150px;
+    margin-left: 30px;
+    color:black;
+    font-weight: bold;
+    font-size: 27px;
   }
   
   

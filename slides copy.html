@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      margin-bottom: 20px;
+    }
+
+    .image-fade {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .image-fade.active {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Slideshow</h1>
+<div id="slideshow" class="image-container">
+  <div class="image-fade-container">
+    <img src="img/flower.png" class="image-fade active">
+    <img src="img/apple.png" class="image-fade active">
+    <img src="img/apricot.jpg" class="image-fade active">
+  </div>
+  <p>Get 50% discount from all these amazing things when you shop goods worth above $500</p>
+</div>
+
+  <script>
+    var images = document.querySelectorAll('.image-fade');
+    var currentIndex = 0;
+
+    function fadeImages() {
+      images.forEach(function(image) {
+        image.classList.remove('active');
+      });
+
+      images[currentIndex].classList.add('active');
+
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    setInterval(fadeImages, 3000);
+  </script>
+</body>
+</html>
