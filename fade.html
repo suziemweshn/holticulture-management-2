@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        @keyframes fadeInOut {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      
+        .text1 {
+          animation: fadeInOut 2s infinite;
+        }
+      </style>
+      
+      <div class="list">
+        <ul class="">
+          <li>
+            <a href="#">
+              <p class="text1">Hi <?php echo $username ?>! Welcome</p>
+            </a>
+          </li> 
+                      
+          <li class="cart">
+            <a href=""><img src="img/shopping-cart.png" alt=""> Cart</a>  
+          </li>
+        </ul>
+      </div>
+      
+</body>
+</html>

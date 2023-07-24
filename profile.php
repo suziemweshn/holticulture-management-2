@@ -127,7 +127,7 @@ $conn->close();
 </div>
 
 <div class="search-bar">
-  <form class="search-form d-flex align-items-center justify-content-center mt-3" method="POST" action="#">
+  <form class="search-form d-flex align-items-center justify-content-center " method="POST" action="#">
     <input type="text" name="query" placeholder="Search" title="Enter search keyword">
     <button type="submit" title="Search"><i class="bi bi-search"></i></button>
   </form>
@@ -430,27 +430,28 @@ $conn->close();
       
       <div class="col-xl-8">
       <div class="card">
-          <div class="card-body">
+          <div class="card-body ">
             <!-- Bordered Tabs -->
-            <ul class="nav nav-tabs nav-tabs-bordered">
+            <ul class="nav nav-tabs nav-tabs-bordered ">
 
               <li class="nav-item">
-                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                <button class="nav-link active d-flex flex-row me-30" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                <button class="nav-link d-flex flex-row me-30" data-bs-toggle="tab" data-bs-target="#profile-edit">EditProfile</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
+                <button class="nav-link d-flex flex-row me-30" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
               </li>
 
               <li class="nav-item">
-                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                <button class="nav-link d-flex flex-row me-30" data-bs-toggle="tab" data-bs-target="#profile-change-password">ChangePassword</button>
               </li>
 
             </ul>
+
             <form action="edit-profile.php " method="POST">
             <div class="tab-content pt-2">
 

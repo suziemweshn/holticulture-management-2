@@ -7,7 +7,7 @@ ini_set('display_startup_errors', 1);
 
 
 
-$servername = 'localhost:3307';
+$servername = "localhost:3307";
 $username = "root";
 $password = '1234';
 $database = 'Project';
@@ -43,8 +43,9 @@ if ($stmt->execute()) {
             exit();
         } else {
             // Invalid password
-            header("Location: pages-login.html?error=invalid");
-            exit();
+          //  header("Location: pages-login.html?error=invalid");
+           // exit();
+           echo("log in unsuccessful");
         }
     } else {
         // User does not exist

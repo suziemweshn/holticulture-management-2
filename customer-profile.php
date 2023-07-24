@@ -67,7 +67,26 @@ $conn->close();
    <link href="style.css" rel="stylesheet">
    <link href="assets/css/style.css" rel="stylesheet">
    <link href="css/task6.css" rel="stylesheet">
+   <style>
+        @keyframes fadeInOut {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      
+        .text1 {
+          animation: fadeInOut 2s infinite;
+        }
+         
+         .row{
+          margin-left:350px;
+          margin-top: 400px;
+            
+          
+         }
+     
+      </style>
 </head>
+
 <body>
     <!-- Top bar -->
     <div class="top-bar mx-auto">
@@ -76,7 +95,7 @@ $conn->close();
         </div>
         <div class="list">
             <ul class="">
-                <li > <a href="#"> <p class="text1">Hi   <?php echo $username?>!</p></a></li> 
+                <li > <a href="#"> <p class="text1">Hi   <?php echo $username?>! Welcome</p></a></li> 
                 
                 <li class="cart">
                 <a href=""><img src="img/shopping-cart.png" alt=""> Cart</a>  
@@ -120,6 +139,81 @@ $conn->close();
     <p class="fade-text">Get 50% discount from all these amazing things <br> when you shop goods worth above $500</p>
   </div>
 </div>
+
+<div class="row">
+
+            <div class="col-lg-3 col-md-6 col sm-12 rounded" >
+               <div class="card text-center " style="background-color: lime">
+                   <a href="Roses.php"><img src="img/roses.jpg" class="card-img-top" alt="Card Image" height="250px" ></a>
+                   <div class="card-body">
+                    
+                    <a href="Roses.php"> <p class="card-text-light " >Roses</p></a> 
+                   </div>
+                 </div>
+            </div>
+           <div class="col-lg-3 col-md-6 col sm-12 rounded" >
+               <div class="card text-center " style="background-color: lime">
+                   <a href="mixed-roses.php"><img src="img/mixed roses.jpg" class="card-img-top" alt="Card Image" height="250px" ></a>
+                   <div class="card-body">
+                    
+                    <a href="mixed-roses.php"> <p class="card-text-light " > Mixed Roses</p></a> 
+                   </div>
+                 </div>
+            </div>
+            
+           
+            <div class="col-lg-3 col-md-6 col sm-12 rounded">
+               <div class="card text-center" style="background-color: lime">
+                   <img src="img/carnation.jpg" class="card-img-top" alt="Card Image" height="250px">
+                   <div class="card-body">
+                    
+                     <a href="carnation.php"> <p class="card-text-light" >Carnation</p></a>
+                   </div>
+                 </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col sm-12 rounded">
+               <div class="card text-center" style="background-color:lime ">
+                   <a href=""><img src="img/lily.jpg" class="card-img-top" alt="Card Image" height="250px"> </a>
+                   <div class="card-body">
+                    
+                     <a href="lily.php"> <p class="card-text-light " >Lilies</p></a>
+                   </div>
+                 </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col sm-12 rounded">
+               <div class="card text-center" style="background-color: lime">
+                  <a href="">  <img src="img/seasonal flowers.jpg" class="card-img-top" alt="Card Image" height="250px"></a>
+                   <div class="card-body">
+                    
+                    <a href="seasonal.php"> <p class="card-text-light" >seasonal Flowers</p></a> 
+                   </div>
+                 </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col sm-12 rounded">
+               <div class="card text-center" style="background-color: lime">
+                  <a href=""><img src="img/astroemelia.jpg" class="card-img-top" alt="Card Image" height="250px"> </a> 
+                   <div class="card-body">
+                    
+                   <a href="astroemelia.php"><p class="card-text-light " >astroemelia</p> </a>  
+                   </div>
+                 </div>
+            </div>
+            <div class="col-lg-12 col-md-6 col sm-12 rounded">
+               <div class="card text-center" style="background-color: lime">
+                     <a href=""><img src="img/fillers and foliages.jpg" class="card-img-top" alt="Card Image" height="250px"> </a>
+                   <div class="card-body">
+                    
+                    <a href="Filler.php"><p class="card-text-light" >Fillers and Foliages</p> </a> 
+                   </div>
+                 </div>
+            </div>
+                                  
+
+    </div>
+                    
+                                     </div>
+                                 </div>
+                                 <div>
 <!--<script>
   var images = document.querySelectorAll('.image-fade');
   var text = document.querySelector('.fade-text');
@@ -207,12 +301,7 @@ $conn->close();
                       <li>
 
 
-              <a href="forms-layouts.html">
-                <i class="bi bi-circle"></i><span>Edit profile</span>
-              </a>
-            </li>
-            <li>
-
+            
 
 <a href="forms-layouts.html">
   <i class="bi bi-circle"></i><span>Change password</span>
