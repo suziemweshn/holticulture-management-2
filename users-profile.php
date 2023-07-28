@@ -6,7 +6,7 @@
    //   // Redirect to the login page
      // header("Location: login.html");
       //exit();
-  }
+  
   
   // Simulated user data (replace with your own database logic)
   //$userData = array(

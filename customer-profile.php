@@ -58,6 +58,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
@@ -77,12 +78,68 @@ $conn->close();
           animation: fadeInOut 2s infinite;
         }
          
-         .row{
+         .trend{
           margin-left:350px;
           margin-top: 400px;
-            
-          
          }
+         .dropdown-menu{
+          display:flex;
+          flex-direction: column;
+
+         }
+         .dropdown-menu {
+    display: none;
+  }
+  .show-dropdown .dropdown-menu {
+    display: block;
+  }
+  .sidebar {
+   position: fixed;
+   top:-2px;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    z-index: 996;
+    transition: all 0.3s;
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #aab7cf transparent;
+    box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+    background-color:whitesmoke;
+  
+ 
+  } 
+  .neonText {
+  animation: flicker 1.5s infinite alternate;
+  
+}
+
+
+
+/* Flickering animation */
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #0fa,
+      0 0 80px #0fa,
+      0 0 90px #0fa,
+      0 0 100px #0fa,
+      0 0 150px #0fa;
+  
+  }
+  
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
+}
+          
+         
      
       </style>
 </head>
@@ -95,7 +152,66 @@ $conn->close();
         </div>
         <div class="list">
             <ul class="">
-                <li > <a href="#"> <p class="text1">Hi   <?php echo $username?>! Welcome</p></a></li> 
+            <li class="nav-item dropdown pe-3">
+  <a class="nav-link nav-profile d-flex align-items-center pe-0 justify-content-end" href="#" data-bs-toggle="dropdown">
+  <img src=img/person (2).png  alt="" class="rounded-circle">
+  <div class="text1">
+  <p class=" neonText d-none d-md-block dropdown-toggle ps-2">Hi <?php echo $username; ?> Welcome</p>
+  </div>
+   
+  </a>
+  
+  <ul class="profile dropdown-menu dropdown-menu-end dropdown-menu-arrow  ">
+    <li class="dropdown-header">
+      <h6> </h6>
+      <span> </span>
+    </li>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+    <li>
+      <a class="dropdown-item d-flex align-items-center " href="pages-login.html">
+        <i class="bi bi-person"></i>
+        <span>My Profile</span>
+      </a>
+    </li>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+    
+    <li>
+      <a class="dropdown-item d-flex align-items-center" href="#">
+        <i class="bi bi-gear"></i>
+        <span>Account Settings</span>
+      </a>
+    </li>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+    
+    <li>
+      <a class="dropdown-item d-flex align-items-center" href="pages-faq.php">
+        <i class="bi bi-question-circle"></i>
+        <span>Need Help?</span>
+      </a>
+    </li>
+    <li>
+      <hr class="dropdown-divider">
+    </li>
+    
+    <li>
+      <a class="dropdown-item d-flex align-items-center" href="pages-login.html">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>Sign Out</span>
+      </a>
+    </li> 
+  </ul><!-- End Profile Dropdown Items -->
+</li>
+
+ 
+
+
+            
                 
                 <li class="cart">
                 <a href=""><img src="img/shopping-cart.png" alt=""> Cart</a>  
@@ -103,27 +219,14 @@ $conn->close();
                 
             </ul>
         </div>
-       <!-- <div class="logo">
-            <img src="your-logo.png" alt="Logo" height="40">
-        </div>-->
+       
         <div class="search-bar ">
             <input type="text" placeholder="Search...">
         </div>
-       <!-- <ul>
-            <li>home</li>
-            <li>products</li>
-            <li>about</li>
-        </ul>-->
+     
     </div>
     
-    <!-- Sidebar -->
-    <!--<div class="sidebar" id="sidebar mt-60">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </div>-->
+   
     <div class="content1">
         <!--<h1>Welcome to the Customer Profile</h1>
         <p>This is the main content area of your page.</p>-->
@@ -136,84 +239,288 @@ $conn->close();
     <img src="img/flower.png" class="image-fade active">
     <img src="img/apple.png" class="image-fade active">
     <img src="img/apricot.jpg" class="image-fade active">
-    <p class="fade-text">Get 50% discount from all these amazing things <br> when you shop goods worth above $500</p>
+    <p class="neonText fade-text">Get 50% discount from all these amazing things <br> when you shop goods worth above $500</p>
   </div>
 </div>
 
-<div class="row">
-
-            <div class="col-lg-3 col-md-6 col sm-12 rounded" >
-               <div class="card text-center " style="background-color: lime">
-                   <a href="Roses.php"><img src="img/roses.jpg" class="card-img-top" alt="Card Image" height="250px" ></a>
-                   <div class="card-body">
-                    
-                    <a href="Roses.php"> <p class="card-text-light " >Roses</p></a> 
-                   </div>
-                 </div>
-            </div>
-           <div class="col-lg-3 col-md-6 col sm-12 rounded" >
-               <div class="card text-center " style="background-color: lime">
-                   <a href="mixed-roses.php"><img src="img/mixed roses.jpg" class="card-img-top" alt="Card Image" height="250px" ></a>
-                   <div class="card-body">
-                    
-                    <a href="mixed-roses.php"> <p class="card-text-light " > Mixed Roses</p></a> 
-                   </div>
-                 </div>
-            </div>
-            
-           
-            <div class="col-lg-3 col-md-6 col sm-12 rounded">
-               <div class="card text-center" style="background-color: lime">
-                   <img src="img/carnation.jpg" class="card-img-top" alt="Card Image" height="250px">
-                   <div class="card-body">
-                    
-                     <a href="carnation.php"> <p class="card-text-light" >Carnation</p></a>
-                   </div>
-                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col sm-12 rounded">
-               <div class="card text-center" style="background-color:lime ">
-                   <a href=""><img src="img/lily.jpg" class="card-img-top" alt="Card Image" height="250px"> </a>
-                   <div class="card-body">
-                    
-                     <a href="lily.php"> <p class="card-text-light " >Lilies</p></a>
-                   </div>
-                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col sm-12 rounded">
-               <div class="card text-center" style="background-color: lime">
-                  <a href="">  <img src="img/seasonal flowers.jpg" class="card-img-top" alt="Card Image" height="250px"></a>
-                   <div class="card-body">
-                    
-                    <a href="seasonal.php"> <p class="card-text-light" >seasonal Flowers</p></a> 
-                   </div>
-                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col sm-12 rounded">
-               <div class="card text-center" style="background-color: lime">
-                  <a href=""><img src="img/astroemelia.jpg" class="card-img-top" alt="Card Image" height="250px"> </a> 
-                   <div class="card-body">
-                    
-                   <a href="astroemelia.php"><p class="card-text-light " >astroemelia</p> </a>  
-                   </div>
-                 </div>
-            </div>
-            <div class="col-lg-12 col-md-6 col sm-12 rounded">
-               <div class="card text-center" style="background-color: lime">
-                     <a href=""><img src="img/fillers and foliages.jpg" class="card-img-top" alt="Card Image" height="250px"> </a>
-                   <div class="card-body">
-                    
-                    <a href="Filler.php"><p class="card-text-light" >Fillers and Foliages</p> </a> 
-                   </div>
-                 </div>
-            </div>
-                                  
-
-    </div>
-                    
-                                     </div>
-                                 </div>
-                                 <div>
+<section class="trend " style="background-color: gray;">
+                       
+                        <div class="team-area  pb-160">
+                            <div class="container-fluid" style="background-color:lightgray;">
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-6 col-lg-7 col-md-10 col-sm-10">
+                                        <!-- Section Title -->
+                                        <div class="section-tittle section-tittle2 text-center mb-70">
+                                            <h2>Trending Items </h2>
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="row" style="background-color:lightgray;">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30">
+                                            <div class="team-img">
+                                                <img src="img/carrots.jfif" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $80</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $60</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Carrots</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30">
+                                            <div class="team-img">
+                                                <img src="img/apple.png" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $20</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $18</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;"class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Apples</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/kales.jpg" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $20</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $18</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Kales</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/cabbage.jpg" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $35</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $30</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Cabbage</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/avo.webp" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $15</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $12</li><br>
+                                                    <li style="font-size:30px; color:black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;"class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Avocado</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/milk.jpg" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $60</strike></li><br>
+                                                    <li style="font-size:50px; color:black;">now  $55</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">milk</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/brocolli.jpg" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $20</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $18</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Brocolli</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/cucumber.jpg" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $90</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $83</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Cucumber</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/rose flower.jfif" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $200</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $150</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Rose Flower</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/daisy.jfif" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $220</strike></li><br>
+                                                    <li style="font-size:50px; color:black;">now  $210</li><br>
+                                                    <li style="font-size:30px; color: black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Daisy Flower</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/cala lily.jfif" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $180</strike></li><br>
+                                                    <li style="font-size:50px; color: black;">now  $155</li><br>
+                                                    <li style="font-size:30px; color:black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Cala lily</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="single-team mb-30" >
+                                            <div class="team-img" style="background-color: ;">
+                                                <img src="img/colorful.jfif" alt="" height="250px">
+                                                <!-- Blog Social -->
+                                                <ul class="team-social">
+                                                    
+                                                    <li style="font-size:50px; color: black;"><strike> was  $300</strike></li><br>
+                                                    <li style="font-size:50px; color:black;">now  $280</li><br>
+                                                    <li style="font-size:30px; color:black;"> Add to cart<a href="#"><img src="img/cart2.png" alt=""></a></li><br>
+                                                    
+                                                </ul>
+                                            </div>
+                                            <div class="team-caption">
+                                                <p style="font-size:30px;color:white; ; background-color: lime;" class="neonText">New</p>
+                                                
+                                                
+                                                <h3><a href="instructor.html">Bunch</a></h3>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
 <!--<script>
   var images = document.querySelectorAll('.image-fade');
   var text = document.querySelector('.fade-text');
@@ -426,6 +733,7 @@ $conn->close();
     <!-- Content area -->
     
     <!-- Vendor JS Files -->
+    
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>

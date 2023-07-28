@@ -364,5 +364,18 @@ function myFunction() {
           document.getElementById('profileUpload').value = '';
       });
       //save notification changes
-      
+  //dropdown js
+  document.addEventListener('click', function(event) {
+    const targetElement = event.target;
+    const profileDropdown = document.querySelector('.profile');
+
+    // Check if the clicked element is inside the profile dropdown or the profile toggle
+    if (profileDropdown.contains(targetElement) || targetElement.classList.contains('nav-profile')) {
+      profileDropdown.classList.toggle('show-dropdown');
+    } else {
+      // Close the dropdown when clicking outside of it
+      profileDropdown.classList.remove('show-dropdown');
+    }
+  });
+    
       

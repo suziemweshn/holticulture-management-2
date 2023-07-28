@@ -40,10 +40,29 @@ mysqli_close($conn);
    <link rel="stylesheet" href="css/task6.css">
    <link rel="stylesheet" href="css/bootstrap.css">
    <link rel="stylesheet" href="css/bootstrap.min.css">
+   <style>
+    .product-list {
+        position: relative;
+    }
+
+    .cart-button {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .product-list:hover .cart-button {
+        opacity: 1;
+    }
+</style>
+
 </head>
 <body>
-<header>
-        <!-- Header Start -->
+<!--<header>
+        <!-- Header Start 
         <div class="header-area mb-20">
             <div class="main-header ">
                 <div class="header-top d-none d-lg-block">
@@ -71,7 +90,7 @@ mysqli_close($conn);
                     <div class="container-fluid">
                         <div class="row align-items-center">
                             <!-- Logo -->
-                            <div class="col-xl-2 col-lg-2">
+                           <!-- <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
                                     <a href="index.html"><img src="img/org.png" alt="" height="50px"></a> AHF
                                     
@@ -80,7 +99,7 @@ mysqli_close($conn);
                             <div class="col-xl-10 col-lg-10">
                                 <div class="menu-wrapper  d-flex align-items-center justify-content-end">
                                     <!-- Main-menu -->
-                                    <div class="main-menu d-none d-lg-block">
+                                    <!--<div class="main-menu d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">                                                                                          
                                                 <li><a href="index.html">Home</a></li>
@@ -125,7 +144,7 @@ mysqli_close($conn);
           <li><a href="#">Portals</a></li>
           <li><a href="#">Account</a></li>
           <li><a href="#">Blog</a></li>
-          <li><a href="#">Contacts</a></li>-->
+          <li><a href="#">Contacts</a></li>
           
         </ul>
                                                     
@@ -137,7 +156,7 @@ mysqli_close($conn);
                                 </div>
                             </div> 
                             <!-- Mobile Menu -->
-                            <div class="col-12">
+                           <!-- <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
                             </div>
                         </div>
@@ -150,7 +169,7 @@ mysqli_close($conn);
     <h1 class="text-center">Roses</h1>
     
     <!-- Display Products -->
-<section class="product-display ">
+<!--<section class="product-display ">
     <div class="container-fluid">
     <?php foreach ($roses as $product): ?>
         <div class="product-list ">
@@ -166,7 +185,7 @@ mysqli_close($conn);
                         <hr>
                         <?php echo $product['price']?>   USD
                         <hr>
-                        <button type="submit">Add to cart</button>
+                        <button type="submit" class="cart-button">Add to cart</button>
                         <hr>
 
                     </div>
@@ -174,60 +193,53 @@ mysqli_close($conn);
                     <?php endforeach; ?>
                     
                     </div>
-    </section>
-    <!--<div class="row d-flex ">
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class=" ">
-            <?php foreach ($products as $product): ?>
-                <div class="card-img-top">
-
-                    <?php if (!empty($product['image'])): ?>
-                        <img src="product-images/<?php echo $product['image']; ?>" alt="Product Image" width="100">
-                    <?php else: ?>
-                        No Image Available
-                    <?php endif; ?>
-                    <div class="card-body">
-                    
-                    <div class="card-text">
-                        <?php echo $product['name']?>
-                        <?php echo $product['description']?>
-                        <?php echo $product['price']?>
-
-                    </div>
-
-                    </div>
-                    <?php endforeach; ?>
+    </section>-->
+    <!-- Display Products -->
+<!-- Display Products -->
+<!-- Display Products -->
+<!-- Display Products -->
+<section class="product-display">
+    <div class="container-fluid">
+        <?php foreach ($roses as $product): ?>
+        <div class="product-list">
+            <?php if (!empty($product['image'])): ?>
+                <div class="product-image">
+                    <img src="product-images/<?php echo $product['image']; ?>" alt="Product Image" class="img-fluid rounded-circle">
+                    <button type="submit" class="cart-button">Add to cart</button>
                 </div>
-            </div>
+                <div class="product-details mt-5">
+                    <?php echo $product['name'] ?><br>
+                    <hr>
+                    <?php echo $product['description'] ?>
+                    <hr>
+                    <?php echo $product['price'] ?> USD
+                    <hr>
+                </div>
+            <?php else: ?>
+                No Image Available
+            <?php endif; ?>
         </div>
+        <?php endforeach; ?>
     </div>
-                    </div>
+</section>
 
-       <!-- <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Image</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($products as $product): ?>
-            <tr>
-                <td><?php echo $product['name']; ?></td>
-                <td><?php echo $product['description']; ?></td>
-                <td><?php echo $product['price']; ?></td>
-                <td>
-                    <?php if (!empty($product['image'])): ?>
-                        <img src="product-images/<?php echo $product['image']; ?>" alt="Product Image" width="100">
-                    <?php else: ?>
-                        No Image Available
-                    <?php endif; ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>-->
+<script>
+    const productImages = document.querySelectorAll('.product-image img');
+    const cartButtons = document.querySelectorAll('.product-image .cart-button');
+
+    productImages.forEach((img, index) => {
+        img.addEventListener('mouseenter', () => {
+            cartButtons[index].style.opacity = 1;
+        });
+
+        img.addEventListener('mouseleave', () => {
+            cartButtons[index].style.opacity = 0;
+        });
+    });
+</script>
+
+
+   
 </body>
 </html>
                 

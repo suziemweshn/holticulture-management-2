@@ -89,7 +89,7 @@ button {
   background:#4CAF50;
 }
 
-.sidebar {
+/*.sidebar {
   background:#fff;
   width:235px;
   position:fixed;
@@ -146,7 +146,7 @@ button {
 
 .sidebarshow {
   left:0;
-}
+}*/
 .top-bar {
   background-color: #f5f5f5;
   padding: 10px;
@@ -1214,12 +1214,12 @@ label{
   # Sidebar
   --------------------------------------------------------------*/
   .sidebar {
-   position: fixed;
+   /*position: fixed;
     top: 100px;
     left: 0;
-    bottom: 0;
+    bottom: 0;*/
     width: 300px;
-    z-index: 996;*/
+    z-index: 996;
     transition: all 0.3s;
     padding: 20px;
     overflow-y: auto;
@@ -1227,11 +1227,14 @@ label{
     scrollbar-color: #aab7cf transparent;
     box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
     background-color:whitesmoke;
-    margin-top: 10px;
+    margin-top: 100px;
+ 
   } 
  .section-profile{
-margin-top: 200px;
+position: relative;
+top: -750px;
     margin-left: 400px;
+  
   }
   .product-form{
     
@@ -1248,9 +1251,11 @@ margin-top: 200px;
   color: lime;
   font-size:20px;
  }
- .list .text1{
-  color:lime;
+  .text1{
+  color:white;
   font-size: 20px;
+  background-color: lime;
+
 
 
  }
@@ -1307,6 +1312,8 @@ margin-top: 200px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+ 
   
   
  }
@@ -1330,6 +1337,11 @@ margin-top: 200px;
 .update-button{
   border-radius: 4px;
   padding: 4px;
+}
+.cart-button{
+padding: 10px;
+border-radius: 3px;
+display: none;
 }
 .product-form fieldset{
   border: 2px solid black;
