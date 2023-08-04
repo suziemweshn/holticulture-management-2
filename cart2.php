@@ -38,7 +38,7 @@ $cartItems = $_SESSION['cart'] ?? [];
     <h1>Shopping Cart</h1>
 
     <?php if (count($cartItems) > 0): ?>
-    <table border="1">
+   <!-- <table border="1">
         <thead>
             <tr>
                 <th>Product Name</th>
@@ -50,26 +50,37 @@ $cartItems = $_SESSION['cart'] ?? [];
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
-            <?php foreach ($cartItems as $item): ?>
-                <tr>
-                    <td><?php echo $item['name']; ?></td>
-                    <td><?php echo $item['description']; ?></td>
-                    <td><?php echo $item['price']; ?></td>
-                    <td><?php echo $item['quantity']; ?></td>
-                    <td><?php echo $item['price'] * $item['quantity']; ?></td>
-                    <td>
+        <tbody>-->
+            <section class="cart-products">
+                <div class="container-fluid">
+                <?php foreach ($cartItems as $item): ?>
+              <div class="d-flex flex-row">
+                   <p> Product Name:<?php echo $item['name']; ?> </p>
+                   <p>Description:<?php echo $item['description']; ?></p> 
+                    </div>
+                    <p> Product Price:<?php echo $item['price']; ?></p>
+                   <p> Quantity:<?php echo $item['quantity']; ?></p>
+                   <p> Total Price:<?php echo $item['price'] * $item['quantity']; ?></p>
+                    
                         <?php if (!empty($item['image'])): ?>
                             <img src="product-images/<?php echo $item['image']; ?>" alt="Product Image" width="100">
                         <?php else: ?>
                             No Image Available
                         <?php endif; ?>
-                    </td>
-                    <td><a href="remove_from_cart.php?id=<?php echo $item['id']; ?>">Remove</a></td>
-                </tr>
+                        <div>
+                        <a href="remove_from_cart.php?id=<?php echo $item['id']; ?>">Remove</a>
+                        </div>
+                    
+                   
+              </div>
+                   
+                
             <?php endforeach; ?>
-        </tbody>
-    </table>
+        
+                </div>
+        
+            </section>
+            
 
     <h3>Total Price: $<?php echo calculateTotalPrice($cartItems); ?></h3>
 
