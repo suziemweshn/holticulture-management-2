@@ -2,7 +2,7 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['id'])) {
     // Redirect to the login page if the user is not logged in
     header('Location: customer-login.php');
     exit;
@@ -58,17 +58,18 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-   <link href="style.css" rel="stylesheet">
-   <link href="assets/css/style.css" rel="stylesheet">
-   <link href="css/task6.css" rel="stylesheet">
-   <style>
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="css/task6.css">
+ 
+ <style>
         @keyframes fadeInOut {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.5; }
@@ -76,6 +77,8 @@ $conn->close();
       
         .text1 {
           animation: fadeInOut 2s infinite;
+          padding:5px;
+          width:300px;
         }
          
          .trend{
@@ -87,12 +90,10 @@ $conn->close();
           flex-direction: column;
 
          }
-         .dropdown-menu {
-    display: none;
-  }
-  .show-dropdown .dropdown-menu {
-    display: block;
-  }
+        
+ 
+  
+  
   .sidebar {
    position: fixed;
    top:-2px;
@@ -138,25 +139,67 @@ $conn->close();
       text-shadow: none;
   }    
 }
-          
+   .cart img{
+    
+   height:80px;
+   max-width:200Px;
+   }
+   .dropdown-list{
+  display:flex;
+  justify-content:flex-end;
+
+   }
+   .dropdown button{
+    width:100%;
+
+   }
+   .search-bar{
+    width:40%;
+    margin-left:200px;
+    
+    
+    
+   }
+   .title{
+    margin-left:20px;
+    color:lime;
+    font-size:20px;
+   }
+   .top-bar{
+    margin-bottom:100px;
+
+   }
+   .dropdown-menu{
+    display: none;
+   }
          
      
       </style>
 </head>
 
 <body>
-    <!-- Top bar -->
-    <div class="top-bar mx-auto">
-       <div class="logo">
-            <img src="img/org.png" alt="Logo" >    AKIMA
+
+   <div class="top-bar ">
+
+    
+
+       <div class="d-flex flex-row">
+            <img src="img/org.png" alt="Logo" height="20px" class="">  <span class=title>AKIMA</span> 
         </div>
+        <div class="search-bar ">
+            <input type="text" placeholder="Search...">
+        </div>
+     
+   <div class="cart">
+                <a href="cart2.php"><img src="img/shopping-cart.png" alt=""> </a>  
+  </div>
         <div class="list">
             <ul class="">
             <li class="nav-item dropdown pe-3">
-  <a class="nav-link nav-profile d-flex align-items-center pe-0 justify-content-end" href="#" data-bs-toggle="dropdown">
+  <a class="nav-link nav-profile d-flex align-items-center justify-content-end" href="#" data-bs-toggle="dropdown">
   <img src=img/person (2).png  alt="" class="rounded-circle">
   <div class="text1">
-  <p class=" neonText d-none d-md-block dropdown-toggle ps-2">Hi <?php echo $username; ?> Welcome</p>
+  <p class=" neonText d-none d-md-block dropdown-toggle ps-2">  <img src="img\person (2).png" alt="" width="70px" height="50px">My Account</p>
   </div>
    
   </a>
@@ -205,26 +248,37 @@ $conn->close();
         <span>Sign Out</span>
       </a>
     </li> 
-  </ul><!-- End Profile Dropdown Items -->
-</li>
-
- 
+  </ul><!-- End Profile Dropdown Items 
+</li>-->
 
 
-            
+  <!-- Your HTML code here -->
+
+
+
+
+  
                 
-                <li class="cart">
-                <a href=""><img src="img/shopping-cart.png" alt=""> Cart</a>  
-                </li>
-                
-            </ul>
-        </div>
+           
+        
        
-        <div class="search-bar ">
-            <input type="text" placeholder="Search...">
-        </div>
-     
+       
     </div>
+  </div>
+  <!--<div class="dropdown-list">
+<div class="dropdown">
+
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown button
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+  </div>
+  </div>-->
     
    
     <div class="content1">
@@ -233,7 +287,7 @@ $conn->close();
         
     </div>
     <div class="content2">
-    <h1>Image Slideshow</h1>
+    
 <div id="slideshow" class="image-container">
   <div class="image-fade-container">
     <img src="img/flower.png" class="image-fade active">
@@ -644,6 +698,33 @@ $conn->close();
 
   setInterval(fadeImages, 3000);
 </script>
+<!-- Your HTML code here -->
+
+<script>
+  // Get the dropdown button and dropdown menu
+  const dropdownButton = document.getElementById('dropdownMenuButton1');
+  const dropdownMenu = document.querySelector('.dropdown-menu');
+
+  // Function to check if a clicked target is inside the dropdown or the button
+  function isInsideDropdown(target) {
+    return dropdownButton.contains(target) || dropdownMenu.contains(target);
+  }
+
+  // Add a click event listener to the document
+  document.addEventListener('click', function (event) {
+    // Check if the clicked element is not inside the dropdown or the button
+    if (!isInsideDropdown(event.target)) {
+      // If the clicked element is outside, close the dropdown
+      dropdownMenu.classList.remove('show'); // Manually hide the dropdown
+    }
+  });
+
+  // Add a click event listener to the dropdown button to toggle the dropdown menu
+  dropdownButton.addEventListener('click', function () {
+    dropdownMenu.classList.toggle('show'); // Toggle the class to show/hide the dropdown
+  });
+</script>
+
   
        <!-- <li class="nav-item">
           <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -734,7 +815,8 @@ $conn->close();
     
     <!-- Vendor JS Files -->
     
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+   <!-- Vendor JS Files -->
+   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
   <script src="assets/vendor/echarts/echarts.min.js"></script>
@@ -744,10 +826,9 @@ $conn->close();
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="js/main.js"></script>
   <!-- Add this script tag at the end of the body section -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     
     <script src="script.js"></script>

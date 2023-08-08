@@ -1,5 +1,3 @@
-<!-- add_to_cart.php -->
-
 <?php
 session_start();
 
@@ -31,7 +29,22 @@ if (!$product) {
     die("Product not found.");
 }
 
-// Add the product to the cart session
+// Check if the user is logged in
+if (!isset($_SESSION['id'])) {
+    // User is not logged in, store the product in a temporary session variable
+    if (!isset($_SESSION['temp_cart'])) {
+        $_SESSION['temp_cart'] = [];
+    }
+    
+    $_SESSION['temp_cart'][] = $product;
+    echo ("user is not logged in");
+    // Redirect to login page
+    //header('Location: customer-login.html');
+    exit ();
+}
+
+
+// User is logged in, proceed to add product to the cart
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -51,8 +64,8 @@ if ($productIndex !== -1) {
     $product['quantity'] = 1;
     $_SESSION['cart'][] = $product;
 }
-
+echo ("user is logged in ");
 // Redirect back to the user page or display success message
-header('Location: customer-profile.php');
+//eader('Location: customer-profile.php');
 exit();
 ?>

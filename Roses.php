@@ -185,7 +185,7 @@ mysqli_close($conn);
                         <?php echo $product['price'] ?> USD
                         <hr>
                         <!-- Add to Cart button -->
-                        <a href="add_to_cart.php?id=<?php echo $product['id']; ?>">Add to Cart</a>
+                        <a href="Add_to_cart.php?id=<?php echo $product['id']; ?>">Add to Cart</a>
                     </div>
                 <?php else: ?>
                     No Image Available
