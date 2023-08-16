@@ -1,24 +1,16 @@
 <?php
-session_start();
+Session_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-
-
-$servername = 'localhost:3307';
-$username = "root";
-$password = '1234';
-$database = 'project';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (isset($_SESSION['username'])) {
+    header("Location: customer-profile.php"); // Redirect to the dashboard if already logged in
+    exit();
 }
+
+include  'conn.php';
 
 // Retrieve the form data for login
 $username = isset($_POST['username']) ? $_POST['username'] : '';

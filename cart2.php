@@ -3,16 +3,7 @@
 <?php
 session_start();
 
-$servername="localhost:3307";
-$username="root";
-$password='1234';
-$database="products";
-
-$conn=new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error){
-    die("connection failed: " .$conn->connect_error);
-}
+include  'conn.php';
 
 // Helper function to calculate total price
 function calculateTotalPrice($cartItems)
@@ -26,6 +17,7 @@ function calculateTotalPrice($cartItems)
 
 // Retrieve cart items from the session
 $cartItems = $_SESSION['cart'] ?? [];
+
 
 ?>
 
@@ -71,9 +63,13 @@ $cartItems = $_SESSION['cart'] ?? [];
 
                       <button><a href="remove_from_cart.php?id=<?php echo $item['id']; ?>" >Remove</a></button>  
               
-               
-                      <button><a href="Buy_details.php?id=<?php echo $item['id']; ?>" >Buynow</a></button>  
                 </div>
+                      <!--<button><a href="Buy_details.php?id=<?php echo $item['id']; ?>" >checkOut</a></button> -->
+        <form method="GET" action="checkout.php">
+        <button type="submit"  style="background-color: lime; color: white;width: 200px; margin-top:20px;" >Checkout</button>
+   </form>
+                      
+         
 
                
                 </div>
@@ -117,7 +113,7 @@ $cartItems = $_SESSION['cart'] ?? [];
 </div>
 
 </div>
-    
+
 </section>
     <script>
         function clearCart() {

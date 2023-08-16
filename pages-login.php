@@ -7,19 +7,7 @@ ini_set('display_startup_errors', 1);
 
 
 
-$servername = "localhost:3307";
-$username = "root";
-$password = '1234';
-$database = 'Project';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+include  'conn.php';
 // Retrieve the form data for login
 $USER_NAME = isset($_POST['USER_NAME']) ? $_POST['USER_NAME'] : '';
 $PASS_WORD = isset($_POST['PASS_WORD']) ? $_POST['PASS_WORD'] : '';

@@ -9,19 +9,7 @@ if (!isset($_SESSION['USER_NAME'])) {
     exit;
 }
 
-$servername = 'localhost:3307';
-$username = "root";
-$password = '1234';
-$database = 'Project';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+include  'conn.php';
 // Retrieve user details from the session
 $USER_NAME = isset($_SESSION['USER_NAME']) ? $_SESSION['USER_NAME'] : '';
 

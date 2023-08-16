@@ -2,24 +2,10 @@
 session_start();
 
 // Check if the user is logged in
-if (!isset($_SESSION['id'])) {
-    // Redirect to the login page if the user is not logged in
-    header('Location: customer-login.php');
-    exit;
-}
+include 'conn.php';
+include 'oauth.php';
 
-$servername = 'localhost:3307';
-$username = "root";
-$password = '1234';
-$database = 'Project';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
 // Retrieve user details from the session
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
@@ -139,11 +125,10 @@ $conn->close();
       text-shadow: none;
   }    
 }
-   .cart img{
+   
     
-   height:80px;
-   max-width:200Px;
-   }
+   
+   
    .dropdown-list{
   display:flex;
   justify-content:flex-end;
@@ -186,12 +171,12 @@ $conn->close();
        <div class="d-flex flex-row">
             <img src="img/org.png" alt="Logo" height="20px" class="">  <span class=title>AKIMA</span> 
         </div>
-        <div class="search-bar ">
+        <div class="search-bar">
             <input type="text" placeholder="Search...">
         </div>
      
-   <div class="cart">
-                <a href="cart2.php"><img src="img/shopping-cart.png" alt=""> </a>  
+   <div class="cart ">
+                <a href="cart2.php"><img src="img/cart2.png" alt="" height="50px" width="40px"> cart</a> 
   </div>
         <div class="list">
             <ul class="">
@@ -199,7 +184,7 @@ $conn->close();
   <a class="nav-link nav-profile d-flex align-items-center justify-content-end" href="#" data-bs-toggle="dropdown">
   <img src=img/person (2).png  alt="" class="rounded-circle">
   <div class="text1">
-  <p class=" neonText d-none d-md-block dropdown-toggle ps-2">  <img src="img\person (2).png" alt="" width="70px" height="50px">My Account</p>
+  <p class=" neonText d-none d-md-block dropdown-toggle ps-2">  <img src=img\person3.png alt="" width="70px" height="30px">Hi <?php echo ($username)?></p>
   </div>
    
   </a>
@@ -243,7 +228,7 @@ $conn->close();
     </li>
     
     <li>
-      <a class="dropdown-item d-flex align-items-center" href="pages-login.html">
+      <a class="dropdown-item d-flex align-items-center" href="out.php">
         <i class="bi bi-box-arrow-right"></i>
         <span>Sign Out</span>
       </a>

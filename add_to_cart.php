@@ -10,17 +10,7 @@ if ($productId === null) {
     die("Invalid product ID.");
 }
 
-$servername="localhost:3307";
-$username="root";
-$password='1234';
-$database="products";
-
-$conn=new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error){
-    die("connection failed: " .$conn->connect_error);
-}
-
+include  'conn.php';
 // Retrieve the selected product from the database
 $query = "SELECT * FROM roses WHERE id = $productId";
 $result = mysqli_query($conn, $query);
@@ -53,6 +43,6 @@ if ($productIndex !== -1) {
 }
 
 // Redirect back to the user page or display success message
-header('Location: customer-profile.php');
+header('Location: cart2.php');
 exit();
 ?>

@@ -4,20 +4,7 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-var_dump($_POST);
-
-$servername = "localhost:3307";
-$username = "root";
-$password = '1234';
-$database = 'project';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include  'conn.php';
 
 // Retrieve user ID from the session
 $ADMIN_ID = $_SESSION['ADMIN_ID'] ?? '';

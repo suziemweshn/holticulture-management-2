@@ -1,15 +1,6 @@
 <?php
-$servername="localhost:3307";
-$username="root";
-$password='1234';
-$database='project';
-//check the connection
-$conn=new mysqli($servername,$username,$password,$database);
-if($conn->connect_error){
-    die(" connection failed :".$conn->connect_error);
-    
-}
-$id = uniqid(); // Generate a unique ID for the admin
+include  'conn.php';
+//$id = uniqid(); // Generate a unique ID for the admin
 $name = isset($_POST['name']) ? $_POST['name'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 $phone_no = isset($_POST['phone_no']) ? $_POST['phone_no'] : '';

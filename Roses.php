@@ -4,19 +4,7 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$servername = 'localhost:3307';
-$username = "root";
-$password = '1234';
-$database = 'products';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+include  'conn.php';
 // Retrieve products from the database
 $query = "SELECT * FROM roses";
 $result = mysqli_query($conn, $query);
@@ -91,7 +79,7 @@ mysqli_close($conn);
                         <div class="row align-items-center">
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2">
-                                <div class="logo">
+                                <div class="logo mb-60">
                                     <a href="index.html"><img src="img/org.png" alt="" height="50px"></a> AHF
                                     
                                 </div>
@@ -128,9 +116,10 @@ mysqli_close($conn);
                             
                          </ul>
                                                  </li>
-                                                 <li><a href="Blog.html">Blog</a></li>
+                                                 
                                                 
                                                 <li><a href="contact.html">Contacts</a></li>
+                                                <li><a href="cart2.php"><img src="img/cart2.png" alt="" width="50px" height="40px">cart</a></li>
                                                 
                                             </ul>
                                             <div class="search">

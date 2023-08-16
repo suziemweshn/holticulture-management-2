@@ -1,115 +1,133 @@
+<!-- cart.php -->
+
+<?php
+session_start();
+
+include  'conn.php';
+
+// Helper function to calculate total price
+function calculateTotalPrice($cartItems)
+{
+    $totalPrice = 0;
+    foreach ($cartItems as $item) {
+        $totalPrice += $item['price'] * $item['quantity'];
+    }
+    return $totalPrice;
+}
+
+// Retrieve cart items from the session
+$cartItems = $_SESSION['cart'] ?? [];
 
 
-
-
-
+?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Example E-commerce Website</title>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+   <link rel="stylesheet" href="css/task6.css">
+   <link rel="stylesheet" href="css/bootstrap.css">
+   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-   <?php echo $name?>
-    <?php echo $price?>
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" value="1">
-    <button onclick="addToCart()">Add to Cart</button>
+    <h1 class="cart-title">Shopping Cart</h1>
 
-    <div id="cartIcon" onclick="openCart()">
-        <img src="cart.png" alt="Cart Icon">
-        <span id="cartCount">0</span>
+    <?php if (count($cartItems) > 0): ?>
+   <!-- <table border="1">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Description</th>
+                <th>Product Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Product Image</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>-->
+            <section class="cart-products">
+               
+                <?php foreach ($cartItems as $item): ?>
+                    <div class="d-flex flex-row justify-center ">
+                        <span class="border-2"></span>
+                    <div class="cart-display">
+                   <p> Product Name:<?php echo $item['name']; ?> </p>
+                   <p>Description:<?php echo $item['description']; ?></p> 
+                    
+                    <p> Product Price:<?php echo $item['price']; ?> USD</p>
+                   <p> Quantity:<?php echo $item['quantity']; ?></p>
+                   <p> Total Price:<?php echo $item['price'] * $item['quantity']; ?> USD</p>
+                <div >
+
+                      <button><a href="remove_from_cart.php?id=<?php echo $item['id']; ?>" >Remove</a></button>  
+              
+                </div>
+                      <!--<button><a href="Buy_details.php?id=<?php echo $item['id']; ?>" >checkOut</a></button> -->
+                      <form method="post" action="oauth.php">
+        <button type="submit"  style="background-color: lime; color: white;width: 200px; margin-top:20px;" >Checkout</button>
+   </form>
+                      
+              
+
+               
+                </div>
+                <div class="image-display">
+                <?php if (!empty($item['image'])): ?>
+                            <img src="product-images/<?php echo $item['image']; ?>" alt="Product Image" width="100">
+                        <?php else: ?>
+                            No Image Available
+                        <?php endif; ?>
+                       
+                    
+                       
+                    </div>
+              
+                        </div>
+                        <hr>
+                    
+                   
+              </div>
+                   
+                
+            <?php endforeach; ?>
+        
+                </div>
+                        </div>
+        
+          
+            
+
+    <h3>Total Price: $<?php echo calculateTotalPrice($cartItems); ?></h3>
+<div class="buy-button">
+    <div class="clear-button">
+    <button onclick="clearCart()"><a href="">Clear</a></button>
+<?php else: ?>
+    <p>Your cart is empty.</p>
+<?php endif; ?>
     </div>
 
-    <div id="cartModal" style="display: none;">
-        <h2>Shopping Cart</h2>
-        <ul id="cartItems">
-            <!-- Cart items will be dynamically added here -->
-        </ul>
-        <button onclick="clearCart()">Clear Cart</button>
-        <button onclick="closeCart()">Close</button>
-    </div>
+<div class="close-button">
+<button onclick="closeCart()"><a href="">Close</a></button>
+</div>
 
+</div>
+
+</section>
     <script>
-        let cartCount = 0;
-        let cartItems = [];
-
-        function addToCart() {
-            const quantityInput = document.getElementById("quantity").value;
-            const quantity = parseInt(quantityInput);
-
-            if (quantity > 0) {
-                const existingItemIndex = cartItems.findIndex(item => item.productName === "Product Name");
-                if (existingItemIndex !== -1) {
-                    cartItems[existingItemIndex].quantity += quantity;
-                } else {
-                    cartItems.push({ productName: "Product Name", price: 19.99, quantity });
-                }
-
-                cartCount += quantity;
-                updateCartCount();
-                updateCartItems();
-                alert(quantity + " item(s) added to cart!");
-            } else {
-                alert("Please enter a valid quantity.");
-            }
-        }
-
-        function updateCartCount() {
-            const cartCountSpan = document.getElementById("cartCount");
-            cartCountSpan.innerText = cartCount;
-        }
-
-        function updateCartItems() {
-            const cartItemsContainer = document.getElementById("cartItems");
-            cartItemsContainer.innerHTML = "";
-
-            cartItems.forEach(item => {
-                const listItem = document.createElement("li");
-                listItem.innerHTML = `
-                    <span>${item.productName} - $${item.price} x ${item.quantity} = $${(item.price * item.quantity).toFixed(2)}</span>
-                    <button onclick="removeFromCart('${item.productName}')">Remove</button>
-                `;
-                cartItemsContainer.appendChild(listItem);
-            });
-        }
-
-        function removeFromCart(productName) {
-            const itemIndex = cartItems.findIndex(item => item.productName === productName);
-
-            if (itemIndex !== -1) {
-                const removedQuantity = 1;
-                if (cartItems[itemIndex].quantity <= 1) {
-                    cartItems.splice(itemIndex, 1);
-                } else {
-                    cartItems[itemIndex].quantity -= 1;
-                }
-
-                cartCount -= removedQuantity;
-                updateCartCount();
-                updateCartItems();
-                alert(removedQuantity + " item(s) removed from cart.");
-            }
-        }
-
-        function openCart() {
-            const cartModal = document.getElementById("cartModal");
-            cartModal.style.display = "block";
+        function clearCart() {
+            // Send a request to a PHP file that will clear the cart
+            window.location.href = 'clear_cart.php';
         }
 
         function closeCart() {
-            const cartModal = document.getElementById("cartModal");
-            cartModal.style.display = "none";
+            // Close the cart page
+            window.close();
         }
+        
 
-        function clearCart() {
-            cartItems = [];
-            cartCount = 0;
-            updateCartCount();
-            updateCartItems();
-            closeCart();
-            alert("Cart cleared.");
-        }
     </script>
+    
 </body>
 </html>

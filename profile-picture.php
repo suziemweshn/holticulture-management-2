@@ -4,16 +4,7 @@
 session_start();
 
 // Establish database connection
-$servername = 'localhost:3307';
-$username = "root";
-$password = '1234';
-$database = "project";
-
-$conn = new mysqli($servername, $username, $password, $database);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+include  'conn.php';
 // Check if a file was uploaded
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
     $tempFile = $_FILES['profileImage']['tmp_name'];
