@@ -43,6 +43,6 @@ if ($productIndex !== -1) {
 }
 
 // Redirect back to the user page or display success message
-header('Location: cart2.php');
+header('Location: cart.php');
 exit();
 ?>

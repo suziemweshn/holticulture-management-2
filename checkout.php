@@ -47,6 +47,8 @@ $conn->close();
     border:none;
     outline:none;
     width:100%;
+    border-radius:3px;
+    height:30px;
    
   }
   form{
@@ -62,7 +64,7 @@ $conn->close();
     font-weight:bold
   }
   fieldset{
-    width:50%;
+    width:90%;
     border-radius:5px;
   }
   .container-fluid{
@@ -72,25 +74,34 @@ $conn->close();
   form a button{
     border:1px solid black;
     border-radius:5px;
-    background-color:lime;
+    background-color:black;
     color:white;
-    height:40px;
-    margin-top:20px;
-    width:10%;
-    margin-left:50px;
+    height:25px;
+    margin-top:30px;
+    width:30%;
+    margin-left:40px;
   }
   form a{
     text-decoration:none;
     font-size:20px;
   }
-  .buttons{
-    margin-left:100px;
-  }
+  
+  .checkout-form {
+    
+  background:linear-gradient( 115deg, rgba(81, 241, 7, 0.8), rgba(58, 218, 37, 0.719) ),url('Nanyuki.jpg') no-repeat;
+   background-size: cover;
+  width:40%;
+  height:700px;
+  border-radius: 5px ;
+
+ 
+}
+
  </style>
 </head>
 <body>
     <section class="">
-        <div class="container-fluid">
+        <div class="container-fluid" style="background: url(../img/flamingo.jpeg)">
         <div class="checkout-form">
             <h3>Customer Address</h3>
           <form action="">
@@ -155,8 +166,8 @@ $conn->close();
                       
                     
               <div class="buttons">
-              <a href=""><button type="submit">Submit</button></a>    
- <a href=""><button type="submit">Cancel</button></a>
+              <a href="" class="submit-button"><button type="submit">Submit</button></a>    
+ <a href="" class="cancel-button"><button type="submit">Cancel</button></a>
               </div>    
            
         

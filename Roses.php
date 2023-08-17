@@ -119,7 +119,7 @@ mysqli_close($conn);
                                                  
                                                 
                                                 <li><a href="contact.html">Contacts</a></li>
-                                                <li><a href="cart2.php"><img src="img/cart2.png" alt="" width="50px" height="40px">cart</a></li>
+                                                <li><a href="cart.php"><img src="img/cart2.png" alt="" width="50px" height="40px">cart</a></li>
                                                 
                                             </ul>
                                             <div class="search">
