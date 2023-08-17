@@ -161,6 +161,8 @@ $conn->close();
 <input type="text" name="name " value="<?php echo ($location)?> "placeholder="Enter your name" class="input" required>
 
             </fieldset>
+
+            
                    
                    
                       

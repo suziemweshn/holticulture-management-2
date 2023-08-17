@@ -28,153 +28,268 @@
   <link href="assets/css/style.css" rel="stylesheet">
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/task6.css" rel="stylesheet">
+  <style>
+   /* .register-form{
+      background:linear-gradient( 115deg, rgba(81, 241, 7, 0.8), rgba(58, 218, 37, 0.719) ),url('flamingo.jpeg') no-repeat;
+   background-size: cover;
+  
+  border-radius: 5px ;*/
+
+    }
+  </style>
   
  
 </head>
 
 <body>
-
-  <main>
-    <div class="container">
-
-      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
-
-            <!--  <div class="d-flex justify-content-center py-4">
-                <a href="index.html" class="logo d-flex align-items-center w-auto">
-                  <img src="assets/img/org2.png" alt="">
-                  <span class="d-none d-lg-block">AHF</span>
-                </a>
-              </div><!-- End Logo -->
-              <div class="col-xl-2 col-lg-2">
-                <div class="logo">
-                    <a href="Admin.html"><img src="assets/img/org2.png" alt="" ></a> AHF
-                    
+  <header>
+    <!-- Header Start -->
+    <div class="header-area mb-20">
+        <div class="main-header ">
+            <div class="header-top d-none d-lg-block">
+                <div class="container-fluid">
+                    <div class="col-xl-12">
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="header-info-left d-flex">
+                                <ul>     
+                                    <li>Email: Akimafarm@gmail.com</li>
+                                </ul>
+                                <div class="header-social">    
+                                    <ul>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a  href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li> <a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-xl-10 col-lg-10">
-                <div class="menu-wrapper  d-flex align-items-center justify-content-end">
-          
+            <div class="header-bottom  header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo mb-60">
+                                <a href="index.html"><img src="img/org.png" alt="" height="50px"></a> AHF
+                                
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="menu-wrapper  d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">                                                                                          
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="index.html#about">About</a></li>
+                                            <li><a href="">Products</a>
+                                             <ul class="submenu">
+                       <li><a href="flowers.html">Flowers</a></li>
+                       <li><a href="vegetable.html">Vegetables</a></li>
+                       <li><a href="fruits.html">Fruits</a></li>
+                       <li><a href="dairy.html">Dairy Products</a></li>
+                       
+                    </ul>
+                                            </li>
+                                            <li><a href="#">Portals</a>
+                                              <ul class="submenu">
+                        <li><a href="pages-login.html">Admin Portal</a></li>
+                        <li><a href="employee-login.html">Employee portal</a></li>
+                        
+                        
+                     </ul>
+                                             </li>
+                                             <li><a href="category.html">My account</a>
+                                              <ul class="submenu">
+                        <li><a href="datascience.html">Log in</a></li>
+                        <li><a href="ai.html">Sign up</a></li>
+                        
+                     </ul>
+                                             </li>
+                                             
+                                            
+                                            <li><a href="contact.html">Contacts</a></li>
+                                            <li><a href="cart.php"><img src="img/cart2.png" alt="" width="50px" height="40px">cart</a></li>
+                                            
+                                        </ul>
+                                        <div class="search">
+                                            <form class="d-flex">
+                                                <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
 
-              <div class="card mb-3">
+    <ul id="myMenu">
+     <!-- <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Portals</a></li>
+      <li><a href="#">Account</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contacts</a></li>
+      
+    </ul>-->
+                                                
+                                              </form>
+                                        </div>
+                                       
+                                    </nav>
+                                   
+                            </div>
+                        </div> 
+                        <!-- Mobile Menu -->
+                       <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-                <div class="card-body">
+  <main>
+    <div class="container ">
 
-                  <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                    <p class="text-center small">Enter your personal details to create account</p>
-                  </div>
+      <section class="section register min-vh-100 d-flex flex-row align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="register-form">
+              <div class=" d-flex flex-row align-items-center justify-content-center">
 
-                  <form class="row g-3 " action="create-account.php" method="POST">
-                    <div class="col-12">
-                      <label for="yourName" class="form-label">Your Name</label>
-                      <input type="text" name="ADMIN_NAME" class="form-control" id="yourName" required>
-                      <div class="invalid-feedback">Please, enter your name!</div>
-                    </div>
-                    <div class="col-12">
-                      <label for="ADMIN_ID" class="form-label">ADMIN ID</label>
-                      <input type="text" name="ADMIN_ID" class="form-control" id="ID" required>
-                      <div class="invalid-feedback">Please, enter your ID!</div>
-                    </div>
-                    <div class="col-12">
-                      <label for="ADMIN_ID" class="form-label">ROLE ID</label>
-                      <input type="text" name="ROLE_ID" class="form-control" id="ID" required>
-                      <div class="invalid-feedback">Please, enter your ID!</div>
-                    </div>
-                    
-                   
-                    <div class="col-12">
-                      <label for="yourEmail" class="form-label">Your Email</label>
-                      <input type="email" name="email" class="form-control" id="yourEmail" required>
-                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourUsername" class="form-label">Username</label>
-                      <div class="input-group has-validation">
-                        <span class="input-group-text" id="inputGroupPrepend">@</span>
-                        <input type="text" name="USER_NAME" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please choose a username.</div>
+           
+              
+                <div class="col-xl-10 col-lg-10">
+                    <div class="menu-wrapper  d-flex align-items-center justify-content-end">
+              
+    
+                  <div class="card mb-3">
+    
+                    <div class="card-body ">
+    
+                      <div class="pt-4 pb-2">
+                        <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                        <p class="text-center small">Enter your personal details to create account</p>
                       </div>
-                    </div>
-
-                    <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="PASS_WORD" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
-                    </div>
-                    
-                    <div class="col-12">
-                      <fieldset><h3><b>Other details</b></h3> </fieldset>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">Company Name</label>
-                        <input type="text" name="company" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">Job Title</label>
-                        <input type="text" name="jobTitle" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">Country</label>
-                        <input type="text" name="country" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">Address</label>
-                        <input type="text" name="Address" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">Phone</label>
-                        <input type="text" name="Phone" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">TwitterProfile</label>
-                        <input type="text" name="twitterProfile" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">LinkedinProfile</label>
-                        <input type="text" name="linkedinProfile" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">InstagramProfile</label>
-                        <input type="text" name="instagramProfile" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">FacebookProfile</label>
-                        <input type="text" name="facebookProfile" class="form-control" id="company" required>
-                        <div class="invalid-feedback">Please enter the company you are in</div>
-                      </div>
-                      <div class="col-12">
-                        <label for="yourPassword" class="form-label">Tell us about yourself</label>
-                       <textarea name="about" id="" cols="20" rows="5"></textarea>
+                      <div class="register-form">
+                        <div class="personal-details">
+                          <form class="row g-3  " action="create-account.php" method="POST">
+                            <div class="col-12">
+                              <label for="yourName" class="form-label">Your Name</label>
+                              <input type="text" name="ADMIN_NAME" class="form-control" id="yourName" required>
+                              <div class="invalid-feedback">Please, enter your name!</div>
+                            </div>
+                            <div class="col-12">
+                              <label for="ADMIN_ID" class="form-label">ADMIN ID</label>
+                              <input type="text" name="ADMIN_ID" class="form-control" id="ID" required>
+                              <div class="invalid-feedback">Please, enter your ID!</div>
+                            </div>
+                            <div class="col-12">
+                              <label for="ADMIN_ID" class="form-label">ROLE ID</label>
+                              <input type="text" name="ROLE_ID" class="form-control" id="ID" required>
+                              <div class="invalid-feedback">Please, enter your ID!</div>
+                            </div>
+                            
+                           
+                            <div class="col-12">
+                              <label for="yourEmail" class="form-label">Your Email</label>
+                              <input type="email" name="email" class="form-control" id="yourEmail" required>
+                              <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                            </div>
+        
+                            <div class="col-12">
+                              <label for="yourUsername" class="form-label">Username</label>
+                              <div class="input-group has-validation">
+                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                <input type="text" name="USER_NAME" class="form-control" id="yourUsername" required>
+                                <div class="invalid-feedback">Please choose a username.</div>
+                              </div>
+                            </div>
+        
+                            <div class="col-12">
+                              <label for="yourPassword" class="form-label">Password</label>
+                              <input type="password" name="PASS_WORD" class="form-control" id="yourPassword" required>
+                              <div class="invalid-feedback">Please enter your password!</div>
+                            </div>
+                        </div>
+      
+                       
+                          <div class="details">
+                            <div class="col-12">
+                              <fieldset><h3><b>Other details</b></h3> </fieldset>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">Company Name</label>
+                                <input type="text" name="company" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">Job Title</label>
+                                <input type="text" name="jobTitle" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">Country</label>
+                                <input type="text" name="country" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">Address</label>
+                                <input type="text" name="Address" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">Phone</label>
+                                <input type="text" name="Phone" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">TwitterProfile</label>
+                                <input type="text" name="twitterProfile" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">LinkedinProfile</label>
+                                <input type="text" name="linkedinProfile" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">InstagramProfile</label>
+                                <input type="text" name="instagramProfile" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">FacebookProfile</label>
+                                <input type="text" name="facebookProfile" class="form-control" id="company" required>
+                                <div class="invalid-feedback">Please enter the company you are in</div>
+                              </div>
+                              <div class="col-12">
+                                <label for="yourPassword" class="form-label">Tell us about yourself</label><br>
+                               <textarea name="about" id="" cols="70" rows="5"></textarea>
+                              </div>
+                          </div>
+                         
                       </div>
                      
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
-                        <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
-                        <div class="invalid-feedback">You must agree before submitting.</div>
-                      </div>
+                         
+                        <div class="col-12">
+                          <div class="form-check">
+                            <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                            <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+                            <div class="invalid-feedback">You must agree before submitting.</div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <button class="btn btn-primary w-100" type="submit" name="createAccount">Create Account</button>
+                        </div>
+                        <div class="col-12">
+                          <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                        </div>
+                      </form>
+    
                     </div>
-                    <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit" name="createAccount">Create Account</button>
-                    </div>
-                    <div class="col-12">
-                      <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
-                    </div>
-                  </form>
-
-                </div>
-              </div>
+                  </div>
+            </div>
+           
 
               <div class="credits">
              
