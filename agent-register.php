@@ -1,40 +1,3 @@
-<?php
-session_start();
-
-include  'oauth.php';
-include  'conn.php';
-
-// Retrieve user details from the session
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
-
-// Retrieve user profile details from the admin_table
-$stmt = $conn->prepare("SELECT * FROM customer_table WHERE username = ?");
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $id = $row['id'] ?? '';
-    $name = $row['name'] ?? '';
-    $email = $row['email'] ?? '';
-    $phone_no = $row['phone_no'] ?? '';
-    $password = $row['password'] ?? '';
-    $username = $row['username'] ?? '';
-    $country = $row['country'] ?? '';
-    $city = $row['city'] ?? '';
-    $location = $row['location'] ?? '';
-
-} else {
-    // User not found in the admin_table
-    // Handle the scenario accordingly, e.g., display an error message
-    echo "User profile not found!";
-}
-
-$stmt->close();
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,7 +75,7 @@ border-radius: 5px;
     <label for="">Name</label>
    
 </legend>
-<input type="text" name="name " value="<?php echo ($name)?> "placeholder="Enter your name"  class="input" required>
+<input type="text" name="name " placeholder="Enter your name"  class="input" required>
 
             </fieldset>
             <fieldset>
@@ -120,7 +83,7 @@ border-radius: 5px;
     <label for="">Phone Number</label>
    
 </legend>
-<input type="text" name="name "  value="+254<?php echo ($phone_no)?> "placeholder="Enter your name" class="input" required>
+<input type="text" name="name "  placeholder="Enter your name" class="input" required>
 
             </fieldset>
             <fieldset>
@@ -128,7 +91,7 @@ border-radius: 5px;
     <label for="">Email</label>
    
 </legend>
-<input type="text" name="name " value="<?php echo ($email)?> "placeholder="Enter your name" class="input" required>
+<input type="text" name="name " placeholder="Enter your name" class="input" required>
 
             </fieldset>
             <fieldset>
@@ -144,7 +107,15 @@ border-radius: 5px;
     <label for="">Country</label>
    
 </legend>
-<input type="text" name="name " value="<?php echo ($country)?> "placeholder="Enter your name" class="input" required>
+<input type="text" name="name " placeholder="Enter your name" class="input" required>
+
+            </fieldset>
+            <fieldset>
+<legend>
+    <label for="">Region</label>
+   
+</legend>
+<input type="text" name="name " placeholder="Enter your name" class="input" required>
 
             </fieldset>
             <fieldset>
@@ -152,15 +123,7 @@ border-radius: 5px;
     <label for="">City</label>
    
 </legend>
-<input type="text" name="name " value="<?php echo ($city)?> "placeholder="Enter your name" class="input" required>
-
-            </fieldset>
-            <fieldset>
-<legend>
-    <label for="">Location</label>
-   
-</legend>
-<input type="text" name="name " value="<?php echo ($location)?> "placeholder="Enter your name" class="input" required>
+<input type="text" name="name " placeholder="Enter your name" class="input" required>
 
             </fieldset>
 
