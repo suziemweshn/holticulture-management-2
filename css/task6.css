@@ -453,6 +453,11 @@ input[type="email"]{
     border-radius: 5px;
     padding: 6px;
 }
+input[type="password"]{
+  width: 80%;
+  border-radius: 5px;
+  padding: 6px;
+}
 label{
     font-size:20px;
 }

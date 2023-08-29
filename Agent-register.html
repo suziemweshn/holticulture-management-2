@@ -176,109 +176,134 @@
     
                       <div class="pt-4 pb-2">
                         <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
-                        <p class="text-center small">Enter your personal details to create account</p>
+                        <p class="text-center small">Create an Account</p>
                       </div>
                       <div class="register-form">
                         <div class="personal-details">
-                          <form class="row g-3  " action="create-account.php" method="POST">
+                          <form class="row g-3  " action="Agent-register.php" method="POST">
                             <div class="col-12">
                               <label for="yourName" class="form-label">Your Name</label>
-                              <input type="text" name="ADMIN_NAME" class="form-control" id="yourName" required>
+                              <input type="text" name="Agent_name" class="form-control" id="yourName" required>
                               <div class="invalid-feedback">Please, enter your name!</div>
                             </div>
                             <div class="col-12">
-                              <label for="ADMIN_ID" class="form-label">ADMIN ID</label>
-                              <input type="text" name="ADMIN_ID" class="form-control" id="ID" required>
+                              <label for="ADMIN_ID" class="form-label">Agent Number</label>
+                              <input type="text" name="Agent_Number" class="form-control" id="ID" required>
                               <div class="invalid-feedback">Please, enter your ID!</div>
                             </div>
                             <div class="col-12">
-                              <label for="ADMIN_ID" class="form-label">ROLE ID</label>
-                              <input type="text" name="ROLE_ID" class="form-control" id="ID" required>
-                              <div class="invalid-feedback">Please, enter your ID!</div>
-                            </div>
-                            
+                                <label for="yourEmail" class="form-label">Contact Number</label>
+                                <input type="text" name="Contact_Number" class="form-control" id="yourEmail" required>
+                                <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                              </div>
+          
+                              <div class="col-12">
+                                <label for="yourEmail" class="form-label">Emergency Contact Number</label> <br>
+                                <input type="text" name="Emergency_Contact" class="form-control" id="yourEmail" required>
+                                <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                              </div>
                            
                             <div class="col-12">
-                              <label for="yourEmail" class="form-label">Your Email</label>
-                              <input type="email" name="email" class="form-control" id="yourEmail" required>
+                              <label for="yourEmail" class="form-label">Your Email</label><br>
+                              <input type="email" name="Email_Address" class="form-control" id="yourEmail" required>
                               <div class="invalid-feedback">Please enter a valid Email adddress!</div>
                             </div>
-        
                             <div class="col-12">
-                              <label for="yourUsername" class="form-label">Username</label>
-                            <!-- <div class="input-group has-validation">
-                                <span class="input-group-text " id="inputGroupPrepend">@</span>-->
-                                <input type="text" name="USER_NAME" class="form-control " id="yourUsername"  required >
-                                <div class="invalid-feedback">Please choose a username.</div>
-                              </div>
+                                <label for="yourEmail" class="form-label">Your Gender</label><br>
+                                <input type="radio" name="Gender" value="male" style="margin-left:25px"> male 
+                                <input type="radio" name="Gender" value="female" style="margin-left:25px">Female 
+                                <input type="radio" name="Gender"  value="other" style="margin-left: 25px"> Other 
+                               
                             </div>
-        
+                           
+
+                          
                             <div class="col-12">
-                              <label for="yourPassword" class="form-label">Password</label>
-                              <input type="password" name="PASS_WORD" class="form-control " id="yourPassword" required>
-                              <div class="invalid-feedback">Please enter your password!</div>
+                            <label for="">Date Of Birth</label><br>
+                            <input type="date" name="Date_of_Birth" class="form-cont"    style="width:80%; padding:6px; border-radius:5px;display:block; border-color:1px solid #ced4dA" required>
                             </div>
-                        </div>
-      
-                       
-                          <div class="details">
-                            <div class="col-12">
-                              <fieldset><h3><b>Other details</b></h3> </fieldset>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">Company Name</label>
-                                <input type="text" name="company" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">Job Title</label>
-                                <input type="text" name="jobTitle" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">Country</label>
-                                <input type="text" name="country" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">Address</label>
-                                <input type="text" name="Address" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">Phone</label>
-                                <input type="text" name="Phone" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">TwitterProfile</label>
-                                <input type="text" name="twitterProfile" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">LinkedinProfile</label>
-                                <input type="text" name="linkedinProfile" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">InstagramProfile</label>
-                                <input type="text" name="instagramProfile" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">FacebookProfile</label>
-                                <input type="text" name="facebookProfile" class="form-control" id="company" required>
-                                <div class="invalid-feedback">Please enter the company you are in</div>
-                              </div>
-                              <div class="col-12">
-                                <label for="yourPassword" class="form-label">Tell us about yourself</label><br>
-                               <textarea name="about" id="" cols=" 80" rows="5"></textarea>
-                              </div>
+                          <div class="col-12">
+                            <label for="">Address</label><br>
+                            <input type="text" name="Address_name" value="" class="form-control" required>
+
                           </div>
-                         
-                      </div>
-                     
-                         
-                        <div class="col-12">
+                          <div class="col-12">
+                            <label for="">Country</label><br>
+                            <select name="Country" id="country" class="form-cont"       style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA">
+                              <option value="Kenya">select a country...</option>
+                              <option value="Kenya">KENYA</option>
+                                <option value="Tanzania">TANZANIA</option>
+                                <option value="Uganda">UGANDA</option>
+                                <option value="Sudan">SUDAN</option>
+                                <option value="South Sudan ">SOUTH SUDAN</option>
+                                <option value="Burundi">ETHIOPIA</option>
+                                <option value="Burundi">SOMALIA</option>
+                                <option value="Burundi">RWANDA</option>
+                                <option value="Burundi">BURUNDI</option>
+                                <option value="Burundi">ERITREA</option>
+                                <option value="Burundi">DJIBOUTI</option>
+                           </select>
+                          </div>
+                        <!--  <label for="city">Select a City:</label>
+                          <select name="City" id="city" class="form-cont"   style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA" disabled>
+        <option value="">Select a city...</option>
+        <option value="">NAIROBI</option>
+        <option value="">DODOMA</option>
+        <option value="">JINJA</option>
+        <option value="">JUBA</option>
+        <option value="">KHARTOUM</option>
+        <option value="">ADISABABA</option>
+        <option value="">MOGAADISHU</option>
+        <option value="">KIGALI</option>
+        <option value="">BUJUMBURA</option>
+        <option value="">ASMARA</option>
+        <option value="">DJIBOUTI</option>
+
+    </select>-->
+    <div class="col-12">
+      <label for="">City</label><br>
+      <select name="City" id="country" class="form-cont"       style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA">
+        <option value="">select a city....</option>
+        <option value="NAIROBI">NAIROBI</option>
+          <option value="DODOMA">DODOMA</option>
+          <option value="JINJA">JINJA</option>
+          <option value="KHARTOUM">KHARTOUM</option>
+          <option value="JUBA ">JUBA</option>
+          <option value="ADISABABA">ADISABABA</option>
+          <option value="MOGADISHU">MOGADISHU</option>
+          <option value="KIGALI">KIGALI</option>
+          <option value="BUJUMBURA">BUJUMBURA</option>
+          <option value="ASMARA">ASMARA</option>
+          <option value="DJIBOUTI">DJIBOUTI</option>
+     </select>
+    </div>
+    <div class="col-12">
+      <label for="yourEmail" class="form-label">Location </label> <br>
+      <input type="text" name="Location" class="form-control" id="yourEmail" required>
+
+      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const countrySelect = document.getElementById("country");
+          const citySelect = document.getElementById("city");
+      
+          countrySelect.addEventListener("change", function() {
+              if (countrySelect.value !== "") {
+                  citySelect.removeAttribute("disabled");
+              } else {
+                  citySelect.setAttribute("disabled", "disabled");
+              }
+          });
+      });
+      </script>
+     
+      
+                        
+                               
+      
+<div class="col-12">
                           <div class="form-check">
                             <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
                             <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>

@@ -1,148 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
+<?php
 
- <style>
-  .input{
-    border:none;
-    outline:none;
-    width:100%;
-    border-radius:3px;
-    height:30px;
-   
-  }
-  form{
-  
-   justify-content:center;
-   align-items:center;
-   width:100%;
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
-  
-  }
-  form label{
-    font-size:20px;
-    font-weight:bold
-  }
-  fieldset{
-    width:90%;
-    border-radius:5px;
-  }
-  .container-fluid{
-  position:relative;
-  left:400px
-  }
-  form a button{
-    border:1px solid black;
-    border-radius:5px;
-    background-color:black;
-    color:white;
-    height:25px;
-    margin-top:30px;
-    width:30%;
-    margin-left:40px;
-  }
-  form a{
-    text-decoration:none;
-    font-size:20px;
-  }
-  
-  .checkout-form {
-    background: linear-gradient(115deg, rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.719)), url('Nanyuki.jpg') no-repeat;
-background-size: cover;
-width: 40%;
-height: 700px;
-border-radius: 5px;
+session_start();
 
-    
- 
- 
- 
+include  'conn.php';
+
+// Retrieve the form data for account creation
+$id=uniqid();
+$Agent_name = isset($_POST['Agent_name']) ? $_POST['Agent_name'] : '';
+$Agent_Number = isset($_POST['Agent_Number']) ? $_POST['Agent_Number'] : '';
+$Contact_Number= isset($_POST['Contact_Number']) ? $_POST['Contact_Number'] : '';
+$Emergency_Contact= isset($_POST['Emergency_Contact']) ? $_POST['Emergency_Contact'] : '';
+$Email_Address = isset($_POST['Email_Address']) ? $_POST['Email_Address'] : '';
+$Date_of_Birth = isset($_POST['Date_of_Birth']) ? $_POST['Date_of_Birth'] : '';
+$Address_name = isset($_POST['Address_name']) ? $_POST['Address_name'] : '';
+$Country = isset($_POST['Country']) ? $_POST['Country'] : '';
+$City = isset($_POST['City']) ? $_POST['City'] : '';
+$Location = isset($_POST['Location']) ? $_POST['Location'] : '';
+$Gender = isset($_POST['Gender']) ? $_POST['Gender'] : '';
+
+// Hash the password
+//$hashed_password = password_hash($PASS_WORD, PASSWORD_DEFAULT);
+
+// Process account creation request
+// Prepare and execute the SQL statement with prepared statements
+$stmt = $conn->prepare("INSERT INTO agent (Agent_name, Agent_Number, Contact_Number,Emergency_Contact, Email_Address, Date_of_Birth, Address_name, Country, City, Location,Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+if (!$stmt) {
+    echo "Error preparing statement: " . $conn->error;
+    exit();
 }
 
- </style>
-</head>
-<body>
-    <section class="">
-        <div class="container-fluid" style="background: url(../img/flamingo.jpeg)">
-        <div class="checkout-form">
-            <h3>Customer Address</h3>
-          <form action="">
-            <fieldset>
-<legend>
-    <label for="">Name</label>
+$stmt->bind_param(
+    "sssssssssss",
    
-</legend>
-<input type="text" name="name " placeholder="Enter your name"  class="input" required>
+   $Agent_name,
+   $Agent_Number,
+   $Contact_Number,
+   $Emergency_Contact,
+   $Email_Address,
+   $Date_of_Birth,
+   $Address_name,
+   $Country,
+   $City,
+   $Location,
+   $Gender,
+);
 
-            </fieldset>
-            <fieldset>
-<legend>
-    <label for="">Phone Number</label>
-   
-</legend>
-<input type="text" name="name "  placeholder="Enter your name" class="input" required>
+if ($stmt->execute()) {
+    // Account created successfully, set session variables
+    $_SESSION['id'] = $id;
 
-            </fieldset>
-            <fieldset>
-<legend>
-    <label for="">Email</label>
-   
-</legend>
-<input type="text" name="name " placeholder="Enter your name" class="input" required>
+    // Redirect to the login page
+   echo('user registered successfully');
+    exit();
+} else {
+    echo "Error executing statement: " . $stmt->error;
+}
 
-            </fieldset>
-            <fieldset>
-<legend>
-    <label for="">Address</label>
-   
-</legend>
-<input type="text" name="name " placeholder="Enter your Address" class="input" required>
+// Close statement
+$stmt->close();
 
-            </fieldset>
-            <fieldset>
-<legend>
-    <label for="">Country</label>
-   
-</legend>
-<input type="text" name="name " placeholder="Enter your name" class="input" required>
+// Close connection
+$conn->close();
+?>
 
-            </fieldset>
-            <fieldset>
-<legend>
-    <label for="">Region</label>
-   
-</legend>
-<input type="text" name="name " placeholder="Enter your name" class="input" required>
 
-            </fieldset>
-            <fieldset>
-<legend>
-    <label for="">City</label>
-   
-</legend>
-<input type="text" name="name " placeholder="Enter your name" class="input" required>
 
-            </fieldset>
-
-            
-                   
-                   
-                      
-                    
-              <div class="buttons">
-              <a href="" class="submit-button"><button type="submit">Submit</button></a>    
- <a href="" class="cancel-button"><button type="submit">Cancel</button></a>
-              </div>    
-           
-        
-           
-          </form>
-        </div>
-        </div>
-      
-    </section>
-</body>
-</html>

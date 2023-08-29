@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Country and City Selection</title>
+</head>
+<body>
+    <label for="country">Select a Country:</label>
+    <select id="country" onchange="fetchCities()">
+        <option value="Kenya">KENYA</option>
+        <option value="Tanzania">TANZANIA</option>
+        <option value="Uganda">UGANDA</option>
+        <option value="Sudan">SUDAN</option>
+        <option value="South Sudan ">SOUTH SUDAN</option>
+        <option value="Burundi">ETHIOPIA</option>
+        <option value="Burundi">SOMALIA</option>
+        <option value="Burundi">RWANDA</option>
+        <option value="Burundi">BURUNDI</option>
+        <option value="Burundi">ERITREA</option>
+        <option value="Burundi">DJIBOUTI</option>
+    </select>
+
+    <label for="city">Select a City:</label>
+    <select id="city" disabled>
+        <option value="">Select a city...</option>
+        <option value="">NAIROBI</option>
+        <option value="">DODOMA</option>
+        <option value="">JINJA</option>
+        <option value="">JUBA</option>
+        <option value="">KHARTOUM</option>
+        <option value="">ADISABABA</option>
+        <option value="">MOGAADISHU</option>
+        <option value="">KIGALI</option>
+        <option value="">BUJUMBURA</option>
+        <option value="">ASMARA</option>
+        <option value="">DJIBOUTI</option>
+
+    </select>
+
+    <script>
+        function fetchCities() {
+            const countrySelect = document.getElementById('country');
+            const citySelect = document.getElementById('city');
+            
+            // Clear city dropdown
+            citySelect.innerHTML = '<option value="">Select a city...</option>';
+            citySelect.disabled = true;
+            
+            if (countrySelect.value !== '') {
+                // Make an AJAX request to fetch cities for the selected country
+                fetch(`get_cities.php?country=${countrySelect.value}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate city dropdown
+                        data.cities.forEach(city => {
+                            const option = document.createElement('option');
+                            option.value = city;
+                            option.textContent = city;
+                            citySelect.appendChild(option);
+                        });
+                        citySelect.disabled = false;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching cities:', error);
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

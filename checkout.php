@@ -43,6 +43,9 @@ $conn->close();
     <title>Checkout</title>
 
  <style>
+  body{
+    background-color:whitesmoke;
+  }
   .input{
     border:none;
     outline:none;
@@ -87,10 +90,11 @@ $conn->close();
   }
   
   .checkout-form {
-    background: linear-gradient(115deg, rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.719)), url('Nanyuki.jpg') no-repeat;
-background-size: cover;
+  /*  background: linear-gradient(115deg, rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.719)), url('Nanyuki.jpg') no-repeat;
+background-size: cover;*/
+background-color:white;
 width: 40%;
-height: 700px;
+/*height: 700px;*/
 border-radius: 5px;
 
     
@@ -121,6 +125,14 @@ border-radius: 5px;
    
 </legend>
 <input type="text" name="name "  value="+254<?php echo ($phone_no)?> "placeholder="Enter your name" class="input" required>
+
+            </fieldset>
+            <fieldset>
+<legend>
+    <label for="">Alternative Phone Number</label>
+   
+</legend>
+<input type="text" name="name "  value="+254 "placeholder="Enter your name" class="input" required>
 
             </fieldset>
             <fieldset>
@@ -164,12 +176,29 @@ border-radius: 5px;
 
             </fieldset>
 
+
+<h3>Delivery Details</h3>
+<label for="">Delivery points</label><br>
+<input type="radio" name="home" value="Home Delivery" >Home Delivery 
+<input type="radio" value="Agent Pickup" >Agent Pickup <br>
+
+<label for="">Choose Agent</label>
+<select name="" id="">
+<option value="none"></option>
+  <option value="Linda kariuki">Linda kariuki</option>
+  <option value="susan Mwende">susan Mwende</option>
+  <option value="stella">stella</option>
+  <option value="Daisy">Daisy</option>
+  <option value="Glory">Glory</option>
+
+</select>
+
+
+
             
                    
                    
-                      
-                    
-              <div class="buttons">
+                        <div class="buttons">
               <a href="" class="submit-button"><button type="submit">Submit</button></a>    
  <a href="" class="cancel-button"><button type="submit">Cancel</button></a>
               </div>    
