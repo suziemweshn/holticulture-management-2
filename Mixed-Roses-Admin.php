@@ -161,6 +161,14 @@ mysqli_close($conn);
     <link rel="stylesheet" href="css/task6.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        .update-button button{
+            background-color:lime;
+  color: white;
+  font-size: 20px;
+  width: 60%;
+        }
+    </style>
 </head>
 <body>
 <header>

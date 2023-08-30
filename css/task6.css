@@ -1413,11 +1413,13 @@ top: -750px;
   background-color:lime;
   color: white;
   font-size: 30px;
+  
  
 }
 .update-button{
   border-radius: 4px;
   padding: 4px;
+ 
 }
 .cart-button{
 padding: 10px;
