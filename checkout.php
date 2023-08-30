@@ -31,6 +31,7 @@ if ($result->num_rows > 0) {
     echo "User profile not found!";
 }
 
+
 $stmt->close();
 $conn->close();
 ?>
@@ -177,35 +178,21 @@ border-radius: 5px;
             </fieldset>
 
 
-<h3>Delivery Details</h3>
-<label for="">Delivery points</label><br>
-<input type="radio" name="home" value="Home Delivery" >Home Delivery 
-<input type="radio" value="Agent Pickup" >Agent Pickup <br>
 
-<label for="">Choose Agent</label>
-<select name="" id="">
-<option value="none"></option>
-  <option value="Linda kariuki">Linda kariuki</option>
-  <option value="susan Mwende">susan Mwende</option>
-  <option value="stella">stella</option>
-  <option value="Daisy">Daisy</option>
-  <option value="Glory">Glory</option>
-
-</select>
-
-
-
-            
                    
                    
                         <div class="buttons">
-              <a href="" class="submit-button"><button type="submit">Submit</button></a>    
+              <a href="Delivery.php" class="submit-button"><button type="submit">Submit</button></a>    
  <a href="" class="cancel-button"><button type="submit">Cancel</button></a>
-              </div>    
+              </div> 
+</form> 
+            
+             
+         
            
         
            
-          </form>
+       
         </div>
         </div>
       
