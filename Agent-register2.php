@@ -1,3 +1,20 @@
+
+<?php
+ session_start();
+ error_reporting(E_ALL);
+ ini_set(' display errors ',  1);
+
+ include 'conn.php';
+ $countryQuery = "SELECT * FROM country";
+$countryResult = mysqli_query($conn, $countryQuery);
+
+// Fetch and store countries in an array
+$countries = [];
+while ($countryRow = mysqli_fetch_assoc($countryResult)) {
+    $countries[] = $countryRow;
+}
+mysqli_close($conn);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -230,52 +247,19 @@
                           <div class="col-12">
                             <label for="">Country</label><br>
                             <select name="Country" id="country" class="form-cont"       style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA">
-                              <option value="Kenya">select a country...</option>
-                              <option value="Kenya">KENYA</option>
-                                <option value="Tanzania">TANZANIA</option>
-                                <option value="Uganda">UGANDA</option>
-                                <option value="Sudan">SUDAN</option>
-                                <option value="South Sudan ">SOUTH SUDAN</option>
-                                <option value="Burundi">ETHIOPIA</option>
-                                <option value="Burundi">SOMALIA</option>
-                                <option value="Burundi">RWANDA</option>
-                                <option value="Burundi">BURUNDI</option>
-                                <option value="Burundi">ERITREA</option>
-                                <option value="Burundi">DJIBOUTI</option>
-                           </select>
+                           <option value="0" >select country</option>
+                        <?php foreach ($countries as $country): ?>
+                        <option value="<?php echo $country['country_id']; ?>"><?php echo $country['country_name']; ?></option>
+                       <?php endforeach; ?>                    
+                            </select>
                           </div>
-                        <!--  <label for="city">Select a City:</label>
-                          <select name="City" id="city" class="form-cont"   style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA" disabled>
-        <option value="">Select a city...</option>
-        <option value="">NAIROBI</option>
-        <option value="">DODOMA</option>
-        <option value="">JINJA</option>
-        <option value="">JUBA</option>
-        <option value="">KHARTOUM</option>
-        <option value="">ADISABABA</option>
-        <option value="">MOGAADISHU</option>
-        <option value="">KIGALI</option>
-        <option value="">BUJUMBURA</option>
-        <option value="">ASMARA</option>
-        <option value="">DJIBOUTI</option>
-
-    </select>-->
+                     
     <div class="col-12">
       <label for="">City</label><br>
-      <select name="City" id="country" class="form-cont"       style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA">
-        <option value="">select a city....</option>
-        <option value="NAIROBI">NAIROBI</option>
-          <option value="DODOMA">DODOMA</option>
-          <option value="JINJA">JINJA</option>
-          <option value="KHARTOUM">KHARTOUM</option>
-          <option value="JUBA ">JUBA</option>
-          <option value="ADISABABA">ADISABABA</option>
-          <option value="MOGADISHU">MOGADISHU</option>
-          <option value="KIGALI">KIGALI</option>
-          <option value="BUJUMBURA">BUJUMBURA</option>
-          <option value="ASMARA">ASMARA</option>
-          <option value="DJIBOUTI">DJIBOUTI</option>
-     </select>
+      <select name="City" id="city" class="form-cont" style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA">
+      <option value="0" >select city </option>
+      </select>
+
     </div>
     <div class="col-12">
       <label for="yourEmail" class="form-label">Location </label> <br>
@@ -285,7 +269,7 @@
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
+     /* document.addEventListener("DOMContentLoaded", function() {
           const countrySelect = document.getElementById("country");
           const citySelect = document.getElementById("city");
       
@@ -296,8 +280,39 @@
                   citySelect.setAttribute("disabled", "disabled");
               }
           });
-      });
+      });*/
       </script>
+      <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const countrySelect = document.getElementById("country");
+        const citySelect = document.getElementById("city");
+       
+
+        countrySelect.addEventListener("change", function() {
+            const selectedCountryId = countrySelect.value;
+
+            // Clear existing city options
+            citySelect.innerHTML = '<option value="">Select City</option>';
+
+            if (selectedCountryId !== "") {
+                // Fetch cities based on the selected country using AJAX
+                fetch(`fetch_cities.php?country_id=${selectedCountryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the city dropdown with fetched city data
+                        data.forEach(city => {
+                            const option = document.createElement("option");
+                            option.value = city.city_id;
+                            option.textContent = city.city_name;
+                            citySelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching cities:', error));
+            }
+        });
+    });
+</script>
+
      
       
                         

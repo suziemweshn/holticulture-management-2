@@ -29,36 +29,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $city_id = $_POST['edit'];
         
         // Retrieve the updated form data
-        $name = $_POST['name'];
-        $country_id=$_POST['country_id'];
-       
-
-        // Update the cities in the database
-        $updateQuery = "UPDATE cities SET city_name, country_id = '$name', '$country_id'  WHERE city_id = $city_id";
-        mysqli_query($conn, $updateQuery);
+        $city_name = $_POST['city_name']; // Use 'city_name' instead of 'name'
+        $country_id = $_POST['country_id'];
+        
+        // Update the city in the database
+        $updateQuery = "UPDATE cities SET city_name = '$city_name', country_id = '$country_id' WHERE city_id = $city_id";
+        
         if (mysqli_query($conn, $updateQuery)) {
-            echo "Country added successfully";
+            echo "City updated successfully";
         } else {
-            echo "Error adding cities: " . mysqli_error($conn);
+            echo "Error updating city: " . mysqli_error($conn);
         }
     }
-
-
+    
 
     // Handle add cities form submission
     if (isset($_POST['add'])) {
         // Retrieve form data
-        $name = $_POST['name'];
-        $country_id=$_POST['country_id'];
-       
-    
-        // Insert the cities into the countries table
-        $query = "INSERT INTO cities (city_name,country_id) VALUES ('$name', '$country_id')";
+        $city_name = $_POST['city_name']; // Use 'city_name' instead of 'name'
+        $country_id = $_POST['country_id'];
+        
+        // Insert the city into the cities table
+        $query = "INSERT INTO cities (city_name, country_id) VALUES ('$city_name', '$country_id')";
         
         if (mysqli_query($conn, $query)) {
-            echo "Country added successfully";
+            echo "City added successfully";
         } else {
-            echo "Error adding cities: " . mysqli_error($conn);
+            echo "Error adding city: " . mysqli_error($conn);
         }
     }
     $query = "SELECT * FROM cities";
@@ -69,7 +66,14 @@ $cities = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $cities[] = $row;
 }
+$countryQuery = "SELECT * FROM country";
+$countryResult = mysqli_query($conn, $countryQuery);
 
+// Fetch and store countries in an array
+$countries = [];
+while ($countryRow = mysqli_fetch_assoc($countryResult)) {
+    $countries[] = $countryRow;
+}
 mysqli_close($conn);
 ?>
 
@@ -101,24 +105,32 @@ mysqli_close($conn);
     <div class="container w-100">
         <div class="cities-form">
             <form method="POST" action="cities.php" class="d-flex flex-row flex-wrap mt-20" >
-                <div class="w-100 mb-10 ms-20">
-                    <label for="name" class="w-10 display-8 fw-bold">City Name:</label>
-                    <input type="text" class="ms-10" name="name" id="name" required><br>
-                </div>
-                <div class="w-100 mb-10 ms-20">
-                    <label for="name" class="w-10 display-8 fw-bold">Country id</label>
-                    <select name="countryid" id="countryid">
-                    
+            <!-- ... -->
+<div class="container w-100">
+    <div class="cities-form">
+        <form method="POST" action="cities.php" class="d-flex flex-row flex-wrap mt-20">
+            <div class="w-100 mb-10 ms-20">
+                <label for="city_name" class="w-10 display-8 fw-bold">City Name:</label>
+                <input type="text" class="ms-10" name="city_name" id="city_name" required><br>
+            </div>
+            <div class="w-100 mb-10 ms-20">
+                <label for="country_id" class="w-10 display-8 fw-bold">Country Name</label>
+                <select name="country_id" id="country_id">
+                    <?php foreach ($countries as $country): ?>
+                        <option value="<?php echo $country['country_id']; ?>"><?php echo $country['country_name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+           
+            <div class="product-button">
+                <button type="submit" name="add">Add City</button>
+            </div>
+        </form>
+    </div>
 
-                    </select>
+    <!-- ... -->
+</div>
 
-                </div>
-               
-                <div class="product-button">
-                    <button type="submit" name="add">Add Product</button>
-                </div>
-            </form>
-        </div>
 
        
         <!-- Display Products -->
@@ -136,7 +148,7 @@ mysqli_close($conn);
         <?php foreach ($cities as $city): ?>
             <tr>
                 <td><?php echo $city['city_name']; ?></td>
-                <td><?php echo $city['country_id'];?></td>
+                <td><?php echo $city['city_id'];?></td>
                 
                 
                 <td>
@@ -148,8 +160,14 @@ mysqli_close($conn);
                 <form method="POST" action="cities.php" class="update-button">
                     <input type="hidden" name="edit" value="<?php echo $city['city_id']; ?>">
                     <div class="w-100 mb-10 ms-20">
-                        <label for="name" class="w-10 display-8 fw-bold">Country Name:</label>
+                        <label for="name" class="w-10 display-8 fw-bold">City Name:</label>
                         <input type="text" class="ms-10" name="name" id="name" value="<?php echo $city['city_name']; ?>" required><br>
+                    </div>
+                    <div class="w-100 mb-10 ms-20">
+                        <label for="name" class="w-10 display-8 fw-bold">Country id:</label>
+                        
+                        <input type="text" class="ms-10" name="country_name" id="name" value="<?php echo $city['country_id']; ?> "; ?> <br>
+                     
                     </div>
                     <button type="submit">Update</button>
                 </form>

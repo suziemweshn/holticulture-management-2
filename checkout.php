@@ -182,7 +182,7 @@ border-radius: 5px;
                    
                    
                         <div class="buttons">
-              <a href="Delivery.php" class="submit-button"><button type="submit">Submit</button></a>    
+              <a href="" class="submit-button"><button type="submit">Submit</button></a>    
  <a href="" class="cancel-button"><button type="submit">Cancel</button></a>
               </div> 
 </form> 
