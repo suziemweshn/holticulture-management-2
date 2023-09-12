@@ -1,10 +1,16 @@
 <?php
 session_start();
 
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 include  'conn.php';
+/*if (!isset($_SESSION['username'])) {
+    // Redirect to the login page or show a message indicating that the user needs to log in.
+    header('Location: login.php');
+    exit();
+}*/
 // Retrieve products from the database
 $query = "SELECT * FROM roses";
 $result = mysqli_query($conn, $query);

@@ -12,13 +12,13 @@ include  'conn.php';
     exit();
 }*/
 // Retrieve products from the database
-$query = "SELECT * FROM mixed_roses";
+$query = "SELECT * FROM carnations";
 $result = mysqli_query($conn, $query);
 
 // Fetch and store products in an array
-$roses = [];
+$carnations = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $roses[] = $row;
+    $carnations[] = $row;
 }
 
 // Close the database connection
@@ -161,12 +161,12 @@ mysqli_close($conn);
         </div>
     </header>
         <!-- Header End -->
-    <h1 class="text-center">Mixed Roses</h1>
+    <h1 class="text-center">carnations</h1>
     
    
     <section class="product-display">
     <div class="container-fluid">
-        <?php foreach ($roses as $product): ?>
+        <?php foreach ($carnations as $product): ?>
             <div class="product-list">
                 <?php if (!empty($product['image'])): ?>
                     <div class="product-image">

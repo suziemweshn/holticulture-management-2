@@ -1,6 +1,6 @@
 <?php 
 
-include 'conn.php';
+/*include 'conn.php';
 
 // Check if the 'Agent_name' parameter exists in the POST data
 if(isset($_POST['Agent_name'])) {
@@ -27,7 +27,7 @@ $conn->close();
 
 // Return agent details in JSON format
 header('Content-Type: application/json');
-echo json_encode($agentDetails);
+echo json_encode($agentDetails);*/
 ?>
 
 

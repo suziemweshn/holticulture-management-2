@@ -21,7 +21,7 @@ $Country = isset($_POST['Country']) ? $_POST['Country'] : '';
 $City = isset($_POST['City']) ? $_POST['City'] : '';
 $Location = isset($_POST['Location']) ? $_POST['Location'] : '';
 $Gender = isset($_POST['Gender']) ? $_POST['Gender'] : '';
-
+    
 // Hash the password
 //$hashed_password = password_hash($PASS_WORD, PASSWORD_DEFAULT);
 

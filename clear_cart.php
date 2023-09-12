@@ -1,12 +1,11 @@
-<!-- clear_cart.php -->
-
 <?php
 session_start();
 
-// Clear the cart by unsetting the $_SESSION['cart'] array
-unset($_SESSION['cart']);
-
-// Redirect back to the cart page
-header('Location: cart2.php');
-exit();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Clear the cart by unsetting the $_SESSION['cart'] array
+    unset($_SESSION['cart']);
+    echo "Cart cleared.";
+} else {
+    echo "Invalid request method.";
+}
 ?>

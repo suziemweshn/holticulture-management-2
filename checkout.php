@@ -32,6 +32,7 @@ if ($result->num_rows > 0) {
 }
 
 
+
 $stmt->close();
 $conn->close();
 ?>
@@ -177,7 +178,58 @@ border-radius: 5px;
 
             </fieldset>
 
+            <h3>Delivery Details</h3>
+<form id="checkoutForm" action="get_Agent_details.php" method="post">
+    <input type="radio" name="deliveryOption" value="door" style="margin-top:15px;"> Door Delivery <br>
+    <input type="radio" name="deliveryOption" value="pickup" style="margin-top:15px;"> Pickup from Agent
 
+    <div id="agentDetailsSubform" style="display: none;">
+    <select id="agentName" name="agentName">
+    <option value="select Agent" >Select Agent</option>
+    <?php foreach ($agentNames as $agent) { ?>
+      
+        <option value="<?php echo $agent; ?>"><?php echo $agent; ?></option>
+    <?php } ?>
+</select>
+
+    <input type="text" id="agentNumber" name="agentNumber" readonly>
+    <input type="text" id="gender" name="gender" readonly>
+    <input type="text" id="contactNumber" name="contactNumber" readonly>
+    <input type="text" id="Location" name="Location" readonly>
+    </div>
+
+   <!-- <input type="submit" value="Submit">-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    </form>
+    <script>
+                $(document).ready(function() {
+    $('input[name="deliveryOption"]').change(function() {
+        if ($(this).val() === 'pickup') {
+            $('#agentDetailsSubform').show();
+        } else {
+            $('#agentDetailsSubform').hide();
+        }
+    });
+
+    $('#agentName').change(function() {
+        var selectedAgent = $(this).val();
+        $.ajax({
+            url: 'get_Agent_details.php',
+            method: 'POST',
+            data: { Agent_name: selectedAgent }, // Change 'agent' to 'Agent_name'
+            dataType: 'json',
+            success: function(response) {
+                // Populate agent details fields
+                $('#agentNumber').val(response.agentNumber);
+                $('#gender').val(response.gender);
+                $('#contactNumber').val(response.contactNumber);
+            }
+        });
+    });
+});
+
+              </script>
 
                    
                    

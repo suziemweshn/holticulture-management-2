@@ -1341,15 +1341,16 @@ top: -750px;
   margin-left: 400px;
   width: 60%;
  }
- .cart-display button a{
+ .display-button {
   text-decoration: none;
   color:white;
   border-radius: 5px;
   border: 2px solid ;
   font-size: 20px;
 
-  padding: 10px;
-  background-color: lime;
+ padding:10px;
+  background-color:lime;
+  width: 100px;
  }
  .buy-button{
   display: flex;

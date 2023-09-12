@@ -256,15 +256,15 @@ mysqli_close($conn);
                      
     <div class="col-12">
       <label for="">City</label><br>
-      <select name="City" id="city" class="form-cont" style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA">
+      <select name="City" id="city" class="form-cont" style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA" disabled>
       <option value="0" >select city </option>
       </select>
 
     </div>
     <div class="col-12">
-      <label for="yourEmail" class="form-label">Location </label> <br>
-      <input type="text" name="Location" class="form-control" id="yourEmail" required>
-
+    <select name="Location" id="location" class="form-cont" style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA" disabled>
+      <option value="0" >select location </option>
+      </select>
       <div class="invalid-feedback">Please enter a valid Email adddress!</div>
     </div>
 
@@ -283,9 +283,11 @@ mysqli_close($conn);
       });*/
       </script>
       <script>
-    document.addEventListener("DOMContentLoaded", function() {
+   /* document.addEventListener("DOMContentLoaded", function() {
         const countrySelect = document.getElementById("country");
         const citySelect = document.getElementById("city");
+        const locationSelect=document.getElementById("location");
+     
        
 
         countrySelect.addEventListener("change", function() {
@@ -309,9 +311,103 @@ mysqli_close($conn);
                     })
                     .catch(error => console.error('Error fetching cities:', error));
             }
+        });*/
+       /* citySelect.addEventListener("change",function(){
+          const selectedCityId=citySelect.value;
+          locationSelect.innerHTML='option value="">select location</option>';
+          if (selectedCityId !==""){
+            fetch('fetch_locations.php?city_id=${selectedCityId}')
+            .then(response=>response.json())
+            .then(data=>){
+              data.forEach(city=> {
+                const option=document.createElement("option");
+                option.value=location.location_id;
+                option.textContent=location.location_name;
+                locationSelect.appendChild(option);
+
+              });
+            
+            }
+            .catch(error=> console.error("error fetching locations:",error));
+          }
+
+        })
+    });*/
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const countrySelect = document.getElementById("country");
+        const citySelect = document.getElementById("city");
+        const locationSelect = document.getElementById("location");
+
+        // Function to fetch and populate locations based on the selected city
+        function populateLocations(selectedCityId) {
+            // Clear existing location options
+            locationSelect.innerHTML = '<option value="">Select Location</option>';
+
+            if (selectedCityId !== "") {
+                // Fetch locations based on the selected city using AJAX
+                fetch(`fetch_locations.php?city_id=${selectedCityId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the location dropdown with fetched location data
+                        data.forEach(location => {
+                            const option = document.createElement("option");
+                            option.value = location.location_id;
+                            option.textContent = location.location_name;
+                            locationSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching locations:', error));
+
+                // Enable the location dropdown
+                locationSelect.removeAttribute("disabled");
+            } else {
+                // Disable the location dropdown if no city is selected
+                locationSelect.setAttribute("disabled", "disabled");
+            }
+        }
+
+        countrySelect.addEventListener("change", function () {
+            const selectedCountryId = countrySelect.value;
+
+            // Clear existing city and location options
+            citySelect.innerHTML = '<option value="">Select City</option>';
+            locationSelect.innerHTML = '<option value="">Select Location</option>';
+
+            if (selectedCountryId !== "") {
+                // Fetch cities based on the selected country using AJAX
+                fetch(`fetch_cities.php?country_id=${selectedCountryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the city dropdown with fetched city data
+                        data.forEach(city => {
+                            const option = document.createElement("option");
+                            option.value = city.city_id;
+                            option.textContent = city.city_name;
+                            citySelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching cities:', error));
+
+                // Enable the city dropdown
+                citySelect.removeAttribute("disabled");
+            } else {
+                // Disable the city and location dropdowns if no country is selected
+                citySelect.setAttribute("disabled", "disabled");
+                locationSelect.setAttribute("disabled", "disabled");
+            }
+        });
+
+        citySelect.addEventListener("change", function () {
+            const selectedCityId = citySelect.value;
+
+            // Populate the location dropdown based on the selected city
+            populateLocations(selectedCityId);
         });
     });
 </script>
+
 
      
       
