@@ -118,7 +118,9 @@ border-radius: 5px;
         <div class="container-fluid" style="background: url(../img/flamingo.jpeg)">
         <div class="checkout-form">
             <h3>Customer Address</h3>
-          <form action="">
+           
+
+            <form action="payment.php">
             <fieldset>
 <legend>
     <label for="">Name</label>
@@ -184,13 +186,14 @@ border-radius: 5px;
 
             </fieldset>
 
+
             <h3>Delivery Details</h3>
-<form id="checkoutForm" action="get_Agent_details.php" method="post">
-    <input type="radio" name="deliveryOption" value="door" style="margin-top:15px;"> Door Delivery <br>
-    <input type="radio" name="deliveryOption" value="pickup" style="margin-top:15px;"> Pickup from Agent
+<!--<form id="checkoutForm" action="get_Agent_details.php" method="post" class="d-flex flex-row justify-content-center">-->
+    <input type="radio" name="deliveryOption" value="door" style="margin-top:15px;" required> Door Delivery <br>
+    <input type="radio" name="deliveryOption" value="pickup" style="margin-top:15px;" required> Pickup from Agent
 
     <div id="agentDetailsSubform" style="display: none;">
-    <select id="agentName" name="agentName">
+    <select id="agentName" name="agentName" style="margin-top:40px; margin-right:20px;  border-radius:3px;  width:200px;">
     <option value="select Agent" >Select Agent</option>
     <?php foreach ($agentNames as $agent) { ?>
       
@@ -198,11 +201,15 @@ border-radius: 5px;
     <?php } ?>
 </select>
 
-    <input type="text" id="agentNumber" name="agentNumber" readonly>
-    <input type="text" id="gender" name="gender" readonly>
-    <input type="text" id="contactNumber" name="contactNumber" readonly>
-    <input type="text" id="Location" name="Location" readonly>
+    <input type="text" id="agentNumber" name="agentNumber" readonly style="margin-top:20px;  border-radius:3px;  width:200px;">
+    <input type="text" id="gender" name="gender" readonly style="margin-top:20px;   border-radius:3px;  width:200px;">
+    <input type="text" id="contactNumber" name="contactNumber" readonly style="margin-top:20px;   border-radius:3px;  width:200px;">
+    <input type="text" id="Location" name="Location" readonly style="margin-top:20px;   border-radius:3px;  width:200px;">
     </div>
+    <div class="buttons">
+              <a href="" class="submit-button"><button type="submit" style="background-color: lime; color: white; margin-right:50px; width:150px;  border-radius:3px; height:40px; ">Submit</button></a>    
+ <a href="" class="cancel-button"><button type="submit" style="background-color: lime; color: white;width:150px; margin-right:50px; border-radius:3px; height:40px; ">Cancel</button></a>
+              </div> 
 
    <!-- <input type="submit" value="Submit">-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -239,11 +246,8 @@ border-radius: 5px;
 
                    
                    
-                        <div class="buttons">
-              <a href="" class="submit-button"><button type="submit" style="background-color: lime; color: white;width:100px; margin-top:20px; border-radius:3px ">Submit</button></a>    
- <a href="" class="cancel-button"><button type="submit" style="background-color: lime; color: white;width:100px; margin-top:20px; border-radius:3px ">Cancel</button></a>
-              </div> 
-</form> 
+                    
+
             
              
          
