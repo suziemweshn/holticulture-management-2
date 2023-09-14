@@ -43,7 +43,7 @@ $existingCartItem = array_search($product_id, array_column($_SESSION['cart'], 'p
 
 if ($existingCartItem !== false) {
     // If the item is already in the cart, increment the quantity
-   // $_SESSION['cart'][$existingCartItem]['quantity'] += 1;
+    $_SESSION['cart'][$existingCartItem]['quantity'] += 1;
 
     // If it's a new item, add it to the cart session
     $cartItem = [
