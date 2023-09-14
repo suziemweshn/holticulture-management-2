@@ -1347,11 +1347,13 @@ top: -750px;
   border-radius: 5px;
   border: 2px solid ;
   font-size: 20px;
+  
 
  padding:10px;
   background-color:lime;
   width: 100px;
  }
+ 
  .buy-button{
   display: flex;
   flex-direction: row;

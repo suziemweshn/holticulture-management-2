@@ -96,7 +96,7 @@ $conn->close();
 background-size: cover;*/
 background-color:white;
 width: 40%;
-/*height: 700px;*/
+height: 1000px;
 border-radius: 5px;
 
     
@@ -104,6 +104,12 @@ border-radius: 5px;
  
  
 }
+.buttons{
+    margin-top:60px;
+    margin-left:80px;
+
+}
+
 
  </style>
 </head>
@@ -234,8 +240,8 @@ border-radius: 5px;
                    
                    
                         <div class="buttons">
-              <a href="" class="submit-button"><button type="submit">Submit</button></a>    
- <a href="" class="cancel-button"><button type="submit">Cancel</button></a>
+              <a href="" class="submit-button"><button type="submit" style="background-color: lime; color: white;width:100px; margin-top:20px; border-radius:3px ">Submit</button></a>    
+ <a href="" class="cancel-button"><button type="submit" style="background-color: lime; color: white;width:100px; margin-top:20px; border-radius:3px ">Cancel</button></a>
               </div> 
 </form> 
             

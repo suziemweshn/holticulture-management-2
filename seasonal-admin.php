@@ -333,7 +333,7 @@ mysqli_close($conn);
                     <?php endif; ?>
                 </td>
                 <td>
-                    <form method="POST" action="Mixed-Roses-Admin.php" class="update-button">
+                    <form method="POST" action="seasonal-admin.php" class="update-button">
                         <input type="hidden" name="delete" value="<?php echo $product['id']; ?>">
                         <input type="hidden" name="image" value="<?php echo $product['image']; ?>">
                         <button type="submit" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>

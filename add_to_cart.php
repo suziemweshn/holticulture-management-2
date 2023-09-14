@@ -10,90 +10,86 @@ include 'conn.php';
 
 $productId = $_GET['id'] ?? null;
 
-// Retrieve the selected product from the database
-//$query = "SELECT * FROM roses WHERE id = $productId";
-//$result = mysqli_query($conn, $query);
 
+$sql = "SELECT *, 'carnations' AS table_name FROM carnations WHERE id = $productId
+        UNION 
+        SELECT *, 'lily' AS table_name FROM lily WHERE id = $productId
+        UNION 
+        SELECT *, 'roses' AS table_name FROM roses WHERE id = $productId
+        UNION 
+        SELECT *, 'mixed_roses' AS table_name FROM mixed_roses WHERE id = $productId
+        UNION 
+        SELECT *, 'seasonal' AS table_name FROM seasonal WHERE id = $productId";
 
-$sql = "SELECT * FROM roses WHERE id = $productId
-        UNION
-        SELECT * FROM mixed_roses WHERE id = $productId
-        UNION
-        SELECT * FROM carnations WHERE id= $productId
-        UNION
-        SELECT * FROM lily WHERE id= $productId
-        UNION
-        SELECT * FROM seasonal WHERE id = $productId";
-        
-        $result = mysqli_query($conn, $sql);
-        $product = mysqli_fetch_assoc($result);
+$result = mysqli_query($conn, $sql);
+$product = mysqli_fetch_assoc($result);
+
 // Check if the product exists
 if (!$product) {
     die("Product not found.");
 }
 
 // Define the product details
-$product_id = $product['id'];
+$id = $product['id'];
+$name = $product['name'];
+$description = $product['description'];
 $price = $product['price'];
+$image = $product['image']; 
+$quantity = 1; 
+$username = $_SESSION['username'];
 
-// Initialize the cart session variable if not set
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
-
-// Check if the product is already in the session cart
+// Check if the item already exists in the cart
 $existingCartItem = array_search($product_id, array_column($_SESSION['cart'], 'product_id'));
 
 if ($existingCartItem !== false) {
-    // If the product is already in the cart, increase the quantity
-    $_SESSION['cart'][$existingCartItem]['quantity'] += 1;
-} else {
-    // If the product is not in the cart, add it as a new item
+    // If the item is already in the cart, increment the quantity
+   // $_SESSION['cart'][$existingCartItem]['quantity'] += 1;
+
+    // If it's a new item, add it to the cart session
     $cartItem = [
-        'product_id' => $product_id,
-        'quantity' => 1, // Initial quantity
+        'id' => $id,
+        'name' => $name,
+        'description' => $description,
         'price' => $price,
+        'quantity' => $quantity,
+        'username' => $username,
+        'image' => $image, 
     ];
     $_SESSION['cart'][] = $cartItem;
 }
 
 // Add the product to the user's cart in the database
-//$username = $_SESSION['username'];
-//$sql = "INSERT INTO cart (username, product_id, quantity, price) VALUES ('$username', $product_id, 1, $price)";
-$username = $_SESSION['username'];
-$sql = "INSERT INTO cart (username, product_id, quantity, price) VALUES (?, ?, 1, ?)";
+//$sql = "INSERT INTO cart (name, description, price, quantity, username, image) VALUES (?, ?, ?, ?, ?, ?)";
+//$stmt = mysqli_prepare($conn, $sql);
 
+//if ($stmt) {
+    //mysqli_stmt_bind_param($stmt, "ssdssb", $name, $description, $price, $quantity, $username, $image);
+    
+   // if (mysqli_stmt_execute($stmt)) {
+       // header('Location: cart.php');
+       // exit();
+   // } else {
+       // echo "Error: " . mysqli_error($conn);
+   // }
+//} else {
+    //echo "Error: " . mysqli_error($conn);
+//}
+$sql = "INSERT INTO cart (name, description, price, quantity, username, image) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($conn, $sql);
 
 if ($stmt) {
-    mysqli_stmt_bind_param($stmt, "sid", $username, $product_id, $price);
-    
+    mysqli_stmt_bind_param($stmt, "ssdsss", $name, $description, $price, $quantity, $username, $image);
+
     if (mysqli_stmt_execute($stmt)) {
-        // Insertion successful, redirect to the cart page or display a success message.
         header('Location: cart.php');
-       
         exit();
     } else {
-        // Query failed, display an error message.
-        echo "Error: " . mysqli_error($conn);
+        echo "Error inserting into cart: " . mysqli_error($conn); 
     }
+} else {
+    echo "Error preparing SQL statement: " . mysqli_error($conn); 
 }
-    // Close the prepared statement
-   // mysqli_stmt_close($stmt);
-//} else {
-    // Prepare statement failed, display an error message.
-   // echo "Error: " . mysqli_error($conn);
-//}
 
-//if (mysqli_query($conn, $query)) {
-    // Insertion successful, redirect to the cart page or display a success message.
-    //header('Location: cart.php');
-    //exit();
-//} else {
-    // Query failed, display an error message and check for any SQL errors.
-    //echo "Error: " . $query . "<br>" . mysqli_error($conn);
-//}
-
-// Close the database connection
 mysqli_close($conn);
 ?>
+
