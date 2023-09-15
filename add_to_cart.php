@@ -14,8 +14,18 @@ $productId = $_GET['id'] ?? null;
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
+$sql = "SELECT id, name, description, price, image FROM carnations WHERE id = $productId
+       UNION
+       
+       SELECT id, name, description, price, image FROM roses WHERE id = $productId
+       UNION
+       SELECT id, name, description, price, image FROM mixed_roses WHERE id = $productId";
+       
 
-$sql = "SELECT *, 'carnations' AS table_name FROM carnations WHERE id = $productId
+
+
+
+/*$sql = "SELECT *, 'carnations' AS table_name FROM carnations WHERE id = $productId
         UNION 
         SELECT *, 'lily' AS table_name FROM lily WHERE id = $productId
         UNION 
@@ -23,7 +33,7 @@ $sql = "SELECT *, 'carnations' AS table_name FROM carnations WHERE id = $product
         UNION 
         SELECT *, 'mixed_roses' AS table_name FROM mixed_roses WHERE id = $productId
         UNION 
-        SELECT *, 'seasonal' AS table_name FROM seasonal WHERE id = $productId";
+        SELECT *, 'seasonal' AS table_name FROM seasonal WHERE id = $productId";*/
 
 $result = mysqli_query($conn, $sql);
 $product = mysqli_fetch_assoc($result);

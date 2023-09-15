@@ -2,32 +2,48 @@
 session_start();
 include 'conn.php';
 
-// Include your database connection code here if needed
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $payment_option = $_POST['payment_option'] ?? '';
+    $_SESSION['payment_option'] = $payment_option;
 
-    // Check if the payment option is not empty
+    // Debug: Output the payment option to check its value
+    var_dump($_SESSION['payment_option']);
     if (!empty($payment_option)) {
-        // Retrieve user details from the session
         $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
-        // Insert data into the payment table
-        $sql = "INSERT INTO payment (username, payment_option) VALUES (?, ?)";
+        // Retrieve user's checkout details from session
+        $checkoutDetails = $_SESSION['checkout_details'] ?? [];
+
+        $address = $checkoutDetails['address'] ?? '';
+        $deliveryOption = $checkoutDetails['deliveryOption'] ?? '';
+        $country = $checkoutDetails['country'] ?? '';
+        $city = $checkoutDetails['city'] ?? '';
+        $location = $checkoutDetails['location'] ?? '';
+        $selectedAgent = $checkoutDetails['selectedAgent'] ?? '';
+
+        // Insert data into the checkout table
+        $sql = "INSERT INTO checkout (username, name, email, phone_no, address, delivery_mode, agent_name, country, city, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            $stmt->bind_param("ss", $username, $payment_option);
+            // Assuming you have the user's name, email, and phone number available
+            $name = ''; // Add user's name here
+            $email = ''; // Add user's email here
+            $phone_no = ''; // Add user's phone number here
+
+            $stmt->bind_param("ssssssssss", $username, $name, $email, $phone_no, $address, $deliveryOption, $selectedAgent, $country, $city, $location);
 
             if ($stmt->execute()) {
                 // Payment data inserted successfully
                 $stmt->close();
                 $conn->close();
-              //  echo "Payment option stored successfully!";
-              header('location: order_confirmation.php');
+                header('Location: order_form.php');
+                exit();
             } else {
-                echo "Error inserting payment option: " . $stmt->error;
+                echo "Error inserting into the checkout table: " . $stmt->error;
             }
+
+            $stmt->close();
         } else {
             echo "Error preparing SQL statement: " . $conn->error;
         }
@@ -54,7 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
         <br>
 
-        <input type="submit" value="Submit Payment">
+        
+        <input type="submit" value="Proceed to Payment">
     </form>
+</section>
+
+      
 </body>
 </html>

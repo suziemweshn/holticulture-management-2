@@ -11,7 +11,11 @@ if (!isset($_SESSION['username'])) {
 $checkoutDetails = $_SESSION['checkout_details'] ?? [];
 
 // Check if payment option is available in the session
+//$paymentOption = $_SESSION['payment_option'] ?? '';
+// Check if payment option is available in the session
 $paymentOption = $_SESSION['payment_option'] ?? '';
+
+
 
 // Check if the cart items are available in the session
 $cartItems = $_SESSION['cart'] ?? [];
@@ -21,7 +25,7 @@ function calculateTotalPrice($cartItems)
 {
     $totalPrice = 0;
     foreach ($cartItems as $item) {
-        $totalPrice += $item['price'] * $item['quantity'];
+        $totalPrice += intval ($item['price'])* $item['quantity'];
     }
     return $totalPrice;
 }
@@ -50,7 +54,8 @@ function calculateTotalPrice($cartItems)
     <?php endif; ?>
 
     <h2>Payment Option</h2>
-    <p><strong>Payment Option:</strong> <?php echo $paymentOption; ?></p>
+    <p><strong>Payment Option:</strong> <?php echo $_SESSION['payment_option']; ?></p>
+
 
     <h2>Order Details</h2>
     <?php if (count($cartItems) > 0): ?>
@@ -71,7 +76,8 @@ function calculateTotalPrice($cartItems)
                     <td><?php echo $item['description']; ?></td>
                     <td><?php echo $item['price']; ?> USD</td>
                     <td><?php echo $item['quantity']; ?></td>
-                    <td><?php echo $item['price'] * $item['quantity']; ?> USD</td>
+                    <td><?php echo intval($item['price']) * $item['quantity']; ?> USD</td>
+
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -81,6 +87,9 @@ function calculateTotalPrice($cartItems)
     <form action="confirm-order.php" method="post">
         <input type="submit" value="Confirm Order">
     </form>
+    <form action="cancel-order.php" method="post">
+    <input type="submit" value="Cancel Order">
+</form>
 
     <?php else: ?>
     <p>Your cart is empty.</p>

@@ -24,7 +24,6 @@ if ($result->num_rows > 0) {
     $country = $row['country'] ?? '';
     $city = $row['city'] ?? '';
     $location = $row['location'] ?? '';
-   // $address = $row['address'] ?? '';
 } else {
     // User not found in the admin_table
     // Handle the scenario accordingly, e.g., display an error message
@@ -32,6 +31,12 @@ if ($result->num_rows > 0) {
 }
 
 $stmt->close();
+
+// Initialize agent details variables outside the conditional block
+$selectedAgent = '';
+$agentNumber = '';
+$gender = '';
+$contactNumber = '';
 
 // Fetch the list of agents from the agent table
 $agentNames = array(); // Initialize an empty array to store agent names
@@ -41,7 +46,6 @@ $result = $conn->query($query);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $agentNames[] = $row['Agent_name'];
-       // $agentNumber[] = $row['agent_id'];
     }
 }
 
@@ -49,134 +53,130 @@ if ($result->num_rows > 0) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve customer address and delivery details from the form
     $customerAddress = $_POST['address'] ?? '';
-    $delivery_mode = $_POST['deliveryOption'] ?? '';
+    $deliveryOption = $_POST['deliveryOption'] ?? '';
     $country = $_POST['country'] ?? '';
     $city = $_POST['city'] ?? '';
     $location = $_POST['location'] ?? '';
 
+    if ($deliveryOption === 'pickup') {
+        $selectedAgent = $_POST['agentName'] ?? '';
+        
+        // Fetch agent details from your agent table based on the selected agent name
+        if (!empty($selectedAgent)) {
+            $agentDetailsQuery = "SELECT * FROM agent WHERE Agent_name = ?";
+            $agentDetailsStmt = $conn->prepare($agentDetailsQuery);
+            $agentDetailsStmt->bind_param("s", $selectedAgent);
+            $agentDetailsStmt->execute();
+            $agentDetailsResult = $agentDetailsStmt->get_result();
 
-
-    // Check if 'Agent_name' parameter exists in the POST data
-    if (isset($_POST['agentName'])) {
-        $selectedAgent = $_POST['agentName'];
-        $address = $_POST['address'];
-        $selectedAgent = $_POST['agentNumber'];
-
-        // Insert data into the checkout table
-        $sql = "INSERT INTO checkout (username, name, email, phone_no, address, delivery_mode, agent_name, country, city, location) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt) {
-        $stmt->bind_param("ssssssssss", $username, $name, $email, $phone_no, $address, $delivery_mode, $selectedAgent, $country, $city, $location);
-
-        if ($stmt->execute()) {
-            // Data inserted successfully, now redirect to the payment page
-            $stmt->close();
-            $conn->close();
-           header('location: payment.php');
-         
-            exit();
-        } else {
-            echo "Error inserting into the checkout table: " . $stmt->error;
+            if ($agentDetailsResult->num_rows > 0) {
+                $agentRow = $agentDetailsResult->fetch_assoc();
+                $agentNumber = $agentRow['agentNumber'] ?? '';
+                $gender = $agentRow['gender'] ?? '';
+                $contactNumber = $agentRow['contactNumber'] ?? '';
+            }
+            
+            $agentDetailsStmt->close();
         }
-
-        $stmt->close();
-    } else {
-        echo "Error preparing SQL statement: " . $conn->error;
     }
-} else {
-    echo "Agent_name parameter not received.";
-}
-}
 
-$conn->close();
+    // Store the user's details, delivery option, and agent details in session variables
+    $_SESSION['checkout_details'] = [
+        'address' => $customerAddress,
+        'deliveryOption' => $deliveryOption,
+        'country' => $country,
+        'city' => $city,
+        'location' => $location,
+        'selectedAgent' => $selectedAgent,
+        'agentNumber' => $agentNumber,
+        'gender' => $gender,
+        'contactNumber' => $contactNumber,
+    ];
+
+    // Redirect to the payment page
+    header('Location: payment.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <style>
+<style>
       
-  body{
-    background-color:whitesmoke;
-  }
-  .input{
-    border:none;
-    outline:none;
-    width:100%;
-    border-radius:3px;
-    height:30px;
-   
-  }
-  form{
-  
-   justify-content:center;
-   align-items:center;
-   width:100%;
-
-  
-  }
-  form label{
-    font-size:20px;
-    font-weight:bold
-  }
-  fieldset{
-    width:90%;
-    border-radius:5px;
-  }
-  .container-fluid{
-  position:relative;
-  left:400px
-  }
-  form a button{
-    border:1px solid black;
-    border-radius:5px;
-    background-color:black;
-    color:white;
-    height:25px;
-    margin-top:30px;
-    width:30%;
-    margin-left:40px;
-  }
-  form a{
-    text-decoration:none;
-    font-size:20px;
-  }
-  
-  .checkout-form {
-  /*  background: linear-gradient(115deg, rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.719)), url('Nanyuki.jpg') no-repeat;
-background-size: cover;*/
-background-color:white;
-width: 40%;
-height: 1000px;
-border-radius: 5px;
-
+      body{
+        background-color:whitesmoke;
+      }
+      .input{
+        border:none;
+        outline:none;
+        width:100%;
+        border-radius:3px;
+        height:30px;
+       
+      }
+      form{
+      
+       justify-content:center;
+       align-items:center;
+       width:100%;
     
- 
- 
- 
-}
-.buttons{
-    margin-top:60px;
-    margin-left:80px;
-
-}
-
-
- </style>
- 
+      
+      }
+      form label{
+        font-size:20px;
+        font-weight:bold
+      }
+      fieldset{
+        width:90%;
+        border-radius:5px;
+      }
+      .container-fluid{
+      position:relative;
+      left:400px
+      }
+      form a button{
+        border:1px solid black;
+        border-radius:5px;
+        background-color:black;
+        color:white;
+        height:25px;
+        margin-top:30px;
+        width:30%;
+        margin-left:40px;
+      }
+      form a{
+        text-decoration:none;
+        font-size:20px;
+      }
+      
+      .checkout-form {
+      /*  background: linear-gradient(115deg, rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.719)), url('Nanyuki.jpg') no-repeat;
+    background-size: cover;*/
+    background-color:white;
+    width: 40%;
+    height: 1000px;
+    border-radius: 5px;
+    
+        
+     
+     
+     
+    }
+    .buttons{
+        margin-top:60px;
+        margin-left:80px;
+    
+    }
+    
+    
+     </style>
+     
 </head>
 <body>
-    <section class="">
-        <div class="container-fluid" style="background: url(../img/flamingo.jpeg)">
-            <div class="checkout-form">
-                <h3>Customer Address</h3>
-                <form method="POST" action="checkout.php">
-                
-            <fieldset>
+    <h1>Checkout</h1>
+    <form method="POST" action="checkout.php">
+    <fieldset>
 <legend>
     <label for="">Name</label>
    
@@ -240,13 +240,11 @@ border-radius: 5px;
 
             </fieldset>
 
+        <label for="deliveryOption">Delivery Option:</label>
+        <input type="radio" name="deliveryOption" value="door" required> Door Delivery
+        <input type="radio" name="deliveryOption" value="pickup" required> Pickup from Agent
 
-            <h3>Delivery Details</h3>
-<!--<form id="checkoutForm" action="get_Agent_details.php" method="post" class="d-flex flex-row justify-content-center">-->
-    <input type="radio" name="deliveryOption" value="door" style="margin-top:15px;" required> Door Delivery <br>
-    <input type="radio" name="deliveryOption" value="pickup" style="margin-top:15px;" required> Pickup from Agent
-
-    <div id="agentDetailsSubform" style="display: none;">
+        <div id="agentDetailsSubform" style="display: none;">
     <select id="agentName" name="agentName" style="margin-top:40px; margin-right:20px;  border-radius:3px;  width:200px;">
     <option value="select Agent" id="delivery_mode" name="delivery_mode" >Select Agent</option>
     <?php foreach ($agentNames as $agent) { ?>
@@ -303,8 +301,5 @@ border-radius: 5px;
 });
 
               </script>
-            </div>
-        </div>
-    </section>
 </body>
 </html>

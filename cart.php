@@ -7,7 +7,7 @@ function calculateTotalPrice($cartItems)
 {
     $totalPrice = 0;
     foreach ($cartItems as $item) {
-        $totalPrice += $item['price'] * $item['quantity'];
+        $totalPrice += intval ($item['price'])* $item['quantity'];
     }
     return $totalPrice;
 }
@@ -38,11 +38,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 // Function to store the selected item details in a session variable and redirect to checkout
 function storeAndRedirect($itemDetails)
 {
-    $_SESSION['name'] = $item['name'];
-    $_SESSION['description'] = $item['description'];
-    $_SESSION['price'] = $item['price'];
-    
-   // $_SESSION['checkout_item'] = $itemDetails;
+    $_SESSION['checkout_item'] = $itemDetails;
     header('Location: checkout.php');
     exit();
 }
@@ -53,6 +49,7 @@ function storeAndRedirect($itemDetails)
 <html>
 <head>
     <title>Shopping Cart</title>
+   
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="css/task6.css">
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -69,7 +66,7 @@ function storeAndRedirect($itemDetails)
                 <div class="cart-display">
                     <p>Product Name: <?php echo $item['name']; ?></p>
                     <p>Description: <?php echo $item['description']; ?></p>
-                    <p>Product Price: <?php echo $item['price']; ?> USD</p>
+                    <p>Product Price: <?php echo intval ($item['price']); ?> USD</p>
                     <p>Quantity: <?php echo $item['quantity']; ?></p>
                     <p>Total Price: <?php echo $item['price'] * $item['quantity']; ?> USD</p>
 
@@ -97,8 +94,7 @@ function storeAndRedirect($itemDetails)
     </section>
     <h3>Total Price: $<?php echo calculateTotalPrice($cartItems); ?></h3>
     <div class="buy-button">
-        <div class="clear-button">
-            <form method="GET" action="clear_cart.php">
+        <div class="clear-button">          <form method="GET" action="clear_cart.php">
                 <button type="submit">Clear</button>
             </form>
         </div>
