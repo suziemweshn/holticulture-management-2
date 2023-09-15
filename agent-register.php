@@ -1,72 +1,467 @@
+
 <?php
+ session_start();
+ error_reporting(E_ALL);
+ ini_set(' display errors ',  1);
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ include 'conn.php';
+ $countryQuery = "SELECT * FROM country";
+$countryResult = mysqli_query($conn, $countryQuery);
 
-session_start();
-
-include  'conn.php';
-
-// Retrieve the form data for account creation
-$id=uniqid();
-$Agent_name = isset($_POST['Agent_name']) ? $_POST['Agent_name'] : '';
-$Agent_Number = isset($_POST['Agent_Number']) ? $_POST['Agent_Number'] : '';
-$Contact_Number= isset($_POST['Contact_Number']) ? $_POST['Contact_Number'] : '';
-$Emergency_Contact= isset($_POST['Emergency_Contact']) ? $_POST['Emergency_Contact'] : '';
-$Email_Address = isset($_POST['Email_Address']) ? $_POST['Email_Address'] : '';
-$Date_of_Birth = isset($_POST['Date_of_Birth']) ? $_POST['Date_of_Birth'] : '';
-$Address_name = isset($_POST['Address_name']) ? $_POST['Address_name'] : '';
-$Country = isset($_POST['Country']) ? $_POST['Country'] : '';
-$City = isset($_POST['City']) ? $_POST['City'] : '';
-$Location = isset($_POST['Location']) ? $_POST['Location'] : '';
-$Gender = isset($_POST['Gender']) ? $_POST['Gender'] : '';
-    
-// Hash the password
-//$hashed_password = password_hash($PASS_WORD, PASSWORD_DEFAULT);
-
-// Process account creation request
-// Prepare and execute the SQL statement with prepared statements
-$stmt = $conn->prepare("INSERT INTO agent (Agent_name, Agent_Number, Contact_Number,Emergency_Contact, Email_Address, Date_of_Birth, Address_name, Country, City, Location,Gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-if (!$stmt) {
-    echo "Error preparing statement: " . $conn->error;
-    exit();
+// Fetch and store countries in an array
+$countries = [];
+while ($countryRow = mysqli_fetch_assoc($countryResult)) {
+    $countries[] = $countryRow;
 }
-
-$stmt->bind_param(
-    "sssssssssss",
-   
-   $Agent_name,
-   $Agent_Number,
-   $Contact_Number,
-   $Emergency_Contact,
-   $Email_Address,
-   $Date_of_Birth,
-   $Address_name,
-   $Country,
-   $City,
-   $Location,
-   $Gender,
-);
-
-if ($stmt->execute()) {
-    // Account created successfully, set session variables
-    $_SESSION['id'] = $id;
-
-    // Redirect to the login page
-   echo('user registered successfully');
-    exit();
-} else {
-    echo "Error executing statement: " . $stmt->error;
-}
-
-// Close statement
-$stmt->close();
-
-// Close connection
-$conn->close();
+mysqli_close($conn);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title></title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/task6.css" rel="stylesheet">
+  <style>
+   /* .register-form{
+      background:linear-gradient( 115deg, rgba(81, 241, 7, 0.8), rgba(58, 218, 37, 0.719) ),url('flamingo.jpeg') no-repeat;
+   background-size: cover;
+  
+  border-radius: 5px ;*/
+
+    
+   .input-group input[type="text"]{
+      width: 80%;
+
+    }
+    button{
+      width:80%;
+    }
+  </style>
+  
+ 
+</head>
+
+<body>
+  <header>
+    <!-- Header Start -->
+    <div class="header-area mb-20">
+        <div class="main-header ">
+            <div class="header-top d-none d-lg-block">
+                <div class="container-fluid">
+                    <div class="col-xl-12">
+                        <div class="row d-flex justify-content-between align-items-center">
+                            <div class="header-info-left d-flex">
+                                <ul>     
+                                    <li>Email: Akimafarm@gmail.com</li>
+                                </ul>
+                                <div class="header-social">    
+                                    <ul>
+                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a  href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                        <li> <a href="#"><i class="fab fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-bottom  header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2">
+                            <div class="logo mb-60">
+                                <a href="index.html"><img src="img/org.png" alt="" height="50px"></a> AHF
+                                
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10">
+                            <div class="menu-wrapper  d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">                                                                                          
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="index.html#about">About</a></li>
+                                            <li><a href="">Products</a>
+                                             <ul class="submenu">
+                       <li><a href="flowers.html">Flowers</a></li>
+                       <li><a href="vegetable.html">Vegetables</a></li>
+                       <li><a href="fruits.html">Fruits</a></li>
+                       <li><a href="dairy.html">Dairy Products</a></li>
+                       
+                    </ul>
+                                            </li>
+                                            <li><a href="#">Portals</a>
+                                              <ul class="submenu">
+                        <li><a href="pages-login.html">Admin Portal</a></li>
+                        <li><a href="employee-login.html">Employee portal</a></li>
+                        
+                        
+                     </ul>
+                                             </li>
+                                             <li><a href="category.html">My account</a>
+                                              <ul class="submenu">
+                        <li><a href="datascience.html">Log in</a></li>
+                        <li><a href="ai.html">Sign up</a></li>
+                        
+                     </ul>
+                                             </li>
+                                             
+                                            
+                                            <li><a href="contact.html">Contacts</a></li>
+                                            <li><a href="cart.php"><img src="img/cart2.png" alt="" width="50px" height="40px">cart</a></li>
+                                            
+                                        </ul>
+                                        <div class="search">
+                                            <form class="d-flex">
+                                                <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
+
+    <ul id="myMenu">
+     <!-- <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Portals</a></li>
+      <li><a href="#">Account</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Contacts</a></li>
+      
+    </ul>-->
+                                                
+                                              </form>
+                                        </div>
+                                       
+                                    </nav>
+                                   
+                            </div>
+                        </div> 
+                        <!-- Mobile Menu -->
+                       <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+  <main>
+    <div class="container ">
+
+      <section class="section register min-vh-100 d-flex flex-row align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="register-form">
+              <div class=" d-flex flex-row align-items-center justify-content-center">
+
+           
+              
+                <div class="col-xl-10 col-lg-10">
+                    <div class="menu-wrapper  d-flex align-items-center justify-content-end">
+              
+    
+                  <div class="card mb-3">
+    
+                    <div class="card-body ">
+    
+                      <div class="pt-4 pb-2">
+                        <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                        <p class="text-center small">Create an Account</p>
+                      </div>
+                      <div class="register-form">
+                        <div class="personal-details">
+                          <form class="row g-3  " action="Agent-register.php" method="POST">
+                            <div class="col-12">
+                              <label for="yourName" class="form-label">Your Name</label>
+                              <input type="text" name="Agent_name" class="form-control" id="yourName" required>
+                              <div class="invalid-feedback">Please, enter your name!</div>
+                            </div>
+                            <div class="col-12">
+                              <label for="ADMIN_ID" class="form-label">Agent Number</label>
+                              <input type="text" name="Agent_Number" class="form-control" id="ID" required>
+                              <div class="invalid-feedback">Please, enter your ID!</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="yourEmail" class="form-label">Contact Number</label>
+                                <input type="text" name="Contact_Number" class="form-control" id="yourEmail" required>
+                                <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                              </div>
+          
+                              <div class="col-12">
+                                <label for="yourEmail" class="form-label">Emergency Contact Number</label> <br>
+                                <input type="text" name="Emergency_Contact" class="form-control" id="yourEmail" required>
+                                <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                              </div>
+                           
+                            <div class="col-12">
+                              <label for="yourEmail" class="form-label">Your Email</label><br>
+                              <input type="email" name="Email_Address" class="form-control" id="yourEmail" required>
+                              <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                            </div>
+                            <div class="col-12">
+                                <label for="yourEmail" class="form-label">Your Gender</label><br>
+                                <input type="radio" name="Gender" value="male" style="margin-left:25px"> male 
+                                <input type="radio" name="Gender" value="female" style="margin-left:25px">Female 
+                                <input type="radio" name="Gender"  value="other" style="margin-left: 25px"> Other 
+                               
+                            </div>
+                           
+
+                          
+                            <div class="col-12">
+                            <label for="">Date Of Birth</label><br>
+                            <input type="date" name="Date_of_Birth" class="form-cont"    style="width:80%; padding:6px; border-radius:5px;display:block; border-color:1px solid #ced4dA" required>
+                            </div>
+                          <div class="col-12">
+                            <label for="">Address</label><br>
+                            <input type="text" name="Address_name" value="" class="form-control" required>
+
+                          </div>
+                          <div class="col-12">
+                            <label for="">Country</label><br>
+                            <select name="Country" id="country" class="form-cont"       style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA">
+                           <option value="0" >select country</option>
+                        <?php foreach ($countries as $country): ?>
+                        <option value="<?php echo $country['country_id']; ?>"><?php echo $country['country_name']; ?></option>
+                       <?php endforeach; ?>                    
+                            </select>
+                          </div>
+                     
+    <div class="col-12">
+      <label for="">City</label><br>
+      <select name="City" id="city" class="form-cont" style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA" disabled>
+      <option value="0" >select city </option>
+      </select>
+
+    </div>
+    <div class="col-12">
+    <select name="Location" id="location" class="form-cont" style="width:80%; padding:6px; border-radius:5px; display:block;border-color:1px solid #ced4dA" disabled>
+      <option value="0" >select location </option>
+      </select>
+      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+    </div>
+
+    <script>
+     /* document.addEventListener("DOMContentLoaded", function() {
+          const countrySelect = document.getElementById("country");
+          const citySelect = document.getElementById("city");
+      
+          countrySelect.addEventListener("change", function() {
+              if (countrySelect.value !== "") {
+                  citySelect.removeAttribute("disabled");
+              } else {
+                  citySelect.setAttribute("disabled", "disabled");
+              }
+          });
+      });*/
+      </script>
+      <script>
+   /* document.addEventListener("DOMContentLoaded", function() {
+        const countrySelect = document.getElementById("country");
+        const citySelect = document.getElementById("city");
+        const locationSelect=document.getElementById("location");
+     
+       
+
+        countrySelect.addEventListener("change", function() {
+            const selectedCountryId = countrySelect.value;
+
+            // Clear existing city options
+            citySelect.innerHTML = '<option value="">Select City</option>';
+
+            if (selectedCountryId !== "") {
+                // Fetch cities based on the selected country using AJAX
+                fetch(`fetch_cities.php?country_id=${selectedCountryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the city dropdown with fetched city data
+                        data.forEach(city => {
+                            const option = document.createElement("option");
+                            option.value = city.city_id;
+                            option.textContent = city.city_name;
+                            citySelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching cities:', error));
+            }
+        });*/
+       /* citySelect.addEventListener("change",function(){
+          const selectedCityId=citySelect.value;
+          locationSelect.innerHTML='option value="">select location</option>';
+          if (selectedCityId !==""){
+            fetch('fetch_locations.php?city_id=${selectedCityId}')
+            .then(response=>response.json())
+            .then(data=>){
+              data.forEach(city=> {
+                const option=document.createElement("option");
+                option.value=location.location_id;
+                option.textContent=location.location_name;
+                locationSelect.appendChild(option);
+
+              });
+            
+            }
+            .catch(error=> console.error("error fetching locations:",error));
+          }
+
+        })
+    });*/
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const countrySelect = document.getElementById("country");
+        const citySelect = document.getElementById("city");
+        const locationSelect = document.getElementById("location");
+
+        // Function to fetch and populate locations based on the selected city
+        function populateLocations(selectedCityId) {
+            // Clear existing location options
+            locationSelect.innerHTML = '<option value="">Select Location</option>';
+
+            if (selectedCityId !== "") {
+                // Fetch locations based on the selected city using AJAX
+                fetch(`fetch_locations.php?city_id=${selectedCityId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the location dropdown with fetched location data
+                        data.forEach(location => {
+                            const option = document.createElement("option");
+                            option.value = location.location_id;
+                            option.textContent = location.location_name;
+                            locationSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching locations:', error));
+
+                // Enable the location dropdown
+                locationSelect.removeAttribute("disabled");
+            } else {
+                // Disable the location dropdown if no city is selected
+                locationSelect.setAttribute("disabled", "disabled");
+            }
+        }
+
+        countrySelect.addEventListener("change", function () {
+            const selectedCountryId = countrySelect.value;
+
+            // Clear existing city and location options
+            citySelect.innerHTML = '<option value="">Select City</option>';
+            locationSelect.innerHTML = '<option value="">Select Location</option>';
+
+            if (selectedCountryId !== "") {
+                // Fetch cities based on the selected country using AJAX
+                fetch(`fetch_cities.php?country_id=${selectedCountryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Populate the city dropdown with fetched city data
+                        data.forEach(city => {
+                            const option = document.createElement("option");
+                            option.value = city.city_id;
+                            option.textContent = city.city_name;
+                            citySelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching cities:', error));
+
+                // Enable the city dropdown
+                citySelect.removeAttribute("disabled");
+            } else {
+                // Disable the city and location dropdowns if no country is selected
+                citySelect.setAttribute("disabled", "disabled");
+                locationSelect.setAttribute("disabled", "disabled");
+            }
+        });
+
+        citySelect.addEventListener("change", function () {
+            const selectedCityId = citySelect.value;
+
+            // Populate the location dropdown based on the selected city
+            populateLocations(selectedCityId);
+        });
+    });
+</script>
 
 
+     
+      
+                        
+                               
+      
+<div class="col-12">
+                          <div class="form-check">
+                            <input class="form-check-input" name="terms" type="checkbox" value="" id="acceptTerms" required>
+                            <label class="form-check-label" for="acceptTerms">I agree and accept the <a href="#">terms and conditions</a></label>
+                            <div class="invalid-feedback">You must agree before submitting.</div>
+                          </div>
+                        </div>
+                        <div class="col-12">
+                          <button class="btn btn-primary w-80 " type="submit" name="createAccount">Create Account</button>
+                        </div>
+                        <div class="col-12">
+                          <p class="small mb-0">Already have an account? <a href="pages-login.html">Log in</a></p>
+                        </div>
+                      </form>
+    
+                    </div>
+                  </div>
+            </div>
+           
 
+              <div class="credits">
+             
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

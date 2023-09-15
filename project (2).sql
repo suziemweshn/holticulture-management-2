@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307:3307
--- Generation Time: Sep 12, 2023 at 03:38 PM
+-- Generation Time: Sep 15, 2023 at 08:10 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -87,7 +87,8 @@ CREATE TABLE `agent` (
 --
 
 INSERT INTO `agent` (`id`, `Agent_name`, `Agent_Number`, `Contact_Number`, `Emergency_Contact`, `Gender`, `Email_Address`, `Date_of_Birth`, `Address_name`, `Country`, `City`, `Location`) VALUES
-(27, 'Daisy Makena', 'A002', '56462746', '654398463', 'Female', 'Daisy@gmail.com', '2023-05-09', '452', '6', '40', '12');
+(27, 'Daisy Makena', 'A002', '56462746', '654398463', 'Female', 'Daisy@gmail.com', '2023-05-09', '452', '6', '40', '12'),
+(37, 'Susan Mwende', 'A001', 'susanmwende924@gmail.com', '0711926171', 'Female', 'susanmwende924@gmail.com', '2023-08-29', 'Nairobi', '6', '40', '11');
 
 -- --------------------------------------------------------
 
@@ -118,20 +119,60 @@ INSERT INTO `carnations` (`id`, `name`, `description`, `price`, `image`) VALUES
 
 CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `description` text DEFAULT NULL,
   `username` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `price` decimal(10,0) NOT NULL,
-  `Product_id` int(11) NOT NULL
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`id`, `username`, `quantity`, `price`, `Product_id`) VALUES
-(28, 'suzie', 1, 0, 9),
-(34, 'suzie', 1, 0, 1),
-(35, 'suzie', 1, 0, 7);
+INSERT INTO `cart` (`id`, `name`, `price`, `description`, `username`, `quantity`, `image`) VALUES
+(6, 'Rambler Roses', 0.00, '19', 'suzie', 1, 'rambler roses.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `checkout`
+--
+
+CREATE TABLE `checkout` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone_no` varchar(20) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `Location` varchar(255) NOT NULL,
+  `delivery_mode` varchar(255) NOT NULL,
+  `agent_id` int(11) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `agent_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `checkout`
+--
+
+INSERT INTO `checkout` (`id`, `name`, `phone_no`, `email`, `address`, `country`, `city`, `Location`, `delivery_mode`, `agent_id`, `username`, `agent_name`) VALUES
+(1, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '564', '', '', '', 'pickup', NULL, 'suzie', 'Daisy Makena'),
+(2, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '564', '', '', '', 'door', NULL, 'suzie', 'select Agent'),
+(3, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '453', '', '', '', 'pickup', NULL, 'suzie', 'Susan Mwende'),
+(4, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '543', 'Kenya', '', 'Kikuyu', 'pickup', NULL, 'suzie', 'Susan Mwende'),
+(5, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '543', 'Kenya', '', 'Kikuyu', 'pickup', NULL, 'suzie', 'Susan Mwende'),
+(6, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '543', 'Kenya', 'Nairobi', '', 'door', NULL, 'suzie', 'select Agent'),
+(7, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '543', 'Kenya', 'Nairobi', '', 'pickup', NULL, 'suzie', 'Daisy Makena'),
+(8, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '231', 'Kenya', 'Nairobi', '', 'pickup', NULL, 'suzie', 'Susan Mwende'),
+(9, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '234', 'Kenya', 'Nairobi', '', 'door', NULL, 'suzie', 'select Agent'),
+(10, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '234', 'Kenya', 'Nairobi', '', 'pickup', NULL, 'suzie', 'Susan Mwende'),
+(11, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '234', 'Kenya', 'Nairobi', '', 'pickup', NULL, 'suzie', 'A002'),
+(12, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '456', 'Kenya', 'Nairobi', '', 'pickup', NULL, 'suzie', 'A001'),
+(13, 'Susan Mwende', '711926171', 'susanmwende924@gmail.com', '678', 'Kenya', 'Nairobi', '', 'pickup', NULL, 'suzie', 'A002');
 
 -- --------------------------------------------------------
 
@@ -205,8 +246,7 @@ CREATE TABLE `customer_table` (
 --
 
 INSERT INTO `customer_table` (`id`, `name`, `email`, `phone_no`, `password`, `username`, `country`, `city`, `location`) VALUES
-(64, 'Daisy', 'Daisy@gmail.com', 711926171, '$2y$10$.hL/RJIcSCRKOWE2mKNXNum9RUOMfWCIjil8Xvx8fmsKfZ0Ta9wmi', 'Daisy', 'Kenya', 'Nairobi', 'ANYWHERE'),
-(65, 'Susan Mwende', 'susanmwende924@gmail.com', 711926171, '$2y$10$.fY1exDa4T5QOtV0UbbitufqFJ6HzkHdfBQ9llMpCEfrxJbOgAWyK', 'suzie', 'Kenya', 'Nairobi', 'Kikuyu');
+(66, 'Susan Mwende', 'susanmwende924@gmail.com', 711926171, '$2y$10$Z64vEVIBjOkjgiMpdGfBouVc552X/vToB1XVWdrAg0cNjxwttSiVa', 'suzie', 'Kenya', 'Nairobi', 'Kikuyu');
 
 -- --------------------------------------------------------
 
@@ -272,13 +312,108 @@ INSERT INTO `mixed_roses` (`id`, `name`, `description`, `price`, `image`) VALUES
 (4, 'Lesing Artificial Fake Flower', 'Lesing Artificial Fake Flower with vase silk Artificial Roses Wedding', 60, 0x6c657373696e672061727466696369616c20666c6f776572732e6a7067),
 (5, 'Mixed Carnation', 'Exclusive mixed Carnation Bouquet', 23, 0x6d69786564206361726e6174696f6e20626f75717565742e6a7067),
 (6, 'Dollar Roses', 'Dollar on Roses Bouquet', 60, 0x646f6c6c617273206f6e20726f7365732e6a7067),
-(7, 'Beautifully Mixed Roses', 'Beautifully Mixed Roses', 36, 0x62656175746966756c6c792d6d697865642d726f7365732d363030783533392e6a7067),
 (8, 'Mixed 100 Roses', 'Enternal 100 Roses Bouquet , Mixed 100 Roses', 75, 0x6d697865642031303020726f7365732e504e47),
 (9, 'Flower Box', 'Romantically Rosa Flower Box ', 57, 0x526f736120666c6f77657220626f782e6a7067),
-(10, 'Andrea mixed Roses', 'high fragrance', 24, 0x616e647265612d6d697865642d726f7365732d62656175746966756c2d666c6f7765722d626f75717565742d322e6a706567),
 (12, 'sfds', 'dsf', 50, 0x61766f6361646f2e706e67),
 (14, 'red carnations', 'red carnations', 40, 0x726564206361726e6174696f6e2e6a706567),
-(15, 'red carnations', 'red carnations', 40, 0x726564206361726e6174696f6e2e6a706567);
+(15, 'red carnations', 'red carnations', 40, 0x726564206361726e6174696f6e2e6a706567),
+(16, 'gdsksjaf', 'fyuhejaskn', 40, 0x736561736f6e616c20626f6f75717565742e6a706567);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL,
+  `checkout_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `cart_id`, `checkout_id`, `payment_id`, `username`) VALUES
+(1, 6, 1, 1, ''),
+(2, 6, 1, 2, ''),
+(3, 6, 1, 3, ''),
+(4, 6, 2, 1, ''),
+(5, 6, 2, 2, ''),
+(6, 6, 2, 3, ''),
+(7, 6, 3, 1, ''),
+(8, 6, 3, 2, ''),
+(9, 6, 3, 3, ''),
+(10, 6, 4, 1, ''),
+(11, 6, 4, 2, ''),
+(12, 6, 4, 3, ''),
+(13, 6, 5, 1, ''),
+(14, 6, 5, 2, ''),
+(15, 6, 5, 3, ''),
+(16, 6, 6, 1, ''),
+(17, 6, 6, 2, ''),
+(18, 6, 6, 3, ''),
+(19, 6, 7, 1, ''),
+(20, 6, 7, 2, ''),
+(21, 6, 7, 3, ''),
+(22, 6, 8, 1, ''),
+(23, 6, 8, 2, ''),
+(24, 6, 8, 3, ''),
+(25, 6, 9, 1, ''),
+(26, 6, 9, 2, ''),
+(27, 6, 9, 3, ''),
+(28, 6, 10, 1, ''),
+(29, 6, 10, 2, ''),
+(30, 6, 10, 3, ''),
+(31, 6, 11, 1, ''),
+(32, 6, 11, 2, ''),
+(33, 6, 11, 3, ''),
+(34, 6, 12, 1, ''),
+(35, 6, 12, 2, ''),
+(36, 6, 12, 3, ''),
+(37, 6, 13, 1, ''),
+(38, 6, 13, 2, ''),
+(39, 6, 13, 3, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_table`
+--
+
+CREATE TABLE `order_table` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `name` int(11) NOT NULL,
+  `description` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
+  `Delivery_mode` int(11) NOT NULL,
+  `payment_method` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `id` int(11) NOT NULL,
+  `payment_option` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `payment_option`, `username`) VALUES
+(1, 'pay_before_delivery', 'suzie'),
+(2, 'pay_before_delivery', 'suzie'),
+(3, 'pay_before_delivery', 'suzie');
 
 -- --------------------------------------------------------
 
@@ -356,7 +491,9 @@ CREATE TABLE `seasonal` (
 --
 
 INSERT INTO `seasonal` (`id`, `name`, `description`, `price`, `image`) VALUES
-(1, 'spring flowers', 'spring wedding flowers', '60', 0x737072696e672e6a706567);
+(2, 'edffdgdfgfdg', 'gdfgh', '20', 0x477265656e73706f6f6e2d5468652d466c6f7765722d466163746f72792d526f7365732e6a7067),
+(4, 'fghuijkl', 'drfygjh', '20', 0x737072696e672e6a706567),
+(5, 'dtrytkujgh', 'srtyujkyg', '40', 0x66726573682d7265642d616e642d77686974652d726f7365732d626f75717565742e6a7067);
 
 -- --------------------------------------------------------
 
@@ -404,7 +541,15 @@ ALTER TABLE `carnations`
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`);
+
+--
+-- Indexes for table `checkout`
+--
+ALTER TABLE `checkout`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `agent_id` (`agent_id`);
 
 --
 -- Indexes for table `cities`
@@ -423,7 +568,8 @@ ALTER TABLE `country`
 -- Indexes for table `customer_table`
 --
 ALTER TABLE `customer_table`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_username` (`username`);
 
 --
 -- Indexes for table `lily`
@@ -442,6 +588,27 @@ ALTER TABLE `location`
 -- Indexes for table `mixed_roses`
 --
 ALTER TABLE `mixed_roses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_id` (`cart_id`),
+  ADD KEY `checkout_id` (`checkout_id`),
+  ADD KEY `payment_id` (`payment_id`);
+
+--
+-- Indexes for table `order_table`
+--
+ALTER TABLE `order_table`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -470,7 +637,7 @@ ALTER TABLE `seasonal`
 -- AUTO_INCREMENT for table `agent`
 --
 ALTER TABLE `agent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `carnations`
@@ -482,7 +649,13 @@ ALTER TABLE `carnations`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `checkout`
+--
+ALTER TABLE `checkout`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -500,7 +673,7 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT for table `customer_table`
 --
 ALTER TABLE `customer_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `lily`
@@ -518,7 +691,25 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `mixed_roses`
 --
 ALTER TABLE `mixed_roses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `order_table`
+--
+ALTER TABLE `order_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -536,11 +727,23 @@ ALTER TABLE `roses`
 -- AUTO_INCREMENT for table `seasonal`
 --
 ALTER TABLE `seasonal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`username`) REFERENCES `customer_table` (`username`);
+
+--
+-- Constraints for table `checkout`
+--
+ALTER TABLE `checkout`
+  ADD CONSTRAINT `checkout_ibfk_1` FOREIGN KEY (`agent_id`) REFERENCES `agent` (`id`);
 
 --
 -- Constraints for table `cities`
@@ -553,6 +756,14 @@ ALTER TABLE `cities`
 --
 ALTER TABLE `location`
   ADD CONSTRAINT `location_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`city_id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`checkout_id`) REFERENCES `checkout` (`id`),
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
