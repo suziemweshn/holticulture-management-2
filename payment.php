@@ -1,3 +1,42 @@
+<?php
+session_start();
+include 'conn.php';
+
+// Include your database connection code here if needed
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $payment_option = $_POST['payment_option'] ?? '';
+
+    // Check if the payment option is not empty
+    if (!empty($payment_option)) {
+        // Retrieve user details from the session
+        $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
+        // Insert data into the payment table
+        $sql = "INSERT INTO payment (username, payment_option) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("ss", $username, $payment_option);
+
+            if ($stmt->execute()) {
+                // Payment data inserted successfully
+                $stmt->close();
+                $conn->close();
+              //  echo "Payment option stored successfully!";
+              header('location: order_confirmation.php');
+            } else {
+                echo "Error inserting payment option: " . $stmt->error;
+            }
+        } else {
+            echo "Error preparing SQL statement: " . $conn->error;
+        }
+    } else {
+        echo "Payment option is empty.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,32 +46,13 @@
 </head>
 <body>
     <h1>Select Payment Option</h1>
-    <form action="process_payment.php" method="post">
+    <form action="payment.php" method="post">
         <label for="payment_option">Payment Option:</label>
         <select name="payment_option" id="payment_option">
             <option value="pay_before_delivery">Pay Before Delivery</option>
             <option value="pay_after_delivery">Pay After Delivery</option>
         </select>
         <br>
-
-        <!-- Payment method for "Pay Before Delivery" -->
-        <?php if (isset($_POST["payment_option"]) && $_POST["payment_option"] === "pay_before_delivery") { ?>
-        <div>
-            <h2>Pay Before Delivery Options</h2>
-            <label for="mpesa_payment">M-Pesa Payment:</label>
-            <input type="text" name="mpesa_payment" id="mpesa_payment" placeholder="Enter M-Pesa details">
-            <br>
-        </div>
-        <?php } ?>
-
-        <!-- Payment method for "Pay After Delivery" -->
-        <?php if (isset($_POST["payment_option"]) && $_POST["payment_option"] === "pay_after_delivery") { ?>
-        <div>
-            <h2>Pay After Delivery Instructions</h2>
-            <p>Please make payment to the following PayBill number:</p>
-            <p>PayBill Number: <strong>123456</strong></p>
-        </div>
-        <?php } ?>
 
         <input type="submit" value="Submit Payment">
     </form>
