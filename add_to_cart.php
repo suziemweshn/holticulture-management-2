@@ -14,12 +14,12 @@ $productId = $_GET['id'] ?? null;
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
-$sql = "SELECT id, name, description, price, image FROM carnations WHERE id = $productId
-       UNION
+$sql = "SELECT * FROM roses WHERE id = $productId";
+       /*UNION
        
-       SELECT id, name, description, price, image FROM roses WHERE id = $productId
-       UNION
-       SELECT id, name, description, price, image FROM mixed_roses WHERE id = $productId";
+       SELECT id, name, description, price, image FROM carnations WHERE id = $productId";
+      UNION
+       SELECT id, name, description, price, image FROM mixed_roses WHERE id = $productId";*/
        
 
 

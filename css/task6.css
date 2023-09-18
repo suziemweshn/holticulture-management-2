@@ -1357,8 +1357,10 @@ top: -750px;
  .buy-button{
   display: flex;
   flex-direction: row;
-  margin-left: 70px;
-  margin-right: 20px;
+  /*margin-left: 70px;*/
+  align-items: center;
+  justify-content: center;
+ /* margin-right: 200px;*/
   color:white;
 
  }
