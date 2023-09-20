@@ -57,6 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $country = $_POST['country'] ?? '';
     $city = $_POST['city'] ?? '';
     $location = $_POST['location'] ?? '';
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $phone_no = $_POST['phone_no'] ?? '';
+    $alt_phone_number = $_POST['alt_phone_number'] ?? '';
 
     if ($deliveryOption === 'pickup') {
         $selectedAgent = $_POST['agentName'] ?? '';
@@ -91,87 +95,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'agentNumber' => $agentNumber,
         'gender' => $gender,
         'contactNumber' => $contactNumber,
+        'name' => $name,
+        'email' => $email,
+        'phone_no' => $phone_no,
+        'alt_phone_number' => $alt_phone_number,
     ];
-
-    // Redirect to the payment page
     header('Location: payment.php');
     exit();
 }
+    // Check if the checkout_items session variable exists
+    /*if (!isset($_SESSION['checkout_items'])) {
+        // Initialize the checkout_items session variable as an empty array
+        $_SESSION['checkout_items'] = array();
+    }
+
+    if (isset($_POST['checkout_all'])) {
+        // Retrieve the cart items and add them to the checkout_items session variable
+        $cartItems = $_POST['cartItems'] ?? array();
+        $_SESSION['checkout_items'] = $cartItems;
+
+        // Redirect to the payment page
+        header('Location: payment.php');
+        exit();
+    } elseif (isset($_POST['checkout_item'])) {
+        $itemDetails = json_decode($_POST['checkout_item'], true);
+
+        // Add the new item details to the checkout_items session variable
+        $_SESSION['checkout_items'][] = $itemDetails;
+
+        // Redirect to the payment page
+        header('Location: payment.php');
+        exit();
+    }
+}*/
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-      
-      body{
-        background-color:whitesmoke;
-      }
-      .input{
-        border:none;
-        outline:none;
-        width:100%;
-        border-radius:3px;
-        height:30px;
-       
-      }
-      form{
-      
-       justify-content:center;
-       align-items:center;
-       width:100%;
-    
-      
-      }
-      form label{
-        font-size:20px;
-        font-weight:bold
-      }
-      fieldset{
-        width:90%;
-        border-radius:5px;
-      }
-      .container-fluid{
-      position:relative;
-      left:400px
-      }
-      form a button{
-        border:1px solid black;
-        border-radius:5px;
-        background-color:black;
-        color:white;
-        height:25px;
-        margin-top:30px;
-        width:30%;
-        margin-left:40px;
-      }
-      form a{
-        text-decoration:none;
-        font-size:20px;
-      }
-      
-      .checkout-form {
-      /*  background: linear-gradient(115deg, rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.719)), url('Nanyuki.jpg') no-repeat;
-    background-size: cover;*/
-    background-color:white;
-    width: 40%;
-    height: 1000px;
-    border-radius: 5px;
-    
-        
-     
-     
-     
-    }
-    .buttons{
-        margin-top:60px;
-        margin-left:80px;
-    
-    }
-    
-    
-     </style>
-     
+    <!-- Your CSS styles and other head content here -->
 </head>
 <body>
     <h1>Checkout</h1>
@@ -181,7 +143,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label for="">Name</label>
    
 </legend>
-<input type="text" name="name " value="<?php echo ($name)?> "placeholder="Enter your name"  class="input" required>
+<input type="text" name="name" value="<?php echo ($name)?>" placeholder="Enter your name" class="input" required>
+
 
             </fieldset>
             <fieldset>
@@ -189,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label for="">Phone Number</label>
    
 </legend>
-<input type="text" name="phone_no "  value="+254<?php echo ($phone_no)?> "placeholder="Enter your name" class="input" required>
+<input type="text" name="phone_no"  value="+254<?php echo ($phone_no)?> "placeholder="Enter your name" class="input" required>
 
             </fieldset>
             <fieldset>
@@ -197,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label for="">Alternative Phone Number</label>
    
 </legend>
-<input type="text" name="alt_phone_number "  value="+254 "placeholder="Enter your name" class="input" required>
+<input type="text" name="alt_phone_number"  value="+254 "placeholder="Enter your name" class="input" required>
 
             </fieldset>
             <fieldset>
@@ -205,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label for="">Email</label>
    
 </legend>
-<input type="text" name="email " value="<?php echo ($email)?> "placeholder="Enter your name" class="input" required>
+<input type="text" name="email" value="<?php echo ($email)?> "placeholder="Enter your name" class="input" required>
 
             </fieldset>
             <fieldset>
@@ -236,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <label for="">location</label>
    
 </legend>
-<input type="text" name="location " value="<?php echo ($location)?> "placeholder="Enter your name" class="input" required>
+<input type="text" name="location" value="<?php echo ($location)?> "placeholder="Enter your name" class="input" required>
 
             </fieldset>
 
@@ -266,11 +229,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    <!-- <input type="submit" value="Submit">-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-   <!-- </form>-->
-                    <input type="submit" value="Submit">
-                </form>
-    
-                <script>
+        <!-- Add a submit button to send the form data -->
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+ 
                 $(document).ready(function() {
     $('input[name="deliveryOption"]').change(function() {
         if ($(this).val() === 'pickup') {
@@ -300,6 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     });
 });
 
-              </script>
+             
+    </script>
 </body>
 </html>

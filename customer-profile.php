@@ -176,7 +176,7 @@ $conn->close();
         </div>
      
    <div class="cart ">
-                <a href="cart3.php"><img src="img/cart2.png" alt="" height="50px" width="40px"> cart</a> 
+                <a href="cart.php"><img src="img/cart2.png" alt="" height="50px" width="40px"> cart</a> 
   </div>
         <div class="list">
             <ul class="">

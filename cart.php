@@ -7,7 +7,7 @@ function calculateTotalPrice($cartItems)
 {
     $totalPrice = 0;
     foreach ($cartItems as $item) {
-        $totalPrice += intval ($item['price'])* $item['quantity'];
+        $totalPrice += intval($item['price']) * $item['quantity'];
     }
     return $totalPrice;
 }
@@ -36,33 +36,42 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 
 // Function to store the selected item details in a session variable and redirect to checkout
-/*function storeAndRedirect($itemDetails)
+function storeAndRedirect($itemDetails)
 {
     $_SESSION['checkout_item'] = $itemDetails;
-   
+    header('Location: checkout.php');
+    exit();
+}
 
-    header('Location: checkout.php');*/
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['checkout_item'])) {
-        // Check if the checkout_item session variable exists
-        if (isset($_SESSION['checkout_item'])) {
-            // Unset the existing checkout_item session variable
-            unset($_SESSION['checkout_item']);
-        }
-    
-        $itemDetails = json_decode($_POST['checkout_item'], true);
-    
-        // Set the checkout_item session variable with the new item details
-        $_SESSION['checkout_item'] = $itemDetails;
-    
-        // Redirect to the checkout page
-        header('Location: checkout.php');
-        exit();
-    }
-    
-   // exit();
-//}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['checkout_all'])) {
+      // Check if the checkout_item session variable exists
+      if (isset($_SESSION['checkout_item'])) {
+          // Unset the existing checkout_item session variable
+          unset($_SESSION['checkout_item']);
+      }
+
+      // Set the checkout_item session variable with all cart items
+      $_SESSION['checkout_items'] = $cartItems;
+
+      // Redirect to the checkout page
+      header('Location: checkout.php');
+      exit();
+  } elseif (isset($_POST['checkout_item'])) {
+      $itemDetails = json_decode($_POST['checkout_item'], true);
+
+      // Set the checkout_item session variable with the new item details
+      $_SESSION['checkout_item'] = $itemDetails;
+
+      // Redirect to the checkout page
+      header('Location: checkout.php');
+      exit();
+  }
+}
 
 ?>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -239,8 +248,14 @@ while ($row = mysqli_fetch_assoc($result)) {
             </div>
         <?php endforeach; ?>
     </section>
+    <form method="POST" action="cart.php" style=" width:60%; background-color:lime; color:white;  display:flex; flex-direction:row; align-items:center; justify-content:center; ">
+    <input type="hidden" name="checkout_all" value="<?php echo json_encode($item); ?>">
+    <button type="submit">CheckoutAll</button>
+</form>
     <h3 class="d-flex flex-row align-items-center justify-content-center">Total Price: $<?php echo calculateTotalPrice($cartItems); ?></h3>
     <div class="buy-button ">
+    
+
         <div class="clear-button">          <form method="GET" action="clear_cart.php">
                 <button type="submit">Clear</button>
             </form>
