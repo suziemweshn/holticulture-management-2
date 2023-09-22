@@ -30,6 +30,64 @@ $totalPrice = 0;
 foreach ($checkoutItems as $item) {
     $totalPrice += $item['price'];
 }
+
+// Function to store checkout details into the order table
+function storeOrderDetails($checkoutDetails, $paymentOption, $checkoutItems)
+{
+    include 'conn.php'; // Include your database connection
+
+    // Insert checkout details into the order table
+    $insertOrderQuery = "INSERT INTO orders (username, name, email, phone_no, alt_phone_number, address, country, city, location, delivery_option, selected_agent, agent_number, gender, contact_number, payment_option, total_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $insertOrderStmt = $conn->prepare($insertOrderQuery);
+    
+    if (!$insertOrderStmt) {
+        echo "Error preparing order SQL statement: " . $conn->error;
+        return false;
+    }
+
+    $username = $_SESSION['username']; // Get the username from the session
+
+    $insertOrderStmt->bind_param("sssssssssssssssd", $username, $checkoutDetails['name'], $checkoutDetails['email'], $checkoutDetails['phone_no'], $checkoutDetails['alt_phone_number'], $checkoutDetails['address'], $checkoutDetails['country'], $checkoutDetails['city'], $checkoutDetails['location'], $checkoutDetails['deliveryOption'], $checkoutDetails['selectedAgent'], $checkoutDetails['agentNumber'], $checkoutDetails['gender'], $checkoutDetails['contactNumber'], $paymentOption, $totalPrice);
+
+    if (!$insertOrderStmt->execute()) {
+        echo "Error executing order SQL query: " . $insertOrderStmt->error;
+        return false;
+    }
+
+    $orderId = $insertOrderStmt->insert_id;
+
+    // Insert checkout items into the order_items table
+    foreach ($checkoutItems as $item) {
+    $insertOrderItemQuery = "INSERT INTO order_items (order_id, username, product_name, price, total_price) VALUES (?, ?, ?, ?, ?)";
+    $insertOrderItemStmt = $conn->prepare($insertOrderItemQuery);
+
+    if (!$insertOrderItemStmt) {
+        echo "Error preparing order items SQL statement: " . $conn->error;
+        return false;
+    }
+
+    $insertOrderItemStmt->bind_param("isssd", $orderId, $username, $item['name'], $item['price'], $totalPrice);
+
+    if (!$insertOrderItemStmt->execute()) {
+        echo "Error executing order items SQL query: " . $insertOrderItemStmt->error;
+        return false;
+    }
+}
+    return true;
+}
+
+// Check if the Confirm button is clicked
+if (isset($_POST['confirm'])) {
+    // Call the function to store order details
+    if (storeOrderDetails($checkoutDetails, $paymentOption, $checkoutItems)) {
+        // Order details successfully stored, you can redirect or display a success message here
+        header('Location: order_success.php');
+        exit();
+    } else {
+        echo "Failed to store order details.";
+      
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,8 +135,10 @@ foreach ($checkoutItems as $item) {
     <h2>Total Price:</h2>
     <p><?php echo $totalPrice; ?></p>
 
-    <!-- You can add more content here, such as order summary, total price, etc. -->
-
-    <p>Your order has been confirmed. Thank you for shopping with us!</p>
+    <!-- Add Confirm and Cancel buttons -->
+    <form method="POST" action="order_form.php">
+        <button type="submit" name="confirm">Confirm</button>
+        <button type="submit" name="cancel">Cancel</button>
+    </form>
 </body>
 </html>

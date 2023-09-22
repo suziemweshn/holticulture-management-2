@@ -1,0 +1,1 @@
+Thank you for shopping with us ....Your order has been confirmed.

@@ -4,24 +4,13 @@ session_start();
 include 'oauth.php';
 include 'conn.php';
 
-// Enable error reporting for mysqli
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
 // Retrieve user details from the session
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
 
 // Retrieve user profile details from the admin_table
 $stmt = $conn->prepare("SELECT * FROM customer_table WHERE username = ?");
 $stmt->bind_param("s", $username);
-
-if (!$stmt) {
-    die("Error preparing user query: " . $conn->error);
-}
-
-if (!$stmt->execute()) {
-    die("Error executing user query: " . $stmt->error);
-}
-
+$stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
@@ -38,7 +27,7 @@ if ($result->num_rows > 0) {
 } else {
     // User not found in the admin_table
     // Handle the scenario accordingly, e.g., display an error message
-    die("User profile not found!");
+    echo "User profile not found!";
 }
 
 $stmt->close();
@@ -53,10 +42,6 @@ $contactNumber = '';
 $agentNames = array(); // Initialize an empty array to store agent names
 $query = "SELECT Agent_name FROM agent";
 $result = $conn->query($query);
-
-if (!$result) {
-    die("Error fetching agent names: " . $conn->error);
-}
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -76,29 +61,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $phone_no = $_POST['phone_no'] ?? '';
     $alt_phone_number = $_POST['alt_phone_number'] ?? '';
-    $selectedAgent = $_POST['selected_agent'] ?? '';
-$agentNumber = $_POST['agent_number'] ?? '';
-$gender = $_POST['gender'] ?? '';
-$contactNumber = $_POST['contact_number'] ?? '';
-    
-    // Your code to insert checkout details into the checkout table
-    $insertCheckoutQuery = "INSERT INTO checkout (name, email, phone_no, alt_phone_number, address, country, city, location, delivery_option, selected_agent, agent_number, gender, contact_number) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
-    // Prepare the SQL statement
-    $insertCheckoutStmt = $conn->prepare($insertCheckoutQuery);
-    
-    if (!$insertCheckoutStmt) {
-        die("Error preparing checkout query: " . $conn->error);
-    }
-    
-    // Bind the parameters
-    $insertCheckoutStmt->bind_param("sssssssssssss", $name, $email, $phone_no, $alt_phone_number, $customerAddress, $country, $city, $location, $deliveryOption, $selectedAgent, $agentNumber, $gender, $contactNumber);
-    
-    if (!$insertCheckoutStmt->execute()) {
-        die("Error executing checkout query: " . $insertCheckoutStmt->error);
+
+    if ($deliveryOption === 'pickup') {
+        $selectedAgent = $_POST['agentName'] ?? '';
+        
+        // Fetch agent details from your agent table based on the selected agent name
+        if (!empty($selectedAgent)) {
+            $agentDetailsQuery = "SELECT * FROM agent WHERE Agent_name = ?";
+            $agentDetailsStmt = $conn->prepare($agentDetailsQuery);
+            $agentDetailsStmt->bind_param("s", $selectedAgent);
+            $agentDetailsStmt->execute();
+            $agentDetailsResult = $agentDetailsStmt->get_result();
+
+            if ($agentDetailsResult->num_rows > 0) {
+                $agentRow = $agentDetailsResult->fetch_assoc();
+                $agentNumber = $agentRow['agentNumber'] ?? '';
+                $gender = $agentRow['gender'] ?? '';
+                $contactNumber = $agentRow['contactNumber'] ?? '';
+            }
+            
+            $agentDetailsStmt->close();
+        }
     }
 
-    // Checkout details successfully inserted into the checkout table
+    // Store the user's details, delivery option, and agent details in session variables
     $_SESSION['checkout_details'] = [
         'address' => $customerAddress,
         'deliveryOption' => $deliveryOption,
@@ -117,9 +103,6 @@ $contactNumber = $_POST['contact_number'] ?? '';
     header('Location: payment.php');
     exit();
 }
-
-// Rest of your HTML and JavaScript code remains the same
-
     // Check if the checkout_items session variable exists
     /*if (!isset($_SESSION['checkout_items'])) {
         // Initialize the checkout_items session variable as an empty array
@@ -225,7 +208,7 @@ $contactNumber = $_POST['contact_number'] ?? '';
         <input type="radio" name="deliveryOption" value="pickup" required> Pickup from Agent
 
         <div id="agentDetailsSubform" style="display: none;">
-        <select id="agentName" name="selected_agent" style="margin-top:40px; margin-right:20px;  border-radius:3px;  width:200px;">
+    <select id="agentName" name="agentName" style="margin-top:40px; margin-right:20px;  border-radius:3px;  width:200px;">
     <option value="select Agent" id="delivery_mode" name="delivery_mode" >Select Agent</option>
     <?php foreach ($agentNames as $agent) { ?>
       
@@ -233,9 +216,9 @@ $contactNumber = $_POST['contact_number'] ?? '';
     <?php } ?>
 </select>
 
-    <input type="text" id="agentNumber" name="agent_number" readonly style="margin-top:20px;  border-radius:3px;  width:200px;">
+    <input type="text" id="agentNumber" name="agentNumber" readonly style="margin-top:20px;  border-radius:3px;  width:200px;">
     <input type="text" id="gender" name="gender" readonly style="margin-top:20px;   border-radius:3px;  width:200px;">
-    <input type="text" id="contactNumber" name="contact_number" readonly style="margin-top:20px;   border-radius:3px;  width:200px;">
+    <input type="text" id="contactNumber" name="contactNumber" readonly style="margin-top:20px;   border-radius:3px;  width:200px;">
    
     </div>
     <div class="buttons">
