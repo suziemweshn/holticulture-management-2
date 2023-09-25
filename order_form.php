@@ -1,15 +1,8 @@
 <?php
 session_start();
 
-// Check if checkout details are stored in the session
-/*if (!isset($_SESSION['checkout_details'])) {
-    header('Location: checkout.php');
-    exit();
-}*/
-
 $checkoutDetails = $_SESSION['checkout_details'];
 
-// Check if a payment option is selected and stored in the session
 if (!isset($_SESSION['payment_option'])) {
     header('Location: payment.php');
     exit();
@@ -17,7 +10,6 @@ if (!isset($_SESSION['payment_option'])) {
 
 $paymentOption = $_SESSION['payment_option'];
 
-// Check if checkout items are stored in the session
 if (!isset($_SESSION['checkout_items'])) {
     header('Location: checkout.php');
     exit();
@@ -25,18 +17,15 @@ if (!isset($_SESSION['checkout_items'])) {
 
 $checkoutItems = $_SESSION['checkout_items'];
 
-// Calculate the total price
 $totalPrice = 0;
 foreach ($checkoutItems as $item) {
     $totalPrice += $item['price'];
 }
 
-// Function to store checkout details into the order table
-function storeOrderDetails($checkoutDetails, $paymentOption, $checkoutItems)
+function storeOrderDetails($checkoutDetails, $paymentOption, $checkoutItems, $totalPrice)
 {
     include 'conn.php'; // Include your database connection
 
-    // Insert checkout details into the order table
     $insertOrderQuery = "INSERT INTO orders (username, name, email, phone_no, alt_phone_number, address, country, city, location, delivery_option, selected_agent, agent_number, gender, contact_number, payment_option, total_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insertOrderStmt = $conn->prepare($insertOrderQuery);
     
@@ -45,7 +34,7 @@ function storeOrderDetails($checkoutDetails, $paymentOption, $checkoutItems)
         return false;
     }
 
-    $username = $_SESSION['username']; // Get the username from the session
+    $username = $_SESSION['username'];
 
     $insertOrderStmt->bind_param("sssssssssssssssd", $username, $checkoutDetails['name'], $checkoutDetails['email'], $checkoutDetails['phone_no'], $checkoutDetails['alt_phone_number'], $checkoutDetails['address'], $checkoutDetails['country'], $checkoutDetails['city'], $checkoutDetails['location'], $checkoutDetails['deliveryOption'], $checkoutDetails['selectedAgent'], $checkoutDetails['agentNumber'], $checkoutDetails['gender'], $checkoutDetails['contactNumber'], $paymentOption, $totalPrice);
 
@@ -56,36 +45,48 @@ function storeOrderDetails($checkoutDetails, $paymentOption, $checkoutItems)
 
     $orderId = $insertOrderStmt->insert_id;
 
-    // Insert checkout items into the order_items table
     foreach ($checkoutItems as $item) {
-    $insertOrderItemQuery = "INSERT INTO order_items (order_id, username, product_name, price, total_price) VALUES (?, ?, ?, ?, ?)";
-    $insertOrderItemStmt = $conn->prepare($insertOrderItemQuery);
+        $insertOrderItemQuery = "INSERT INTO order_items (order_id, username, product_name, price) VALUES (?, ?, ?, ?)";
+        $insertOrderItemStmt = $conn->prepare($insertOrderItemQuery);
+    
+        if (!$insertOrderItemStmt) {
+            echo "Error preparing order items SQL statement: " . $conn->error;
+            return false;
+        }
+    
+        $insertOrderItemStmt->bind_param("isss", $orderId, $username, $item['name'], $item['price']);
+    
+        if (!$insertOrderItemStmt->execute()) {
+            echo "Error executing order items SQL query: " . $insertOrderItemStmt->error;
+            return false;
+        }
+    }
 
-    if (!$insertOrderItemStmt) {
-        echo "Error preparing order items SQL statement: " . $conn->error;
+    // Calculate and store the total price in the total_prices table
+    $insertTotalPriceQuery = "INSERT INTO total_prices (order_id, total_price) VALUES (?, ?)";
+    $insertTotalPriceStmt = $conn->prepare($insertTotalPriceQuery);
+
+    if (!$insertTotalPriceStmt) {
+        echo "Error preparing total price insert SQL statement: " . $conn->error;
         return false;
     }
 
-    $insertOrderItemStmt->bind_param("isssd", $orderId, $username, $item['name'], $item['price'], $totalPrice);
+    $insertTotalPriceStmt->bind_param("id", $orderId, $totalPrice);
 
-    if (!$insertOrderItemStmt->execute()) {
-        echo "Error executing order items SQL query: " . $insertOrderItemStmt->error;
+    if (!$insertTotalPriceStmt->execute()) {
+        echo "Error inserting total price: " . $insertTotalPriceStmt->error;
         return false;
     }
-}
+
     return true;
 }
 
-// Check if the Confirm button is clicked
 if (isset($_POST['confirm'])) {
-    // Call the function to store order details
-    if (storeOrderDetails($checkoutDetails, $paymentOption, $checkoutItems)) {
-        // Order details successfully stored, you can redirect or display a success message here
+    if (storeOrderDetails($checkoutDetails, $paymentOption, $checkoutItems, $totalPrice)) {
         header('Location: order_success.php');
         exit();
     } else {
         echo "Failed to store order details.";
-      
     }
 }
 ?>
